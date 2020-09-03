@@ -1,0 +1,31 @@
+/* pages/leave/leave.wxss */
+page{background-color:#f8f3f3;}
+.formBox{width:100%;height:100%}
+
+.topBox{width:750rpx;height:100rpx;padding:0 20rpx;background-color: #ccccff;}
+.topBox image{width:50rpx;height:50rpx;float:left;margin-top:25rpx}
+.topBox text{width:610rpx;text-align:center;line-height:100rpx;float:left;}
+
+.titleBox{width:710rpx;height:200rpx;margin:20rpx 20rpx 0;background:white;border-radius: 20rpx;}
+.titleTtile{width:200rpx;height:100rpx;font-size:28rpx;float:left;line-height:100rpx;}
+.titleText{width:710rpx;height:100rpx;line-height:100rpx;font-size:24rpx;color:#808080;margin:0 20rpx;clear:both}
+
+.leaveClassBox{width:400rpx;height:50rpx;margin:20rpx auto 0;}
+.leaveClassList{width:200rpx;height:50rpx;float:left;}
+.classRadio{float:left;}
+.leaveClassList text{height:100rpx;line-height:50rpx;float:left;margin-left:20rpx;font-size:28rpx}
+
+.leaveTimeBox{width:710rpx;height:100rpx;margin:20rpx 20rpx 0;background:white;border-radius: 20rpx;}
+.signBox{width:6rpx;height:30rpx;float:left;background-color: #66ffff;margin:35rpx 20rpx;}
+.leaveTtile{width:200rpx;height:100rpx;font-size:28rpx;float:left;line-height:100rpx;}
+.leaveTime{height:100rpx;line-height:100rpx;float:right;font-size:24rpx;color:#808080;margin-right:20rpx;}
+
+.returnTimeBox{width:710rpx;height:100rpx;margin:20rpx 20rpx 0;background:white;border-radius: 20rpx;}
+.returnTtile{width:200rpx;height:100rpx;font-size:28rpx;float:left;line-height:100rpx;}
+.returnTime{height:100rpx;line-height:100rpx;float:right;font-size:24rpx;color:#808080;margin-right:20rpx;}
+
+.reasonBox{width:710rpx;height:400rpx;margin:20rpx 20rpx 0;background:white;border-radius: 20rpx;}
+.reasonTtile{width:200rpx;height:100rpx;font-size:28rpx;float:left;line-height:100rpx;}
+.reasonText{width:710rpx;height:300rpx;line-height:100rpx;font-size:24rpx;color:#808080;margin:0 20rpx;clear:both}
+
+.submitBtn{width:710rpx;height:80rpx;margin:40rpx auto;background-color: #66ccff;border-radius: 20rpx;line-height:80rpx;color:white;font-size: 28rpx;}

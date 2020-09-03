@@ -1,0 +1,23 @@
+/* pages/regist/regist.wxss */
+page{background-color:#ccccff;}
+.registBox{width:600rpx;margin:100rpx auto 0;padding:40rpx 20rpx;background-color: white;border-radius: 20rpx;}
+.registBox form{width:100%;height:100%}
+.title{width:100%;text-align:center;height:50rpx;line-height:50rpx;margin:0 auto;font-size:36rpx;display: block;}
+.errMsg{width:100%;height:30rpx;line-height:30rpx;font-size:24rpx;display: block;color:red;margin-left:20rpx;}
+
+.listBox{width:560rpx;height:80rpx;margin:20rpx auto 0;}
+.listTitle{width:120rpx;line-height:80rpx;float:left;font-size:32rpx;}
+.inputBox{width:420rpx;height:80rpx;border:1px solid gray;float:left;border-radius: 20rpx;}
+.selectBox{width:420rpx;height:80rpx;float:left;}
+.selectValue{line-height:80rpx;font-size:28rpx;float:left;}
+.downImg{width:20rpx;height:20rpx;float:left;margin:30rpx 0 0 20rpx;}
+.listIcon{width:30rpx;height:30rpx;float:left;margin:25rpx 20rpx 20rpx 10rpx;opacity: 0.7;}
+.listInput{width:330rpx;height:50rpx;margin-top:15rpx;color:#808080;font-size: 24rpx;}
+
+.radioBox{width:420rpx;height:50rpx;float:left;margin:15rpx auto;}
+.radioList{width:200rpx;height:50rpx;float:left;}
+.radioList radio{float:left;}
+.radioList text{height:50rpx;line-height:50rpx;float:left;margin-left:20rpx;font-size:28rpx}
+
+.registBtn{width:560rpx;height:80rpx;margin-top:20rpx;background-color: #66ccff;line-height:80rpx;font-size:28rpx}
+.hometBtn{width:560rpx;height:80rpx;margin-top:20rpx;background-color: #99ccff;line-height:80rpx;font-size:28rpx}

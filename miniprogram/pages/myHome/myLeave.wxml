@@ -1,0 +1,57 @@
+<!--pages/myLeave/myLeave.wxml-->
+<view class="menuBox">
+  <view class="{{noCheckWxss}}" bindtap="noCheckClick">未审核</view>
+  <view class="{{yesCheckWxss}}"  bindtap="yesCheckClick">已通过</view>
+  <view class="{{backCheckWxss}}"  bindtap="backCheckClick">已驳回</view>
+</view>
+<view class="noCheckList">
+  <view class="noTitleBox">
+    <text class="noClass">事假</text>
+    <text class="noTime">2020-08-30 到 2020-08-31</text>
+  </view>
+  <view class="noDetailBox">
+    <view class="noDetail">查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细
+    查看详细查看详细查看详细查看详细</view>
+  </view>
+</view>
+
+<view class="yesCheckList">
+  <view class="yesDetailBox">
+    <view class="yesClass">事假</view>
+    <view class="yesTime">2020-08-30 到 2020-08-31</view>
+  </view>
+  <view class="yesBillBox">
+    <image src="/images/leave2.png" bindtap="showBill"></image>
+  </view>
+</view>
+
+<cover-view class="coverBillBox" style="display:{{coverBoxDisplay}}" bindtap="hideBill">
+  <cover-view class="coverGray"></cover-view>
+  <cover-view class="showBillBox">
+    <cover-view class="BillTitle">请假单</cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">姓名：</cover-view>
+      <cover-view class="billListText">张三</cover-view>
+    </cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">学院：</cover-view>
+      <cover-view class="billListText">计算机科学与技术学院</cover-view>
+    </cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">类别：</cover-view>
+      <cover-view class="billListText">事假</cover-view>
+    </cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">时间：</cover-view>
+      <cover-view class="billListText">2020-08-30 到 2020-08-31</cover-view>
+    </cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">请假理由：</cover-view>
+    </cover-view>
+    <cover-view class="billReason">请假理由请假理由请假理由请假理由请假理由请假理由请假理由请假理由请假理由请假理由请假理由</cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">审核人：</cover-view>
+      <cover-view class="billListText">李四老师</cover-view>
+    </cover-view>
+  </cover-view>
+</cover-view>

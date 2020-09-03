@@ -1,0 +1,15 @@
+/**app.wxss**/
+/* 元素初始化 */
+button{text-align:center;}
+button::after{border:0px}
+view text{font-weight: normal;padding: 0;margin: 0;color:#333333;font-size: 24rpx;}
+.fl{float: left;}
+.fr{float: right;}
+input,button,textarea,img{border:0px}
+a,button{cursor:pointer;}
+a,input,button,textarea{ outline:none; }
+textarea{resize:none}
+select,option{border:0px;background:none;}
+
+/* 去掉navigator点击时的阴影效果 */
+.noshadow{hover-class:none;}

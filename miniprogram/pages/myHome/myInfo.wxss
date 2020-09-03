@@ -1,0 +1,7 @@
+/* pages/myInfo/myInfo.wxss */
+page{background-color: #f8f3f3;}
+.infoList{width:670rpx;height:100rpx;background-color: white;padding:0 40rpx;margin-top:5rpx}
+.infoTitle{height:100rpx;line-height:100rpx;font-size: 32rpx;float:left;}
+.infoContent{float:right;height:100rpx;line-height:100rpx;font-size: 28rpx;text-align:right;color:#808080}
+.infoAlter{width:50rpx;height:100rpx;float:right;}
+.gotoIcon{width:30rpx;height:30rpx;float:right;margin-top:35rpx;}

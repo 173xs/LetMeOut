@@ -1,0 +1,18 @@
+/* pages/teaHomepage/leaveCheck.wxss */
+page{background-color:#f8f3f3;}
+.noCheckList{width:710rpx; background-color: white;border-radius: 20rpx;margin:20rpx auto;padding-bottom: 40rpx;}
+
+.userBox{width:670rpx;height:100rpx;margin:0 auto;}
+.user{height:100rpx;line-height:100rpx;float:left;font-size:28rpx;}
+.academy{height:100rpx;line-height:100rpx;float:right;font-size:28rpx;}
+
+.noTitleBox{width:670rpx;margin:0 auto;height:100rpx;border-top:1px solid #f8f3f3;}
+.noClass{width:200rpx;height:100rpx;line-height:100rpx;font-size:36rpx;float:left}
+.noTime{height:50rpx;float:right;color:#808080;line-height:100rpx;}
+.noDetailBox{width:670rpx;margin:0 auto;height:150rpx;}
+.noDetail{height:50rpx;line-height:50rpx;font-size:28rpx;text-indent: 2em;}
+
+.buttonList{width:600rpx;height:60rpx;margin:20rpx auto 0;padding-top:20rpx;border-top:1px solid #f8f3f3;}
+.buttonList button{width:200rpx;height:60rpx;color:white;line-height:60rpx;float:left;font-size:28rpx;margin:0 50rpx;}
+.backBtn{background-color: rgb(241, 107, 107);}
+.okBtn{background-color: rgb(88, 187, 88);}

@@ -1,0 +1,54 @@
+<!--pages/regist/regist.wxml-->
+<view  class="registBox">
+<form> 
+  <text class="title">注册</text>
+  <text class="errMsg">{{errMsg}}</text>
+  <view class="listBox">
+    <text class="listTitle">学号：</text>
+    <view class="inputBox">
+      <image class="listIcon" src="/images/user.png"></image>
+      <input class='listInput' placeholder="请输入学号" value="{{sno}}"></input>
+    </view>
+  </view>
+  <view class="listBox">
+    <text class="listTitle">姓名：</text>
+    <view class="inputBox">
+      <image class="listIcon" src="/images/user.png"></image>
+      <input class='listInput' placeholder="请输入姓名" value="{{name}}"></input>
+    </view>
+  </view>
+  <view class="listBox">
+    <text class="listTitle">学院：</text>
+    <picker mode="selector" range="{{academyList}}" class="selectBox" value="{{academyIndex}}" bindchange="bindAcademyChange">
+      <view class='selectValue'>{{academyList[academyIndex]}}</view>
+      <image src='/images/down.png'  class='downImg' ></image>
+    </picker>
+  </view>
+    <view class="listBox">
+    <text class="listTitle">宿舍：</text>
+    <picker mode="selector" range="{{dormList}}" class="selectBox" value="{{dormIndex}}" bindchange="bindDormChange">
+      <view class='selectValue'>{{dormList[dormIndex]}}</view>
+      <image src='/images/down.png'  class='downImg' ></image>
+    </picker>
+  </view>
+    <view class="listBox">
+    <text class="listTitle">身份：</text>
+
+    <radio-group class="radioBox" bindchange="radioChange">
+      <view class="radioList">
+        <radio checked="{{stuChecked}}" value='student'></radio>
+        <text>学生</text>
+      </view>
+      <view class="radioList">
+        <radio checked="{{teaChecked}}" value='teacher'></radio>
+        <text>老师</text>
+      </view>
+    </radio-group>
+
+  </view>
+  <button class="registBtn" bindtap="regist">注册</button>
+  <button  class="hometBtn" bindtap="goHomepage">我已注册,去首页</button>
+</form>
+</view>
+
+

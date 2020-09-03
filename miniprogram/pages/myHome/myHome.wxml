@@ -1,0 +1,43 @@
+<!--pages/myHome/myHome.wxml-->
+<view class="topBox">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="getUserBtn"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <navigator class="userinfo-detail" hover-class="noshadow" url="/pages/myHome/myInfo"><image src="/images/gotoWhite.png"></image></navigator>
+    </block>
+  </view>
+</view>
+
+<view class="mainFunction">
+  <view class="functionTitle">
+    <view class="signBox"></view>
+    <view class="functionTtile">常用功能</view>
+  </view>
+  <view class="functionList">
+    <navigator hover-class="noshadow" url="/pages/myHome/myLeave">
+      <image src="/images/leave2.png"></image>
+      <text>我的请假</text>
+    </navigator>
+    <navigator hover-class="noshadow" url="/pages/travelRecords/travelRecords">
+      <image src="/images/record.png"></image>
+      <text>出行记录</text>
+    </navigator>
+    <navigator hover-class="noshadow" url="/pages/myHome/inform">
+      <image src="/images/message.png"></image>
+      <text>我的消息</text>
+    </navigator>
+  </view>
+</view>
+
+<navigator class="setting" hover-class="noshadow">
+  <image src="/images/setting.png" class="settingIcon"></image>
+  <text>设置</text>
+  <image src="/images/goto.png" class="gotoIcon"></image>
+</navigator>
+<button class="share" open-type="share">
+  <image src="/images/share.png" class="shareIcon"></image>
+  <text>分享</text>
+  <image src="/images/goto.png" class="gotoIcon"></image>
+</button>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "出行记录",
+  "usingComponents": {
+    "Record":"/component/travelRecord/travelRecord"
+  }
+}

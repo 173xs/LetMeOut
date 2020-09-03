@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/homepage/homepage",
+    "pages/logs/logs",
+    "pages/leave/leave",
+    "pages/travelRecords/travelRecords",
+    "pages/report/report",
+    "pages/myHome/myHome",
+    "pages/myHome/myInfo",
+    "pages/myHome/inform",
+    "pages/myHome/myLeave",
+    "pages/teacher/teaHomepage",
+    "pages/regist/regist",
+    "pages/teacher/leaveCheck"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#66ccff",
+    "backgroundColor": "white",
+    "list": [
+      {
+        "pagePath": "pages/homepage/homepage",
+        "text": "首 页",
+        "iconPath": "/images/homepage.png",
+        "selectedIconPath": "/images/homepageAfter.png"
+      },
+      {
+        "pagePath": "pages/myHome/myHome",
+        "text": "我 的",
+        "iconPath": "/images/user.png",
+        "selectedIconPath": "/images/userAfter.png"
+      }
+    ],
+    "position": "bottom"
+  }
+}

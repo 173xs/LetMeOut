@@ -1,0 +1,33 @@
+<!--component/travelRecord/travelRecord.wxml-->
+<view class="recordTime">2020.08.06 周三</view>
+<view class="recordBox">
+  <view class="blackLine"></view>
+  <cover-image class="recordIcon" src="/images/record.png"></cover-image>
+  <view class="recordListBox">
+    <scroll-view class="recordsList" scroll-y="true">
+      <view class="eachRecord">
+        <view class="radiusPoint"></view>
+        <view class="recordPlace">理工D楼</view>
+        <view class="recoreTime">08：00</view>
+      </view>
+      <view class="eachRecord">
+        <view class="radiusPoint"></view>
+        <view class="recordPlace">理工D楼</view>
+        <view class="recoreTime">08：00</view>
+      </view>
+      <view class="eachRecord">
+        <view class="radiusPoint"></view>
+        <view class="recordPlace">理工D楼</view>
+        <view class="recoreTime">08：00</view>
+      </view>
+      <view class="eachRecord">
+        <view class="radiusPoint"></view>
+        <view class="recordPlace">理工D楼</view>
+        <view class="recoreTime">08：00</view>
+      </view>
+    </scroll-view>
+    <image src="/images/position.png" class="positionIcon"></image>
+    <text id="placeNum">4</text>
+    <text>站</text>
+  </view>
+</view>

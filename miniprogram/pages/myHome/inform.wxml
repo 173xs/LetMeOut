@@ -1,0 +1,36 @@
+<!--pages/inform/inform.wxml-->
+<view class="informBox">
+  <text class="informTitle">请假审核</text>
+  <view class="informLabel">你提交的请假请求已经审核通过，请前往"我的请假"里面查看请假单，出示请假单即可出校</view>
+  <view class="informUrlBox">
+    <image src="/images/leave2.png" class="informUrlImage"></image>
+    <view class="informUrlDetail">
+      <view class="informUrlTitle">我要回家探亲</view>
+      <view class="informUrlContent">
+        <text class="contentTitle">审核状态：</text><text class="contentDetail">已通过</text><text class="contentTitle">审核人：</text><text class="contentDetail">张三</text>
+      </view>
+    </view>
+  </view>
+  <view class="otherBox">
+    <text class="informTime">08月17号 11:10</text>
+    <image class="deleteIcon" src="/images/delete.png"></image>
+  </view>
+</view>
+
+<view class="informBox">
+  <text class="informTitle">异常上报</text>
+  <view class="informLabel">你上报的异常审批人已经查阅，我们会妥善进行相关处理，感谢你的上报。</view>
+  <view class="informUrlBox">
+    <image src="/images/report1.png" class="informUrlImage"></image>
+    <view class="informUrlDetail">
+      <view class="informUrlTitle">他好像有点发烧</view>
+      <view class="informUrlContent">
+        <text class="contentTitle">审核状态：</text><text class="contentDetail">已查阅</text><text class="contentTitle">审核人：</text><text class="contentDetail">李四</text>
+      </view>
+    </view>
+  </view>
+  <view class="otherBox">
+    <text class="informTime">08月17号 11:10</text>
+    <image class="deleteIcon" src="/images/delete.png"></image>
+  </view>
+</view>

@@ -1,0 +1,2 @@
+/* pages/teaHomepage/teaHomepage.wxss */
+navigator{width:500rpx;margin:20rpx auto;border:1px solid gray}

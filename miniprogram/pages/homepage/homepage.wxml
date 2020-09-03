@@ -1,0 +1,69 @@
+<!--pages/homepage/homepage.wxml-->
+<view class="container">
+  <view class="menuBox">
+    <view class="iconBox" bindtap="scancode">
+      <cover-image src="../../images/scan.png"></cover-image>
+      <text>扫一扫</text>
+    </view>
+    <view class="gapBox"></view>
+    <navigator class="iconBox" url="/pages/leave/leave" hover-class="noshadow">
+      <cover-image src="../../images/leave.png"></cover-image>
+      <text>请假</text>
+    </navigator>
+    <view class="gapBox"></view>
+   <navigator class="iconBox" url="/pages/report/report" hover-class="noshadow">
+      <cover-image src="../../images/report.png"></cover-image>
+      <text>异常上报</text>
+    </navigator>
+    <view class="gapBox"></view>
+    <navigator class="iconBox" url="/pages/travelRecords/travelRecords" hover-class="noshadow">
+      <cover-image src="../../images/records.png"></cover-image>
+      <text>出行记录</text>
+    </navigator>
+  </view>
+
+  <view class="illDataBox">
+    <view class="illDataTitleBox">
+      <text class="illDataBoxTitle">全校概况</text>
+      <text class="illDataBoxTime">截至 {{nowDate}}</text>
+    </view>
+    <view class="illDataMenuBox">
+      <text class="illDataMenuAcademy">学院</text>
+      <picker mode="selector" range="{{academyList}}" class="academySelectBox" value="{{academyIndex}}" bindchange="bindAcademyChange">
+        <view class='academyValue'>{{academyList[academyIndex]}}</view>
+        <image src='/images/down.png'  class='downImg' ></image>
+      </picker>
+      <picker mode="selector" range="{{dormList}}" class="dormSelectBox" value="{{dormIndex}}" bindchange="bindDormChange">
+        <view class='dormValue'>{{dormList[dormIndex]}}</view>
+        <image src='/images/down.png'  class='downImg' ></image>
+      </picker>
+      <text class="illDataMenuDorm">宿舍</text>
+    </view>
+    <view class="illDataNum">
+      <view class="illDataNumList">
+        <text class="illNum_Sure">{{sureIllNum}}</text>
+        <text class="illNumLable">确诊</text>
+      </view>
+      <view class="illDataNumList">
+        <text class="illNum_Suspect">{{suspectIllNum}}</text>
+        <text class="illNumLable">疑似</text>
+      </view>
+      <view class="illDataNumList">
+        <text class="illNum_Isolate">{{isolateIllNum}}</text>
+        <text class="illNumLable">隔离</text>
+      </view>
+      <view class="illDataNumList">
+        <text class="illNum_Hot">{{hotIllNum}}</text>
+        <text class="illNumLable">发热</text>
+      </view>
+    </view>
+  </view>
+  <view class="temperatureBox">
+    <form class="temperatureForm">
+      <input type="digit" placeholder="请输入体温" bindinput="bindReplaceInput"></input>
+      <button class="temUpBtn" style="background:{{tempBtnBGColor}}" bindtap="{{upTemp}}">体温上报</button>
+    </form>
+  </view>
+
+
+</view>

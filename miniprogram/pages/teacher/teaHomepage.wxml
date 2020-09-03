@@ -1,0 +1,4 @@
+<!--pages/teaHomepage/teaHomepage.wxml-->
+<navigator url="/pages/teacher/leaveCheck"> 请假审核</navigator>
+<navigator> 信息概览</navigator>
+<navigator> 上报信息处理</navigator>

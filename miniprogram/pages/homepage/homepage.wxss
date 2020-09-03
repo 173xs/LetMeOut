@@ -1,0 +1,37 @@
+/* pages/homepage/homepage.wxss */
+page{height: 100%;background-image: linear-gradient(#aeaeff, #f8f3f3);}
+.container {display: flex;flex-direction: column;align-items: center;justify-content: space-between;box-sizing: border-box;} 
+.menuBox{width:650rpx;height:150rpx;margin:40rpx auto;}
+.iconBox{width:120rpx;height:150rpx;float:left;}
+.iconBox cover-image{width:90rpx;height:90rpx;margin:0 auto;}
+.iconBox text{line-height:60rpx;width:100%;text-align:center;color:white;font-size:28rpx;display:block}
+.gapBox{width:4rpx;height:60rpx;margin:10rpx 26.33rpx;background-color: white;float:left;}
+
+.illDataBox{width:700rpx;height:300rpx;margin:0 auto;border-radius: 20rpx;background-color: white;}
+.illDataTitleBox{height:60rpx;width:100%;margin-top:20rpx;}
+.illDataBoxTitle{width:200rpx;height:60rpx;line-height:60rpx;font-size:32rpx;float:left;margin-left:20rpx;}
+.illDataBoxTime{width:300rpx;height:60rpx;line-height:60rpx;font-size: 24rpx;color:#808080;float:right;text-align: right;margin-right:20rpx;}
+
+.illDataMenuBox{width:500rpx;height:50rpx;margin:0 auto;}
+.illDataMenuAcademy{width:60rpx;line-height:50rpx;color:#99ccff;font-size:26rpx;float:left;font-weight:bold;}
+.academySelectBox{width:160rpx;height:100%;float:left;margin-left:20rpx;overflow: hidden;}
+.academyValue{line-height:50rpx;font-size:24rpx;float:left;max-width:120rpx;}
+.downImg{width:20rpx;height:20rpx;float:left;margin:15rpx 0 0 20rpx;}
+.illDataMenuDorm{width:60rpx;line-height:50rpx;color:#99ccff;font-size:26rpx;float:right;font-weight:bold;}
+.dormSelectBox{width:160rpx;height:100%;float:right;margin-left:20rpx}
+.dormValue{line-height:50rpx;font-size:24rpx;float:left;}
+
+
+.illDataNum{width:640rpx;height:150rpx;margin:0 auto;z-index:1;}
+.illDataNumList{width:160rpx;height:150rpx;float:left;}
+.illNum_Sure{width:100%;height:100rpx;color:red;font-size:70rpx;text-align:center;line-height:100rpx;display:block;}
+.illNum_Suspect{width:100%;height:100rpx;color:#f98f13;font-size:70rpx;text-align:center;line-height:100rpx;display:block;}
+.illNum_Isolate{width:100%;height:100rpx;color:#06eee6;font-size:70rpx;text-align:center;line-height:100rpx;display:block;}
+.illNum_Hot{width:100%;height:100rpx;color:#f8db19;font-size:70rpx;text-align:center;line-height:100rpx;display:block;}
+.illNumLable{width:100%;height:50rpx;font-size:28rpx;text-align:center;line-height:50rpx;display:block;}
+
+.temperatureBox{width: 700rpx;height:150rpx;margin:40rpx auto;border-radius: 20rpx;background-color: white;}
+.temperatureForm{width: 660rpx;height:80rpx;margin:35rpx 20rpx;display:block}
+.temperatureForm input{width:400rpx;height:80rpx;color:#adadad;float:left;font-size:28rpx;}
+.temUpBtn{width:200rpx;height:80rpx;float:right;border-radius: 20rpx;
+  font-size:28rpx;text-align:center;color:white;line-height:80rpx;}

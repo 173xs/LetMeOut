@@ -1,0 +1,12 @@
+<!--pages/report/report.wxml-->
+<view class="reportTitleBox">
+  <view class="signBox"></view>
+  <view class="reportTtile">标题</view>
+  <view  class="titleText"><input type="text" value="请输入" ></input></view>
+</view>
+<view class="reportDetailBox">
+  <view class="signBox"></view>
+  <view class="detailTtile">请描述你的问题</view>
+  <view  class="detailText"><input type="text" value="请输入" ></input></view>
+</view>
+<button class="submitBtn">提交</button>

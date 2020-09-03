@@ -1,0 +1,26 @@
+/* pages/myHome/myHome.wxss */
+page{background-color: #f8f3f3;}
+.topBox{width:750rpx;height:300rpx;background-color: #ccccff;padding-top:40rpx}
+.getUserBtn{width:300rpx;height:150rpx;line-height:150rpx;color:white;font-size:32rpx;background-color: #ccccff;}
+.userinfo {width:670rpx;height:150rpx;background-color: #ccccff;margin:0 40rpx}
+.userinfo-avatar {width: 128rpx;height: 128rpx;border-radius: 64rpx;float:left;margin-top:11rpx;}
+.userinfo-nickname {color: white;font-size: 36rpx;height:150rpx;line-height:150rpx;margin-left:20rpx;}
+.userinfo-detail{width:30rpx;height:150rpx;float:right}
+.userinfo-detail image{width:30rpx;height:30rpx;margin-top:60rpx;}
+
+.mainFunction{width:640rpx;height:260rpx;margin:-120rpx auto;background-color: white;border-radius: 40rpx;}
+.functionTitle{width:640rpx;height:80rpx;margin-left:20rpx;}
+.signBox{width:4rpx;height:30rpx;float:left;background-color: #66ffff;margin:25rpx 10rpx;}
+.functionTtile{width:200rpx;height:80rpx;font-size:30rpx;float:left;line-height:80rpx;}
+.functionList{width:600rpx;height:160rpx;margin:0 20rpx;clear:both;border-top:1px solid #f8f3f3;}
+.functionList navigator{width:200rpx;height:160rpx;float:left;}
+.functionList navigator image{width:80rpx;height:80rpx;display: block;margin:20rpx auto 0;}
+.functionList navigator text{width:100%;line-height:60rpx;display:block;height:60rpx;margin:0 auto;text-align:center;font-size:28rpx}
+
+.setting{width:670rpx;height:100rpx;padding:0 40rpx;background-color: white;margin-top:150rpx;clear:both}
+.settingIcon{width:60rpx;height:60rpx;float:left;margin-top:20rpx;}
+.setting text{line-height:100rpx;margin-left:20rpx;float:left;font-size:28rpx}
+.gotoIcon{width:30rpx;height:30rpx;float:right;margin-top:35rpx;}
+.share{width:750rpx;height:100rpx;padding:0 40rpx;background-color: white;clear:both;margin-top: 5rpx;display:block}
+.shareIcon{width:60rpx;height:60rpx;float:left;margin-top:20rpx;}
+.share text{line-height:100rpx;margin-left:20rpx;float:left;font-size:28rpx}
