@@ -7,14 +7,16 @@
     <text class="listTitle">学号：</text>
     <view class="inputBox">
       <image class="listIcon" src="/images/user.png"></image>
-      <input class='listInput' placeholder="请输入学号" value="{{sno}}"></input>
+      <input class='listInput' placeholder="请输入学号" value="{{sno}}"
+      bindinput="noChange"></input>
     </view>
   </view>
   <view class="listBox">
     <text class="listTitle">姓名：</text>
     <view class="inputBox">
       <image class="listIcon" src="/images/user.png"></image>
-      <input class='listInput' placeholder="请输入姓名" value="{{name}}"></input>
+      <input class='listInput' placeholder="请输入姓名" value="{{name}}"
+      bindinput="nameChange"></input>
     </view>
   </view>
   <view class="listBox">

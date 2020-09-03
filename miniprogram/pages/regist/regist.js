@@ -63,6 +63,71 @@ Page({
       curUser:e.detail.value
     })
   },
+
+  noChange: function(e){
+    this.setData({
+      sno:e.detail.value
+    })
+  },
+  nameChange:function(e){
+    this.setData({
+      name:e.detail.value
+    })
+  },
+  callRegister(data) {
+    wx.cloud.callFunction({
+        name: 'register',
+        data: data
+      })
+      .then(res => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '注册成功',
+          icon: 'success',
+          duration: 1000,
+          mask: true
+        })
+      })
+      .catch(err => {
+        console.log(err)
+        wx.showToast({
+          title: '注册失败',
+          icon: 'fail',
+          duration: 1000,
+          mask: true
+        })
+      })
+  },
+  regist() {
+    console.log(this.data)
+    var user = this.data.curUser
+    wx.showLoading({
+      title: '注册中',
+      mask: true
+    })
+    var data 
+    if ('student' == user) {
+      data = {
+        user: user,
+        info: {
+          sno: this.data.sno,
+          sname: this.data.name,
+          sacademy: this.data.academyList[this.data.academyIndex],
+          sdorm: this.data.dormList[this.data.dormIndex]
+        }
+      }
+    } else if ('teacher' == user) {
+      data = {
+        user: user,
+        info: {
+          tno: this.data.sno,
+          tname: this.data.name,
+          tacademy: this.data.academyList[this.data.academyIndex],
+        }
+      }
+    }
+    this.callRegister(data)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
