@@ -37,7 +37,43 @@ bindReturnDateChange: function(e) {
       returnDate: today
     })
   },
-
+  submit: function(e) {
+    // console.log('form submit 事件',e.detail.value)
+    wx.showLoading({
+      title: '提交中...',
+      mask:true
+    })
+    var data = {
+      leaveClass: e.detail.value.leaveClass,
+      leaveDate: this.data.leaveDate,
+      returnDate: this.data.returnDate,
+      leaveReason: e.detail.value.leaveReason
+    }
+    //console.log('data = ',data)
+    wx.cloud.callFunction({
+      name:"upleave",
+      data:data
+    })
+    .then(res=>{
+      // console.log(res)
+      wx.hideLoading()
+      wx.showToast({
+        title: '提交成功',
+        icon:'success',
+        duration:1000,
+        mask:true
+      })
+    })
+    .catch(err=>{
+      wx.showToast({
+        title: '提交失败',
+        icon:'fail',
+        duration:1000,
+        mask:true
+      })
+      console.log(err)
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

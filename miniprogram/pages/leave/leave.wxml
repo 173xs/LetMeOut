@@ -1,5 +1,5 @@
 <!--pages/leave/leave.wxml-->
-<form class="formBox">
+<form class="formBox" bindsubmit="submit">
   <!-- <view class="titleBox">
     <view class="signBox"></view>
     <view class="titleTtile">标题</view>
@@ -7,7 +7,7 @@
   </view> -->
 
   <!-- 这里是两个radio,name你可以自己随便写 -->
-  <radio-group class="leaveClassBox">
+  <radio-group class="leaveClassBox" name="leaveClass">
     <view class="leaveClassList">
       <radio checked="true" value='事假' class="classRadio"></radio>
       <text>事假</text>
@@ -20,14 +20,14 @@
   <view class="leaveTimeBox">
     <view class="signBox"></view>
     <view class="leaveTtile">离校时间</view>
-    <picker mode="date" value="{{leaveDate}}" start="{{nowDate}}" end="2021-09-01" bindchange="bindLeaveDateChange">
+    <picker mode="date" value="{{leaveDate}}" start="{{nowDate}}" end="2021-09-01" bindchange="bindLeaveDateChange" >
       <view  class="leaveTime">{{leaveDate}}</view>
     </picker>
   </view>
   <view class="returnTimeBox">
     <view class="signBox"></view>
     <view class="returnTtile">返校时间</view>
-    <picker mode="date" value="{{returnDate}}" start="{{leaveDate}}" end="2021-09-01" bindchange="bindReturnDateChange">
+    <picker mode="date" value="{{returnDate}}" start="{{leaveDate}}" end="2021-09-01" bindchange="bindReturnDateChange" >
       <view  class="leaveTime">{{returnDate}}</view>
     </picker>
   </view>
@@ -35,8 +35,8 @@
     <view class="signBox"></view>
     <view class="reasonTtile">请假理由</view>
     <!-- 这里是请假理由 -->
-    <view  class="reasonText"><input type="text" placeholder="请输入" ></input></view>
+    <view  class="reasonText"><input type="text" placeholder="请输入" name="leaveReason"></input></view>
   </view>
     <!-- 这是button,点击事件你可以自己随便写 -->
-  <button class="submitBtn">提交</button>
+  <button class="submitBtn" form-type="submit">提交</button>
 </form>
