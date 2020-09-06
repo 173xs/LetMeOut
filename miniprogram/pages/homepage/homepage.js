@@ -1,5 +1,6 @@
 // pages/homepage/homepage.js
 var util = require('../../utils/util.js')
+
 Page({
 
   /**
@@ -38,6 +39,7 @@ Page({
       dormIndex: e.detail.value
     })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -75,7 +77,29 @@ Page({
   },
 //体温框的上传
   uploadTemp:function(){
-    console.log('上传成功')
+    var d = new Date()
+    let timeFlag
+    if (d.getHours() <= 10 && d.getHours() >= 6){
+      timeFlag = 0
+    }else if (d.getHours() > 10 && d.getHours() <= 14){
+      timeFlag = 1
+    }else if (d.getHours() > 14){
+      timeFlag = 2
+    }
+    wx.cloud.callFunction({
+      name:'upTemp',
+      data:{
+        temperature:this.data.upTemp,
+        date:d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate(),
+        timeFlag:timeFlag
+      }
+    })
+    .then(res=>{
+      console.log('上传成功')
+    })
+    .catch(err=>{
+      console.log('上传失败')
+    })
   },
 
   /**
