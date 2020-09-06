@@ -47,9 +47,10 @@ bindReturnDateChange: function(e) {
       leaveClass: e.detail.value.leaveClass,
       leaveDate: this.data.leaveDate,
       returnDate: this.data.returnDate,
-      leaveReason: e.detail.value.leaveReason
+      leaveReason: e.detail.value.leaveReason,
+      subDate: this.data.nowDate
     }
-    //console.log('data = ',data)
+    console.log('data = ',data)
     wx.cloud.callFunction({
       name:"upleave",
       data:data

@@ -9,59 +9,26 @@ const _ = db.command
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
 
-  // var leaveList
-  //var stuInfoList
-  const $ = db.command.aggregate
-  await db.collection("leave")
-    .aggregate()
-    .lookup({
-      from: 'stuInfo',
-      let:{
-        leave_sno: 'sno',
-        leave_approveState: 'approveState',
-        notApprove: 0
-      },
-      pipeline: $.pipeline()
-      // .match({
-      //   '$$leave_approveState': 0
-      // })
-      .match(
-        _.expr($.and([
-        //$.eq(['$sno','$$leave_sno']),
-        $.eq(['$$notApprove','$$leave_approveState'])
-      ])))
-      .done(),
-      as: 'stuInfo',
-    })
-    .end()
-    .then(res => {
-      console.log('res = ',res.list)
-      return res
-      // leaveList = res.data
-    })
-    .catch(err => {
-      return err
-    })
+  let leave = await db.collection("leave")
+  .where({
+    'approveState':0
+  })
+  .get()
 
-  // var snoArr = new Array()
-  // for (var i = 0; i < leaveList.length;i++){
-  //   snoArr.push(leaveList[i].sno)
-  // }
+  //console.log('leave = ',leave)
+  for ( let item of leave.data){
+    let leave_sno = item.sno
+    //console.log('leave_sno = ',leave_sno)
+    let stu_info = await db.collection("stuInfo")
+    .where({
+      sno:leave_sno
+    })
+    .get()
+    //console.log('stu_info = ',stu_info)
+    item['sname'] = stu_info.data[0].sname
+    item['sacademy'] = stu_info.data[0].sacademy
 
-  // await db.collection("stuInfo")
-  // .where({
-  //   sno:_.in(snoArr)
-  // })
-  // .get()
-  // .then(res=>{
-  //   stuInfoList = res.data
-  //   console.log('stuinfolist = ', stuInfoList)
-  // })
-
-  // for (var i = 0;i < leaveList;i++){
-  //   leaveList[i].sno = stuInfoList[i].sno
-  //   leaveList[i].sname = stuInfoList[i].sname
-  //   leaveList[i].sacademy = stuInfoList[i].sacademy
-  // }
-  // return  leaveList
+  }
+  //console.log(leave.data)
+  return leave
 }

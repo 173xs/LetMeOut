@@ -25,7 +25,8 @@ exports.main = async (event, context) => {
         leaveDate: event.leaveDate,
         leaveReason: event.leaveReason,
         returnDate: event.returnDate,
-        approveState: 0
+        approveState: 0,
+        subDate:event.subDate
       }
     })
 }
