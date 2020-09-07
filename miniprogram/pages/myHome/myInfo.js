@@ -1,18 +1,46 @@
 // pages/myInfo/myInfo.js
+const db = wx.cloud.database()
+var app = getApp(0)
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    nickName:"",
+    sno:"",
+    sname:"",
+    sacademy:"",
+    sdorm:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let openid
+    wx.cloud.callFunction({
+      name:'getMyInfo',
+      data:{
+        user:'stu'
+      }
+    })
+    .then(res=>{
+      console.log('myinfo = ', res.result)
+      console.log('userinfo = ', app.globalData)
+      openid = res.result
+      this.setData({
+        nickName : app.globalData.userInfo.nickName,
+        sno: res.result.data[0].sno,
+        sname:res.result.data[0].sname,
+        sacademy: res.result.data[0].sacademy,
+        sdorm: res.result.data[0].sdorm
+      })
+      
+    })
+    .catch(err=>{
+      console.error(err)
+    })   
   },
 
   /**

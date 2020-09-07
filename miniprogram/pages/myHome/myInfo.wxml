@@ -1,19 +1,23 @@
 <!--pages/myInfo/myInfo.wxml-->
 <view class="infoList">
-  <view class="infoTitle">昵称</view>
-  <view class="infoContent">浅夜</view>
+  <view class="infoTitle" >昵称</view>
+  <view class="infoContent" >{{nickName}}</view>
 </view>
 <view class="infoList">
   <view class="infoTitle">学号</view>
-  <view class="infoContent">E19301219</view>
+  <view class="infoContent" >{{sno}}</view>
+</view>
+<view class="infoList">
+  <view class="infoTitle">姓名</view>
+  <view class="infoContent" >{{sname}}</view>
 </view>
 <view class="infoList">
   <view class="infoTitle">学院</view>
-  <view class="infoContent">计算机科学与技术学院</view>
+  <view class="infoContent" >{{sacademy}}</view>
 </view>
 <view class="infoList">
   <view class="infoTitle">宿舍</view>
-  <view class="infoContent">李园1512</view>
+  <view class="infoContent" >{{sdorm}}</view>
 </view>
 <view class="infoList">
   <view class="infoTitle">其他</view>
