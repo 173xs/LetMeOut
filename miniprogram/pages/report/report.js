@@ -7,7 +7,26 @@ Page({
   data: {
 
   },
-
+  submit(e){
+    // console.log(e.detail.value)
+    wx.cloud.callFunction({
+      name:'report',
+      data:{
+        title:e.detail.value.title,
+        detail:e.detail.value.detail
+      }
+    })
+    .then(res=>{
+      console.log('提交成功')
+      wx.showToast({
+        title: '提交成功',
+        icon:'success'
+      })
+    })
+    .catch(err=>{
+      console.error(err)
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
