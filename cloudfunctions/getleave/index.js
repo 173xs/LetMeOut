@@ -41,6 +41,8 @@ async function getSno() {
 //老师审批请假单的查询函数
 async function getLeave1_a(event, context) {
   let leave = await db.collection("leave")
+    .skip(event.condition.skip)
+    .limit(event.condition.limit)
     .where({
       'approveState': 0
     })
@@ -52,7 +54,7 @@ async function getLeave1_a(event, context) {
     //console.log('leave_sno = ',leave_sno)
     let stu_info = await db.collection("stuInfo")
       .where({
-        sno: leave_sno
+        sno:leave_sno
       })
       .get()
     //console.log('stu_info = ',stu_info)
@@ -69,16 +71,16 @@ async function getLeave2_a(event, context) {
   console.log('get sno')
   let sno
   await getSno()
-  .then(res=>{
-    // console.log('res = ',res)
-    sno = res.data[0].sno
-  })
-  .catch(err=>{
-    // console.log(err)
-    return err
-  })
+    .then(res => {
+      // console.log('res = ',res)
+      sno = res.data[0].sno
+    })
+    .catch(err => {
+      // console.log(err)
+      return err
+    })
 
-  console.log('sno = ',sno)
+  console.log('sno = ', sno)
   return await db.collection("leave")
     .where(_.and([{
         'approveState': _.eq(0)
@@ -94,14 +96,14 @@ async function getLeave2_a(event, context) {
 async function getLeave2_b(event, context) {
   let sno
   await getSno()
-  .then(res=>{
-    // console.log('res = ',res)
-    sno = res.data[0].sno
-  })
-  .catch(err=>{
-    // console.log(err)
-    return err
-  })
+    .then(res => {
+      // console.log('res = ',res)
+      sno = res.data[0].sno
+    })
+    .catch(err => {
+      // console.log(err)
+      return err
+    })
 
   return await db.collection("leave")
     .where(_.and([{
@@ -121,14 +123,14 @@ async function getLeave2_b(event, context) {
 async function getLeave2_c(event, context) {
   let sno
   await getSno()
-  .then(res=>{
-    // console.log('res = ',res)
-    sno = res.data[0].sno
-  })
-  .catch(err=>{
-    // console.log(err)
-    return err
-  })
+    .then(res => {
+      // console.log('res = ',res)
+      sno = res.data[0].sno
+    })
+    .catch(err => {
+      // console.log(err)
+      return err
+    })
 
   return await db.collection("leave")
     .where(_.and([{

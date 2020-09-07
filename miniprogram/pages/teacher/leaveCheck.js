@@ -5,14 +5,88 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    leaveList: [],
+    approvedList:[],
+    skip: 0
   },
 
+  callApproveFunc(id, approveSate) {
+    wx.cloud.callFunction({
+        name: 'approveLeave',
+        data: {
+          leaveId: id,
+          approveState: approveSate
+        }
+      })
+      .then(res => {
+        console.log('完成审批')
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  },
+  backBtn(res) {
+    // callApproveFunc(res.currentTarget.dataset.id,-1)
+    wx.cloud.callFunction({
+        name: 'approveLeave',
+        data: {
+          leaveId: res.currentTarget.dataset.id,
+          approveState: -1
+        }
+      })
+      .then(res => {
+        console.log('完成审批')
+        // approvedList.push(res.currentTarget.dataset.id)
+        this.data.skip -= 1
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  },
+  okBtn(res) {
+    // callApproveFunc(res.currentTarget.dataset.id,1)
+    wx.cloud.callFunction({
+        name: 'approveLeave',
+        data: {
+          leaveId: res.currentTarget.dataset.id,
+          approveState: 1
+        }
+      })
+      .then(res => {
+        console.log('完成审批')
+        // approvedList.push(res.currentTarget.dataset.id)
+        this.data.skip -= 1
+      })
+      .catch(err => {
+        console.error(err)
+      })
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.cloud.callFunction({
+        name: 'getleave',
+        data: {
+          funcName: '1-a',
+          condition: {
+            limit: 3,
+            // approvedList:approvedList
+            skip: this.data.skip
+          }
+        }
+      })
+      .then(res => {
+        this.setData({
+          leaveList: res.result.data
+        })
+        this.data.skip = 3
+        console.log('待审核请假单:', this.data.leaveList)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
 
   /**
@@ -54,7 +128,30 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    console.log('onreachbottom')
+    wx.cloud.callFunction({
+        name: 'getleave',
+        data: {
+          funcName: '1-a',
+          condition: {
+            limit: 3,
+            // approvedList:approvedList
+            skip: this.data.skip
+          }
+        }
+      })
+      .then(res => {
+        let oldList = this.data.leaveList
+        let newList = oldList.concat(res.result.data)
+        this.setData({
+          leaveList: newList
+        })
+        this.data.skip += res.result.data.length
+        console.log('待审核请假单:', this.data.leaveList)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
 
   /**

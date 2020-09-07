@@ -2,26 +2,25 @@
 
 <!-- 查询未审核的请假单，循环输出下面的列表，一页两个 -->
 
-<view class="noCheckList">
+<view class="noCheckList" wx:for="{{leaveList}}" wx:key="index">
   <view class="userBox">
-    <text class="user">E19301219张三</text>
-    <text class="academy">计算机科学与技术学院</text>
+    <text class="user">{{item.sno}}{{item.sname}}</text>
+    <text class="academy">{{item.sacademy}}</text>
   </view>
   <view class="noTitleBox">
-    <text class="noClass">事假</text>
-    <text class="noTime">2020-08-30 到 2020-08-31</text>
+    <text class="noClass">{{item.leaveClass}}</text>
+    <text class="noTime">{{item.leaveDate}} 到 {{item.returnDate}}</text>
   </view>
   <view class="noDetailBox">
-    <view class="noDetail">查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细
-    查看详细查看详细查看详细查看详细</view>
+    <view class="noDetail">{{item.leaveReason}}</view>
   </view>
   <view class="buttonList">
-    <button class='backBtn'>驳回</button>
-    <button  class='okBtn'>通过</button>
+    <button class='backBtn' bindtap="backBtn" data-id="{{item._id}}" data-idx="{{index}}">驳回</button>
+    <button class='okBtn' bindtap="okBtn" data-id="{{item._id}}" data-idx="{{index}}">通过</button>
   </view>
 </view>
 
-<view class="noCheckList">
+<!-- <view class="noCheckList">
   <view class="userBox">
     <text class="user">E19301219张三</text>
     <text class="academy">计算机科学与技术学院</text>
@@ -38,4 +37,4 @@
     <button class='backBtn'>驳回</button>
     <button  class='okBtn'>通过</button>
   </view>
-</view>
+</view> -->
