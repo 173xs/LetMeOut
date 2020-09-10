@@ -73,13 +73,13 @@ Page({
           condition: {
             limit: 3,
             // approvedList:approvedList
-            skip: this.data.skip
+            skip: this.data.skip,
           }
         }
       })
       .then(res => {
         this.setData({
-          leaveList: res.result.data
+          leaveList: res.result.list
         })
         this.data.skip = 3
         console.log('待审核请假单:', this.data.leaveList)
@@ -142,11 +142,11 @@ Page({
       })
       .then(res => {
         let oldList = this.data.leaveList
-        let newList = oldList.concat(res.result.data)
+        let newList = oldList.concat(res.result.list)
         this.setData({
           leaveList: newList
         })
-        this.data.skip += res.result.data.length
+        this.data.skip += res.result.list.length
         console.log('待审核请假单:', this.data.leaveList)
       })
       .catch(err => {

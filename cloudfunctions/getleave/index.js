@@ -40,29 +40,52 @@ async function getSno() {
 }
 //老师审批请假单的查询函数
 async function getLeave1_a(event, context) {
-  let leave = await db.collection("leave")
-    .skip(event.condition.skip)
-    .limit(event.condition.limit)
-    .where({
-      'approveState': 0
-    })
-    .get()
+  console.log('condition = ', event.condition)
+  const $ = _.aggregate
+  let wxContext = cloud.getWXContext()
+  let academy
+  //先获取老师的学院信息
+  await db.collection("teaInfo")
+  .where({
+    _openid: wxContext.OPENID
+  })
+  .get()
+  .then(res=>{
+    academy = res.data[0].tacademy
+  })
 
-  //console.log('leave = ',leave)
-  for (let item of leave.data) {
-    let leave_sno = item.sno
-    //console.log('leave_sno = ',leave_sno)
-    let stu_info = await db.collection("stuInfo")
-      .where({
-        sno:leave_sno
-      })
-      .get()
-    //console.log('stu_info = ',stu_info)
-    item['sname'] = stu_info.data[0].sname
-    item['sacademy'] = stu_info.data[0].sacademy
+  console.log('tacademy = ',academy)
+  let leave = await db.collection('leave')
+  .aggregate()
+  .lookup(
+    {
+      from: 'stuInfo',
+      let: {
+        leave_sno: '$sno',
+        leave_approve: '$approveState',
+      },
+      pipeline: $.pipeline()
+        .match(_.expr($.and([
+          $.eq(['$sno', '$$leave_sno']),
+          $.eq([0, '$$leave_approve']),
+          $.eq([academy, '$sacademy'])
+        ])))
+        .project({
+          _id: 0,
+          _openid: 0,
+        })
+        .done(),
+      as: 'stuInfo',
+    }
+  )
+  .match({
+    'approveState': 0
+  })
+  .limit(event.condition.limit)
+  .skip(event.condition.skip)
+  .end()
 
-  }
-  //console.log(leave.data)
+  console.log('leave = ',leave)
   return leave
 }
 
