@@ -135,9 +135,9 @@ async function getLeave2_b(event, context) {
       {
         'sno': _.eq(sno)
       },
-      {
-        'checkState': _.eq(0) //通过审批但是没有使用
-      }
+      // {
+      //   'checkState': _.eq(0) //通过审批但是没有使用
+      // }
     ]))
     .get()
 }

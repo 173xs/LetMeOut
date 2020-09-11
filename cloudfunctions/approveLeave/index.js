@@ -7,11 +7,14 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
 
+  let data 
+  data.approveState = event.approveState
+  if (event.approveState == 1){
+    data.checkState = 0
+  }
   return await db.collection('leave').
   doc(event.leaveId)
   .update({
-    data: {
-      approveState: event.approveState
-    }
+    data: data
   })
 }
