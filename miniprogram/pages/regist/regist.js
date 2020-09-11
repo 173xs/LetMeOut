@@ -42,19 +42,19 @@ Page({
     })
   },
 
-    //根据身份的不同跳转到不同的首页
-  goHomepage:function(){
-    var user=this.data.curUser
-    if(user=='student'){
-      wx.switchTab({
-        url: "/pages/homepage/homepage",
-      })
-    }else if(user=='teacher'){
-      wx.redirectTo({
-        url: "/pages/teacher/teaHomepage",
-      })
-    }
-  },
+  // 已删除  //根据身份的不同跳转到不同的首页
+  // goHomepage:function(){
+  //   var user=this.data.curUser
+  //   if(user=='student'){
+  //     wx.switchTab({
+  //       url: "/pages/homepage/homepage",
+  //     })
+  //   }else if(user=='teacher'){
+  //     wx.redirectTo({
+  //       url: "/pages/teacher/teaHomepage",
+  //     })
+  //   }
+  // },
 
   // 已删除  //身份按钮切换赋值
   // radioChange: function (e) {
@@ -88,7 +88,7 @@ Page({
           mask: true
         })
         wx.switchTab({
-          url: '../homepage/homepage',
+          url: '/pages/homepage/homepage',
         })
       })
       .catch(err => {

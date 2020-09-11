@@ -65,12 +65,13 @@ Page({
   stuHome:function(){
     //根据用户的appid判断用户是否已经注册
     //如果已经注册，跳转首页
-    // wx.switchTab({
-    //   url: "/pages/homepage/homapage",
-    // })
-    //如果没有注册，跳转注册页面
-    wx.redirectTo({
-      url: "/pages/regist/regist",
+    wx.switchTab({
+      url: '/pages/homepage/homepage',
     })
+
+    //如果没有注册，跳转注册页面
+    // wx.redirectTo({
+    //   url: "/pages/regist/regist",
+    // })
   }
 })
