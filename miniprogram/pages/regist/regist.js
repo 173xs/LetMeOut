@@ -84,7 +84,7 @@ Page({
         wx.showToast({
           title: '注册成功',
           icon: 'success',
-          duration: 3000,
+          duration: 2000,
           mask: true
         })
         wx.switchTab({
