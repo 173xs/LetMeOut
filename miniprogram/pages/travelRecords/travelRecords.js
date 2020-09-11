@@ -32,7 +32,7 @@ Page({
     wx.cloud.callFunction({
       name:"getTravel",
       data:{
-        date: '2020-9-11'
+        date: '2020-09-11'
       }
     })
     .then(res=>{

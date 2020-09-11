@@ -8,8 +8,8 @@
   </view>
 </view>
 
-
-<view class="recordBox">
+<view wx:if="{{recordlist.length>0==0}}">你今天没有出行记录</view>
+<view class="recordBox" wx:if="{{recordlist.length>0}}">
   <view class="recordListBox">
     <view class="recordsList">
       <view class="eachRecord" wx:for="{{recordlist}}" wx:key="index">
@@ -19,7 +19,7 @@
       </view>
     </view>
     <image src="/images/position.png" class="positionIcon"></image>
-    <text id="placeNum">4</text>
+    <text id="placeNum">{{recordlist.length}}</text>
     <text>站</text>
   </view>
 </view>
