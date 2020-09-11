@@ -12,7 +12,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.cloud.callFunction({
+      name:"getTravel",
+      data:{
+        date: '2020-9-11'
+      }
+    })
+    .then(res=>{
+      console.log('travelrecords = ', res)
+    })
+    .catch(err=>{
+      console.error(err)
+    })
   },
 
   /**
