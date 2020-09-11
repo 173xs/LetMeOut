@@ -33,7 +33,7 @@
       <image src='/images/down.png'  class='downImg' ></image>
     </picker>
   </view>
-    <view class="listBox">
+<!-- <view class="listBox">
     <text class="listTitle">身份：</text>
 
     <radio-group class="radioBox" bindchange="radioChange">
@@ -47,9 +47,9 @@
       </view>
     </radio-group>
 
-  </view>
+  </view> -->
   <button class="registBtn" bindtap="regist">注册</button>
-  <button  class="hometBtn" bindtap="goHomepage">我已注册,去首页</button>
+  <!-- <button  class="hometBtn" bindtap="goHomepage">我已注册,去首页</button> -->
 </form>
 </view>
 
