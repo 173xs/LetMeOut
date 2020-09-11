@@ -1,4 +1,27 @@
 <!--pages/travelRecords/travelRecords.wxml-->
-<Record></Record>
-<Record></Record>
-<Record></Record>
+<view  class="menuBox">
+  <view class="menuCenterBox">
+    <image src="/images/record.png"></image>
+    <picker mode="date" value="{{queryDate}}" start="2020-09-01" end="{{nowDate}}" bindchange="bindDateChange"  class="pickerBox">
+      <view  class="leaveTime">{{queryDate}}</view>
+    </picker>
+  </view>
+</view>
+
+
+<view class="recordBox">
+  <view class="recordListBox">
+    <view class="recordsList">
+      <view class="eachRecord" wx:for="{{recordlist}}" wx:key="index">
+        <view class="radiusPoint"></view>
+        <view class="recordPlace">{{item.bnum}}</view>
+        <view class="recoreTime">{{item.time}}</view>
+      </view>
+    </view>
+    <image src="/images/position.png" class="positionIcon"></image>
+    <text id="placeNum">4</text>
+    <text>站</text>
+  </view>
+</view>
+
+

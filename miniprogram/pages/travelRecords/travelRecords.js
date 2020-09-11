@@ -1,17 +1,34 @@
 // pages/travelRecords/travelRecords.js
+var util = require('../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    nowData:'',
+    queryData:'',
+    recordlist:[]
   },
-
+  // 日期的选择
+  bindDateChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      queryDate: e.detail.value,
+    })
+    //这里获取日期对应的出行记录 eg: queryDate:2020-09-10
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // leaveDate和returnDate的初始化
+    var today=util.formatDay(new Date())
+    this.setData({
+      nowDate: today,
+      queryDate: today
+    }),
+
     wx.cloud.callFunction({
       name:"getTravel",
       data:{
@@ -19,6 +36,10 @@ Page({
       }
     })
     .then(res=>{
+      this.setData({
+        recordlist:res.result.list
+      })
+      console.log("recordlist:",res.result.list)
       console.log('travelrecords = ', res)
     })
     .catch(err=>{
