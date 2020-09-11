@@ -42,27 +42,27 @@ Page({
     })
   },
 
-    //根据身份的不同跳转到不同的首页
-  goHomepage:function(){
-    var user=this.data.curUser
-    if(user=='student'){
-      wx.switchTab({
-        url: "/pages/homepage/homepage",
-      })
-    }else if(user=='teacher'){
-      wx.redirectTo({
-        url: "/pages/teacher/teaHomepage",
-      })
-    }
-  },
+  // 已删除  //根据身份的不同跳转到不同的首页
+  // goHomepage:function(){
+  //   var user=this.data.curUser
+  //   if(user=='student'){
+  //     wx.switchTab({
+  //       url: "/pages/homepage/homepage",
+  //     })
+  //   }else if(user=='teacher'){
+  //     wx.redirectTo({
+  //       url: "/pages/teacher/teaHomepage",
+  //     })
+  //   }
+  // },
 
-    //身份按钮切换赋值
-  radioChange: function (e) {
-    console.log(e)
-    this.setData({
-      curUser:e.detail.value
-    })
-  },
+  // 已删除  //身份按钮切换赋值
+  // radioChange: function (e) {
+  //   console.log(e)
+  //   this.setData({
+  //     curUser:e.detail.value
+  //   })
+  // },
 
   noChange: function(e){
     this.setData({
@@ -84,8 +84,11 @@ Page({
         wx.showToast({
           title: '注册成功',
           icon: 'success',
-          duration: 1000,
+          duration: 2000,
           mask: true
+        })
+        wx.switchTab({
+          url: '/pages/homepage/homepage',
         })
       })
       .catch(err => {
@@ -101,32 +104,42 @@ Page({
   regist() {
     console.log(this.data)
     var user = this.data.curUser
-    wx.showLoading({
-      title: '注册中',
-      mask: true
-    })
-    var data 
-    if ('student' == user) {
-      data = {
-        user: user,
-        info: {
-          sno: this.data.sno,
-          sname: this.data.name,
-          sacademy: this.data.academyList[this.data.academyIndex],
-          sdorm: this.data.dormList[this.data.dormIndex]
-        }
-      }
-    } else if ('teacher' == user) {
-      data = {
-        user: user,
-        info: {
-          tno: this.data.sno,
-          tname: this.data.name,
-          tacademy: this.data.academyList[this.data.academyIndex],
-        }
-      }
+    if(this.data.sno=="" || this.name==""){
+      this.setData({
+        errMsg:"用户名或密码不能为空"
+      })
     }
-    this.callRegister(data)
+    else{
+      this.setData({
+        errMsg:""
+      })
+      wx.showLoading({
+        title: '注册中',
+        mask: true
+      })
+      var data 
+      if ('student' == user) {
+        data = {
+          user: user,
+          info: {
+            sno: this.data.sno,
+            sname: this.data.name,
+            sacademy: this.data.academyList[this.data.academyIndex],
+            sdorm: this.data.dormList[this.data.dormIndex]
+          }
+        }
+      } else if ('teacher' == user) {
+        data = {
+          user: user,
+          info: {
+            tno: this.data.sno,
+            tname: this.data.name,
+            tacademy: this.data.academyList[this.data.academyIndex],
+          }
+        }
+      }
+      this.callRegister(data)
+    }
   },
   /**
    * 生命周期函数--监听页面加载

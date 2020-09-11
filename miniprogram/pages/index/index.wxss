@@ -25,12 +25,14 @@
   color: #aaa;
 }
 
-.usermotto {
-  margin-top: 200px;
-  border-radius: 5px;
-  border:1px solid #333;
-  width:150px;
-  height:50px;
+.menubox{margin:350rpx auto 0;width:400rpx;}
+.menuBtn {
+  border-radius: 10rpx;
+  border:2rpx solid #333;
+  width:300rpx;
+  height:100rpx;
+  margin:20rpx auto 0;
   text-align:center;
   line-height:50px;
+  background-color: white;
 }

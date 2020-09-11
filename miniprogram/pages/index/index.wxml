@@ -7,7 +7,9 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <view class="usermotto">
-    <navigator class="user-motto" url="/pages/regist/regist">开启小程序之旅</navigator>
+  <view class="menubox">
+    <button class="menuBtn" bindtap="teaHome">我是老师</button>
+    <button class="menuBtn" bindtap="stuHome">我是学生</button>
   </view>
+
 </view>

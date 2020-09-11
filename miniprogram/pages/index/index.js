@@ -50,5 +50,28 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  teaHome:function(){
+    //根据用户的appid判断用户是否已经注册
+    //如果已经注册，跳转首页
+    wx.redirectTo({
+      url: "/pages/teacher/teaHomepage",
+    })
+    //如果没有注册，跳转注册页面
+    // wx.redirectTo({
+    //   url: "/pages/teacher/teaRegist",
+    // })
+  },
+  stuHome:function(){
+    //根据用户的appid判断用户是否已经注册
+    //如果已经注册，跳转首页
+    wx.switchTab({
+      url: '/pages/homepage/homepage',
+    })
+
+    //如果没有注册，跳转注册页面
+    // wx.redirectTo({
+    //   url: "/pages/regist/regist",
+    // })
   }
 })

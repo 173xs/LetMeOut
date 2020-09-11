@@ -4,27 +4,27 @@
   <view class="{{yesCheckWxss}}"  bindtap="yesCheckClick">已通过</view>
   <view class="{{backCheckWxss}}"  bindtap="backCheckClick">已驳回</view>
 </view>
-<view class="noCheckList">
-  <view class="noTitleBox">
-    <text class="noClass">事假</text>
-    <text class="noTime">2020-08-30 到 2020-08-31</text>
-  </view>
-  <view class="noDetailBox">
-    <view class="noDetail">查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细查看详细
-    查看详细查看详细查看详细查看详细</view>
-  </view>
-</view>
 
-<view class="yesCheckList">
+
+<view class="yesCheckList" wx:if="{{yesCheckWxss == addColor}}" wx:for="{{reslist}}" wx:key="index">
   <view class="yesDetailBox">
-    <view class="yesClass">事假</view>
-    <view class="yesTime">2020-08-30 到 2020-08-31</view>
+    <view class="yesClass">{{item.leaveClass}}</view>
+    <view class="yesTime">{{item.leaveDate}} 到 {{item.returnDate}}</view>
   </view>
   <view class="yesBillBox">
     <image src="/images/leave2.png" bindtap="showBill"></image>
   </view>
 </view>
 
+<view class="noCheckList" wx:if="yesCheckWxss == " wx:for="{{reslist}}" wx:key="index">
+  <view class="noTitleBox">
+    <text class="noClass">{{item.leaveClass}}</text>
+    <text class="noTime">{{item.leaveDate}} 到 {{item.returnDate}}</text>
+  </view>
+  <view class="noDetailBox">
+    <view class="noDetail">{{item.leaveReason}}</view>
+  </view>
+</view>
 <cover-view class="coverBillBox" style="display:{{coverBoxDisplay}}" bindtap="hideBill">
   <cover-view class="coverGray"></cover-view>
   <cover-view class="showBillBox">

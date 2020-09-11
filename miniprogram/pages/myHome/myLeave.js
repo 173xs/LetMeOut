@@ -6,6 +6,7 @@ Page({
    */
   data: {
     coverBoxDisplay: "none",
+    reslist:[],
 
     //菜单栏按钮选中时的样式
     noCheckWxss: 'addColor',
@@ -31,6 +32,9 @@ Page({
       })
       .then(res => {
         console.log('未审核的请假单', res)
+        this.setData({
+          reslist:res.result.data
+        })
       })
       .catch(err => {
 
@@ -54,6 +58,9 @@ Page({
       })
       .then(res => {
         console.log('已审核的请假单', res)
+        this.setData({
+          reslist:res.result.data
+        })
       })
       .catch(err => {
 
@@ -77,6 +84,9 @@ Page({
       })
       .then(res => {
         console.log('驳回的请假单', res)
+        this.setData({
+          reslist:res.result.data
+        })
       })
       .catch(err => {
 
@@ -107,6 +117,9 @@ Page({
     })
     .then(res => {
       console.log('未审核的请假单', res)
+      this.setData({
+        reslist:res.result.data
+      })
     })
     .catch(err => {
 
