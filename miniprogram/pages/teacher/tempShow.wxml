@@ -1,0 +1,37 @@
+<!--miniprogram/pages/teacher/tempShow.wxml-->
+<view  class="menuBox">
+    <picker mode="date" value="{{queryDate}}" start="2020-09-01" end="{{nowDate}}" bindchange="bindDateChange"  class="pickerBox">
+      <view  class="leaveTime">{{queryDate}}</view>
+    </picker>
+</view>
+<view class="coverBox">
+  <view class="canvasBox">
+    <canvas canvas-id="mypie" style="width:200px;height:200px;"></canvas>
+  </view>
+</view>
+<text class="label">{{queryDate}}体温上报概况</text>
+<view class="dataBox">
+  <view class="dataList">
+    <view class="radiusPoint"></view>
+    <text class="dataLabel">共上报</text>
+    <text class="dataText">{{upedNum}}</text>
+    <text class="dataLabel">人，未上报</text>
+    <text class="dataText">{{totalNum-upedNum}}</text>
+    <text class="dataLabel">人</text>
+  </view>
+  <view class="dataList">
+    <view class="radiusPoint"></view>
+    <text class="dataLabel">今日</text>
+    <text class="dataText">{{hotNum}}</text>
+    <text class="dataLabel">人体温异常</text>
+  </view>
+  <view class="dataList">
+    <view class="radiusPoint"></view>
+    <text class="dataLabel">上报比</text>
+    <text class="dataText">{{(upedNum/totalNum)*100 | Int}}%</text>
+    <text class="dataLabel">，正常率</text>
+    <text class="dataText">{{(hotNum/upedNum)*100 | Int}}%</text>
+  </view>
+</view>
+
+<button class="hotDetail">查看体温异常人员名单</button>

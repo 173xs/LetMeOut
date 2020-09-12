@@ -1,0 +1,15 @@
+/* miniprogram/pages/teacher/tempShow.wxss */
+page{height: 100%;background-color:#f8f3f3;}
+.menuBox{width:100%;height:100rpx;margin:5rpx auto 0;background-color: white;}
+.pickerBox{width:250rpx;height:100rpx;margin:0 auto}
+.pickerBox view{width:200rpx;margin:0 auto;height:auto;line-height:100rpx;font-size:32rpx;text-decoration: underline;text-align:center}
+
+.coverBox{width:100%;height:400rpx;background:white}
+.canvasBox{width:400rpx;height:400rpx;margin:0 auto;}
+.label{width:100%;text-align:center;height:100rpx;line-height:100rpx;font-size:32rpx;display:block;background:white}
+.dataBox{width:710rpx;margin:20rpx auto 0;background-color: white;border-radius: 20rpx;}
+.dataList{width:670;height:100rpx;margin:0 auto;border-top:2rpx solid #f8f3f3}
+.radiusPoint{width:15rpx;height:15rpx;border-radius: 7.5rpx;background-color: #ccffff;margin:42.5rpx 20rpx;float:left;}
+.dataLabel{line-height:100rpx;float:left;font-size:32rpx;}
+.dataText{line-height:100rpx;float:left;font-size:28rpx;color:red}
+.hotDetail{width:670rpx;height:100rpx;margin:20rpx auto 0;line-height: 100rpx;font-size:32rpx;color:white;text-align: center;background-color: #f6b943;}

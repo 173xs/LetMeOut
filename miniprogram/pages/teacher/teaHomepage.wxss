@@ -1,2 +1,14 @@
 /* pages/teaHomepage/teaHomepage.wxss */
-navigator{width:500rpx;margin:20rpx auto;border:1px solid gray}
+page{height: 100%;background-color:#f8f3f3;}
+
+.container {display: flex;flex-direction: column;align-items: center;justify-content: space-between;box-sizing: border-box;} 
+.bannerBox{width:100%;height:400rpx;}
+.bannerBox image{width:100%;height:100%;}
+
+.menuBox{width:502rpx;height:402rpx;margin:0 auto;position:relative;top:-50rpx;background-color: white;box-shadow: 0rpx 0rpx 10rpx #d5d1d1;border-radius: 20rpx;
+padding:50rpx 85rpx}
+.iconBox{width:200rpx;height:200rpx;float:left;}
+.iconBox cover-image{width:100rpx;height:100rpx;margin:20rpx auto 0;}
+.iconBox text{line-height:80rpx;width:100%;text-align:center;font-size:28rpx;display:block}
+.gapBoxColumn{width:2rpx;height:200rpx;margin:0 50rpx;background-color: #f8f3f3;float:left;}
+.gapBoxRow{width:500rpx;height:2rpx;background-color: #f8f3f3;float:left;}

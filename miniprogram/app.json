@@ -12,7 +12,8 @@
     "pages/myHome/myLeave",
     "pages/teacher/teaHomepage",
     "pages/regist/regist",
-    "pages/teacher/leaveCheck"
+    "pages/teacher/leaveCheck",
+    "pages/teacher/tempShow"
   ],
   "window": {
     "backgroundTextStyle": "light",
