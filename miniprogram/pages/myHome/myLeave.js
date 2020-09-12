@@ -7,6 +7,7 @@ Page({
   data: {
     coverBoxDisplay: "none",
     reslist:[],
+    curLeaveBill:[],//初始化请假单的信息
 
     //菜单栏按钮选中时的样式
     noCheckWxss: 'addColor',
@@ -94,9 +95,20 @@ Page({
   },
 
 
-  showBill: function () {
+  showBill: function (e) {
+    var curId=e.currentTarget.dataset.curid
+    var list=this.data.reslist
+    var bill=[]
+    console.log(curId)
+    for(var i=0;i<list.length;++i){
+      if(list[i]._id===curId){
+        bill=list[i]
+      }
+    }
+    console.log(bill)
     this.setData({
-      coverBoxDisplay: "block"
+      coverBoxDisplay: "block",
+      curLeaveBill:bill
     })
   },
   hideBill: function () {

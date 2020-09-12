@@ -6,17 +6,17 @@
 </view>
 
 
-<view class="yesCheckList" wx:if="{{yesCheckWxss == addColor}}" wx:for="{{reslist}}" wx:key="index">
+<view class="yesCheckList" wx:if="{{yesCheckWxss != 0}}" wx:for="{{reslist}}" wx:key="index">
   <view class="yesDetailBox">
     <view class="yesClass">{{item.leaveClass}}</view>
     <view class="yesTime">{{item.leaveDate}} 到 {{item.returnDate}}</view>
   </view>
   <view class="yesBillBox">
-    <image src="/images/leave2.png" bindtap="showBill"></image>
+    <image src="/images/leave2.png" data-curid="{{item._id}}" bindtap="showBill"></image>
   </view>
 </view>
 
-<view class="noCheckList" wx:if="yesCheckWxss == " wx:for="{{reslist}}" wx:key="index">
+<view class="noCheckList" wx:if="{{yesCheckWxss == 0}}" wx:for="{{reslist}}" wx:key="index">
   <view class="noTitleBox">
     <text class="noClass">{{item.leaveClass}}</text>
     <text class="noTime">{{item.leaveDate}} 到 {{item.returnDate}}</text>
@@ -31,7 +31,7 @@
     <cover-view class="BillTitle">请假单</cover-view>
     <cover-view class="billListBox">
       <cover-view class="billListLabel">姓名：</cover-view>
-      <cover-view class="billListText">张三</cover-view>
+      <cover-view class="billListText">{{curLeaveBill.sno}}</cover-view>
     </cover-view>
     <cover-view class="billListBox">
       <cover-view class="billListLabel">学院：</cover-view>
@@ -39,19 +39,24 @@
     </cover-view>
     <cover-view class="billListBox">
       <cover-view class="billListLabel">类别：</cover-view>
-      <cover-view class="billListText">事假</cover-view>
+      <cover-view class="billListText">{{curLeaveBill.leaveClass}}</cover-view>
     </cover-view>
     <cover-view class="billListBox">
       <cover-view class="billListLabel">时间：</cover-view>
-      <cover-view class="billListText">2020-08-30 到 2020-08-31</cover-view>
+      <cover-view class="billListText">{{curLeaveBill.leaveDate}} 到 {{curLeaveBill.returnDate}}</cover-view>
     </cover-view>
     <cover-view class="billListBox">
       <cover-view class="billListLabel">请假理由：</cover-view>
     </cover-view>
-    <cover-view class="billReason">请假理由请假理由请假理由请假理由请假理由请假理由请假理由请假理由请假理由请假理由请假理由</cover-view>
+    <cover-view class="billReason">{{curLeaveBill.leaveReason}}</cover-view>
     <cover-view class="billListBox">
       <cover-view class="billListLabel">审核人：</cover-view>
       <cover-view class="billListText">李四老师</cover-view>
     </cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">使用状态：</cover-view>
+      <cover-view class="billListText">已使用</cover-view>
+    </cover-view>
   </cover-view>
 </cover-view>
+

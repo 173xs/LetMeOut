@@ -4,12 +4,12 @@ page{background-color:#f8f3f3;}
 .menuBox view{font-size:28rpx;line-height:50rpx;width:100rpx;float:left;text-align:center;margin:25rpx 55rpx 0;}
 .addColor{color:#66ccff;border-bottom:2px solid #66ccff;}
 
-.noCheckList{width:710rpx;margin:0 auto; background-color: white;border-radius: 20rpx;height:280rpx;margin-bottom:20rpx;}
+.noCheckList{width:710rpx;margin:0 auto; background-color: white;border-radius: 20rpx;height:auto;margin-bottom:20rpx;padding-bottom:20rpx;}
 .noTitleBox{width:670rpx;margin:0 auto;height:100rpx;}
 .noClass{width:200rpx;height:100rpx;line-height:100rpx;font-size:36rpx;float:left}
 .noTime{height:50rpx;float:right;color:#808080;line-height:100rpx;}
-.noDetailBox{width:670rpx;margin:0 auto;height:150rpx;}
-.noDetail{height:50rpx;line-height:50rpx;font-size:28rpx;text-indent: 2em;}
+.noDetailBox{width:670rpx;margin:0 auto;min-height:50rpx;}
+.noDetail{line-height:50rpx;font-size:28rpx;text-indent: 2em;}
 
 .yesCheckList{width:710rpx;margin:0 auto; background-color: white;border-radius: 20rpx;height:160rpx;margin-bottom:20rpx;}
 .yesDetailBox{width:590rpx;height:100%;float:left;margin-left:20rpx;}
