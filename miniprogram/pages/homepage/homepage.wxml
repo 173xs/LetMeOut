@@ -1,28 +1,29 @@
 <!--pages/homepage/homepage.wxml-->
 <view class="container">
+  <view class="bannerBox"><image src="/images/banner.png"></image></view>
   <view class="menuBox">
     <view class="iconBox" bindtap="scancode">
       <cover-image src="../../images/scan.png"></cover-image>
       <text>扫一扫</text>
     </view>
-    <view class="gapBox"></view>
+    <view class="gapBoxColumn"></view>
     <navigator class="iconBox" url="/pages/leave/leave" hover-class="noshadow">
-      <cover-image src="../../images/leave.png"></cover-image>
+      <cover-image src="../../images/leave2.png"></cover-image>
       <text>请假</text>
     </navigator>
-    <view class="gapBox"></view>
+    <view class="gapBoxRow"></view>
    <navigator class="iconBox" url="/pages/report/report" hover-class="noshadow">
-      <cover-image src="../../images/report.png"></cover-image>
+      <cover-image src="../../images/message.png"></cover-image>
       <text>异常上报</text>
     </navigator>
-    <view class="gapBox"></view>
+    <view class="gapBoxColumn"></view>
     <navigator class="iconBox" url="/pages/travelRecords/travelRecords" hover-class="noshadow">
-      <cover-image src="../../images/records.png"></cover-image>
+      <cover-image src="../../images/record.png"></cover-image>
       <text>出行记录</text>
     </navigator>
   </view>
 
-  <view class="illDataBox">
+  <!-- <view class="illDataBox">
     <view class="illDataTitleBox">
       <text class="illDataBoxTitle">全校概况</text>
       <text class="illDataBoxTime">截至 {{nowDate}}</text>
@@ -57,7 +58,7 @@
         <text class="illNumLable">发热</text>
       </view>
     </view>
-  </view>
+  </view> -->
   <view class="temperatureBox">
     <form class="temperatureForm">
       <input type="digit" placeholder="请输入体温" bindinput="bindReplaceInput"></input>
