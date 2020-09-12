@@ -67,21 +67,7 @@ Page({
     })
     //刷新列表，填充未审核的请假信息
     this.callGetLeave('2-a')
-    // wx.cloud.callFunction({
-    //     name: 'getleave',
-    //     data: {
-    //       funcName: '2-a'
-    //     }
-    //   })
-    //   .then(res => {
-    //     console.log('未审核的请假单', res)
-    //     this.setData({
-    //       reslist:res.result.data
-    //     })
-    //   })
-    //   .catch(err => {
 
-    //   })
   },
 
   //已审核按钮点击事件
@@ -94,21 +80,6 @@ Page({
     })
     //刷新列表，填充已审核的请假信息
     this.callGetLeave('2-b')
-    // wx.cloud.callFunction({
-    //     name: 'getleave',
-    //     data: {
-    //       funcName: '2-b'
-    //     }
-    //   })
-    //   .then(res => {
-    //     console.log('已审核的请假单', res)
-    //     this.setData({
-    //       reslist:res.result.list
-    //     })
-    //   })
-    //   .catch(err => {
-
-    //   })
   },
 
   //驳回按钮点击事件
@@ -121,21 +92,6 @@ Page({
     })
     //刷新列表，填充驳回的请假信息
     this.callGetLeave('2-c')
-    // wx.cloud.callFunction({
-    //     name: 'getleave',
-    //     data: {
-    //       funcName: '2-c'
-    //     }
-    //   })
-    //   .then(res => {
-    //     console.log('驳回的请假单', res)
-    //     this.setData({
-    //       reslist:res.result.data
-    //     })
-    //   })
-    //   .catch(err => {
-
-    //   })
   },
 
 
@@ -166,21 +122,6 @@ Page({
   onLoad: function (options) {
     //默认刷新未审核的
     this.callGetLeave('2-a')
-    // wx.cloud.callFunction({
-    //     name: 'getleave',
-    //     data: {
-    //       funcName: '2-a'
-    //     }
-    //   })
-    //   .then(res => {
-    //     console.log('未审核的请假单', res)
-    //     this.setData({
-    //       reslist: res.result.data
-    //     })
-    //   })
-    //   .catch(err => {
-
-    //   })
   },
 
   /**
