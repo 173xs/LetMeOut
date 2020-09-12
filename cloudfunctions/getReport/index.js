@@ -30,8 +30,8 @@ exports.main = async (event, context) => {
       },
       pipeline: $.pipeline()
         .match(_.expr($.and([
-          $.eq(['E19301222', '$$abnormal_sno']),
-          $.eq([academy,'$sacademy'])
+          $.eq(['$sno', '$$abnormal_sno']),
+          //$.eq([academy,'$sacademy'])
         ])))
         .project({
           _id:0,
@@ -46,6 +46,9 @@ exports.main = async (event, context) => {
   })
   .project({
     stuInfo:0
+  })
+  .match({
+    sacademy: academy
   })
   .end()
 }
