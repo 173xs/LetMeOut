@@ -6,45 +6,52 @@ Page({
    * 页面的初始数据
    */
   data: {
-    nowData:'',
-    queryData:'',
-    recordlist:[]
+    nowDate: '',
+    queryDate: '',
+    recordlist: [],
+  },
+  //调用getTravel云函数，获取出行记录
+  getTravel: function(queryDate) {
+    wx.cloud.callFunction({
+        name: "getTravel",
+        data: {
+          date: queryDate
+        }
+      })
+      .then(res => {
+        this.setData({
+          recordlist: res.result.list
+        })
+        console.log("recordlist:", res.result.list)
+        console.log('travelrecords = ', res)
+      })
+      .catch(err => {
+        console.error(err)
+      })
   },
   // 日期的选择
-  bindDateChange: function(e) {
+  bindDateChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       queryDate: e.detail.value,
     })
     //这里获取日期对应的出行记录 eg: queryDate:2020-09-10
+    this.getTravel(this.data.queryDate)
   },
+
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     // leaveDate和returnDate的初始化
-    var today=util.formatDay(new Date())
+    var today = util.formatDay(new Date())
     this.setData({
       nowDate: today,
       queryDate: today
-    }),
+    })
+    this.getTravel(this.data.nowDate)
 
-    wx.cloud.callFunction({
-      name:"getTravel",
-      data:{
-        date: '2020-09-11'
-      }
-    })
-    .then(res=>{
-      this.setData({
-        recordlist:res.result.list
-      })
-      console.log("recordlist:",res.result.list)
-      console.log('travelrecords = ', res)
-    })
-    .catch(err=>{
-      console.error(err)
-    })
   },
 
   /**

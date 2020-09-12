@@ -14,7 +14,7 @@
     <view class="recordsList">
       <view class="eachRecord" wx:for="{{recordlist}}" wx:key="index">
         <view class="radiusPoint"></view>
-        <view class="recordPlace">{{item.bnum}}</view>
+        <view class="recordPlace">{{item.bname}}</view>
         <view class="recoreTime">{{item.time}}</view>
       </view>
     </view>

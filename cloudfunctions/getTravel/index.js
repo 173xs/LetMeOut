@@ -19,38 +19,39 @@ exports.main = async (event, context) => {
     .then(res => {
       sno = res.data[0].sno
     })
-console.log(event,event.date)
-    return await db.collection('travelRecords')
+  console.log(event, event.date)
+  return await db.collection('travelRecords')
     .aggregate()
-    .lookup(
-      {
-        from: "buildings",
-        let: {
-          travel_sno: '$sno',
-          travel_bnum: '$bnum',
-          travel_date: '$date'
-        },
-        pipeline: $.pipeline()
-          .match(_.expr($.and([
-            $.eq([sno, '$$travel_sno']),
-            $.eq(['$bnum', '$$travel_bnum']),
-            $.eq([event.date, '$$travel_date'])
-          ])))
-          .project({
-            _id:0,
-            type:0,
-            num:0,
-          })
-          .done(),
-        as: 'buildInfo',
-      }
-    )
+    .lookup({
+      from: "buildings",
+      let: {
+        travel_sno: '$sno',
+        travel_bnum: '$bnum',
+        //travel_date: '$date'
+      },
+      pipeline: $.pipeline()
+        .match(_.expr($.and([
+          $.eq([sno, '$$travel_sno']),
+          $.eq(['$bnum', '$$travel_bnum']),
+          //$.eq([event.date, '$$travel_date'])
+        ])))
+        .project({
+          _id: 0,
+          type: 0,
+          num: 0,
+        })
+        .done(),
+      as: 'buildInfo',
+    })
+    .match({
+      date: event.date
+    })
     .replaceRoot({
       newRoot: $.mergeObjects([$.arrayElemAt(['$buildInfo', 0]), '$$ROOT'])
     })
     .project({
-      buildInfo:0
+      buildInfo: 0
     })
     .end()
-  
+
 }
