@@ -4,7 +4,7 @@ const cloud = require('wx-server-sdk')
 cloud.init()
 const db = cloud.database()
 const _ = db.command
-
+const $ = _.aggregate
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
@@ -41,7 +41,7 @@ async function getSno() {
 //老师审批请假单的查询函数
 async function getLeave1_a(event, context) {
   console.log('condition = ', event.condition)
-  const $ = _.aggregate
+
   let wxContext = cloud.getWXContext()
   let academy
   //先获取老师的学院信息
@@ -128,18 +128,44 @@ async function getLeave2_b(event, context) {
       return err
     })
 
-  return await db.collection("leave")
-    .where(_.and([{
-        'approveState': _.eq(1) //已经通过审批
+  return await db.collection('leave')
+  .aggregate()
+  .lookup(
+    {
+      from: 'teaInfo',
+      let: {
+        // leave_sno: '$sno',
+        leave_ano: '$ano',
+        // leave_approve: '$approveState',
       },
-      {
-        'sno': _.eq(sno)
-      },
-      // {
-      //   'checkState': _.eq(0) //通过审批但是没有使用
-      // }
-    ]))
-    .get()
+      pipeline: $.pipeline()
+        .match(_.expr($.and([
+          //$.eq(['E19301222', '$$leave_sno']),
+          $.eq(['$tno', '$$leave_ano']),
+          //$.eq([0, '$$leave_approve']),
+          //$.eq(['计算机科学与技术学院', '$sacademy'])
+        ])))
+        .project({
+          _id: 0,
+          _openid: 0,
+          tno: 0,
+          tacademy:0,
+        })
+        .done(),
+      as: 'teaInfo',
+    }
+  )
+  .replaceRoot({
+    newRoot: $.mergeObjects([$.arrayElemAt(['$teaInfo', 0]), '$$ROOT'])
+  })
+  .project({
+    teaInfo: 0
+  })
+  .match(_.expr($.and([
+    $.eq([sno, '$sno']),
+    $.eq([1, '$approveState']),
+  ])))
+  .end()
 }
 
 //查询已经驳回的请假申请
@@ -155,13 +181,42 @@ async function getLeave2_c(event, context) {
       return err
     })
 
-  return await db.collection("leave")
-    .where(_.and([{
-        'approveState': _.eq(-1) //驳回的请假单
+  return await db.collection('leave')
+  .aggregate()
+  .lookup(
+    {
+      from: 'teaInfo',
+      let: {
+        // leave_sno: '$sno',
+        leave_ano: '$ano',
+        // leave_approve: '$approveState',
       },
-      {
-        'sno': _.eq(sno)
-      }
-    ]))
-    .get()
+      pipeline: $.pipeline()
+        .match(_.expr($.and([
+          //$.eq(['E19301222', '$$leave_sno']),
+          $.eq(['$tno', '$$leave_ano']),
+          //$.eq([0, '$$leave_approve']),
+          //$.eq(['计算机科学与技术学院', '$sacademy'])
+        ])))
+        .project({
+          _id: 0,
+          _openid: 0,
+          tno: 0,
+          tacademy:0,
+        })
+        .done(),
+      as: 'teaInfo',
+    }
+  )
+  .replaceRoot({
+    newRoot: $.mergeObjects([$.arrayElemAt(['$teaInfo', 0]), '$$ROOT'])
+  })
+  .project({
+    teaInfo: 0
+  })
+  .match(_.expr($.and([
+    $.eq([sno, '$sno']),
+    $.eq([-1, '$approveState']),//已驳回的请假单
+  ])))
+  .end()
 }
