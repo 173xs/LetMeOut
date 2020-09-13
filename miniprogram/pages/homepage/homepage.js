@@ -48,12 +48,46 @@ Page({
   onLoad: function (options) {
 
   },
+   prefixInteger:function(num) {
+    return (Array(2).join('0') + num).slice(-2);
+   },
   //扫一扫
   scancode() {
     wx.scanCode({
       onlyFromCamera: true,
-      scanType: [],
-      success: (result) => {},
+      scanType: ['qrCode'],
+      success: (res) => {
+        wx.showLoading({
+          title: '行程提交中',
+        })
+        var obj = JSON.parse(res.result)
+        // console.log(obj)
+        let d = new Date()
+        wx.cloud.callFunction({
+          name:'upTravel',
+          data:{
+            sno: app.globalData.regInfo.sno,
+            date: d.getFullYear() + '-' + this.prefixInteger(d.getMonth()+1) + '-' + this.prefixInteger(d.getDate()),
+            time: this.prefixInteger(d.getHours()) + ':' + this.prefixInteger(d.getMinutes()),
+            bunm: obj.num
+          }
+        })
+        .then(res=>{
+          //console.log(res)
+          wx.hideLoading({
+            success: (res) => {
+              wx.showToast({
+                title: '提交成功',
+                icon:'success',
+                duration:1500
+              })
+            },
+          })
+        })
+        .catch(err=>{
+          console.error(err)
+        })
+      },
       fail: (res) => {},
       complete: (res) => {},
     })
