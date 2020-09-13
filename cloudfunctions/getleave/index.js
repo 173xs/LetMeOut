@@ -38,13 +38,13 @@ async function getLeave1_a(event, context) {
       from: 'stuInfo',
       let: {
         leave_sno: '$sno',
-        leave_approve: '$approveState',
+        // leave_approve: '$approveState',
       },
       pipeline: $.pipeline()
         .match(_.expr($.and([
           $.eq(['$sno', '$$leave_sno']),
-          $.eq([0, '$$leave_approve']),
-          $.eq([event.condition.tacademy, '$sacademy'])
+          // $.eq([0, '$$leave_approve']),
+          // $.eq([event.condition.tacademy, '$sacademy'])
         ])))
         .project({
           _id: 0,
@@ -54,9 +54,17 @@ async function getLeave1_a(event, context) {
       as: 'stuInfo',
     }
   )
-  .match({
-    'approveState': 0
+  .replaceRoot({
+    newRoot: $.mergeObjects([$.arrayElemAt(['$stuInfo', 0]), '$$ROOT'])
   })
+  .project({
+    stuInfo: 0
+  })
+  .match(_.expr($.and([
+    $.eq([0, '$approveState']),
+    // $.eq([0, '$checkState']),
+    $.eq([event.condition.tacademy, '$sacademy'])
+  ])))
   .limit(event.condition.limit)
   .skip(event.condition.skip)
   .end()
