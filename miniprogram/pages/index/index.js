@@ -84,11 +84,12 @@ Page({
     wx.cloud.callFunction({
         name: 'getMyInfo',
         data: {
-          user: 'tea'
+          user: 'stu'
         }
       })
       .then(res => {
         if (res.result.data.length == 1) {
+          app.globalData.regInfo = res.result.data[0]
           //如果已经注册，跳转首页
           wx.switchTab({
             url: '/pages/homepage/homepage',
