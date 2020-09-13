@@ -8,10 +8,9 @@ Page({
   data: {
     nowDate:"",
     queryDate:"",
-    rate:0.9,//体温正常的百分比
     totalNum:1200,//总人数
     upedNum:1000,//已上报人数
-    hotNum:30,//体温发热人数
+    hotNum:100,//体温发热人数
   },
 
   /**
@@ -40,7 +39,7 @@ Page({
         var context = wx.createContext();
         // 画饼图
         //    数据源
-        var rate=this.data.rate
+        var rate=1-(this.data.hotNum/this.data.upedNum).toFixed(2)
         var colors = [ "#68ed50", "#f6b943"];
         //    定义圆心坐标
         var point = { x: 100, y: 100 };
