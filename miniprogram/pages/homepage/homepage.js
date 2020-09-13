@@ -1,4 +1,5 @@
 // pages/homepage/homepage.js
+var app = getApp()
 var util = require('../../utils/util.js')
 
 Page({
@@ -100,6 +101,7 @@ Page({
     wx.cloud.callFunction({
         name: 'upTemp',
         data: {
+          sno: app.globalData.regInfo.sno,
           temperature: this.data.upTemp,
           date: d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate(),
           timeFlag: timeFlag

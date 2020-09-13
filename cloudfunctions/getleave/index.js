@@ -5,6 +5,7 @@ cloud.init()
 const db = cloud.database()
 const _ = db.command
 const $ = _.aggregate
+
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
@@ -25,36 +26,11 @@ exports.main = async (event, context) => {
 
 }
 
-//通过openid查学号
-async function getSno() {
-  const wxContext = cloud.getWXContext()
-
-  return await db.collection("stuInfo")
-    .where({
-      _openid: wxContext.OPENID,
-    })
-    .field({
-      sno: true,
-    })
-    .get()
-}
 //老师审批请假单的查询函数
 async function getLeave1_a(event, context) {
   console.log('condition = ', event.condition)
 
   let wxContext = cloud.getWXContext()
-  let academy
-  //先获取老师的学院信息
-  await db.collection("teaInfo")
-  .where({
-    _openid: wxContext.OPENID
-  })
-  .get()
-  .then(res=>{
-    academy = res.data[0].tacademy
-  })
-
-  console.log('tacademy = ',academy)
   let leave = await db.collection('leave')
   .aggregate()
   .lookup(
@@ -68,7 +44,7 @@ async function getLeave1_a(event, context) {
         .match(_.expr($.and([
           $.eq(['$sno', '$$leave_sno']),
           $.eq([0, '$$leave_approve']),
-          $.eq([academy, '$sacademy'])
+          $.eq([event.condition.tacademy, '$sacademy'])
         ])))
         .project({
           _id: 0,
@@ -91,25 +67,13 @@ async function getLeave1_a(event, context) {
 
 //查询学生的未审批请假单
 async function getLeave2_a(event, context) {
-  console.log('get sno')
-  let sno
-  await getSno()
-    .then(res => {
-      // console.log('res = ',res)
-      sno = res.data[0].sno
-    })
-    .catch(err => {
-      // console.log(err)
-      return err
-    })
-
-  console.log('sno = ', sno)
+  console.log('sno = ', event.sno)
   return await db.collection("leave")
     .where(_.and([{
         'approveState': _.eq(0)
       },
       {
-        'sno': _.eq(sno)
+        'sno': _.eq(event.sno)
       }
     ]))
     .get()
@@ -117,17 +81,6 @@ async function getLeave2_a(event, context) {
 
 //查询已通过审批请假单
 async function getLeave2_b(event, context) {
-  let sno
-  await getSno()
-    .then(res => {
-      // console.log('res = ',res)
-      sno = res.data[0].sno
-    })
-    .catch(err => {
-      // console.log(err)
-      return err
-    })
-
   return await db.collection('leave')
   .aggregate()
   .lookup(
@@ -162,7 +115,7 @@ async function getLeave2_b(event, context) {
     teaInfo: 0
   })
   .match(_.expr($.and([
-    $.eq([sno, '$sno']),
+    $.eq([event.sno, '$sno']),
     $.eq([1, '$approveState']),
   ])))
   .end()
@@ -170,17 +123,6 @@ async function getLeave2_b(event, context) {
 
 //查询已经驳回的请假申请
 async function getLeave2_c(event, context) {
-  let sno
-  await getSno()
-    .then(res => {
-      // console.log('res = ',res)
-      sno = res.data[0].sno
-    })
-    .catch(err => {
-      // console.log(err)
-      return err
-    })
-
   return await db.collection('leave')
   .aggregate()
   .lookup(
@@ -215,7 +157,7 @@ async function getLeave2_c(event, context) {
     teaInfo: 0
   })
   .match(_.expr($.and([
-    $.eq([sno, '$sno']),
+    $.eq([event.sno, '$sno']),
     $.eq([-1, '$approveState']),//已驳回的请假单
   ])))
   .end()

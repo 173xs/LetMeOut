@@ -1,4 +1,5 @@
 // pages/report/report.js
+var app = getApp()
 Page({
 
   /**
@@ -12,6 +13,7 @@ Page({
     wx.cloud.callFunction({
       name:'report',
       data:{
+        sno: app.globalData.regInfo.sno,
         title:e.detail.value.title,
         detail:e.detail.value.detail
       }

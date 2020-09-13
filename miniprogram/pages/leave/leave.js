@@ -1,4 +1,5 @@
 // pages/leave/leave.js
+var app = getApp()
 var util = require('../../utils/util.js')
 Page({
   /**
@@ -44,6 +45,7 @@ bindReturnDateChange: function(e) {
       mask:true
     })
     var data = {
+      sno: app.globalData.regInfo.sno,
       leaveClass: e.detail.value.leaveClass,
       leaveDate: this.data.leaveDate,
       returnDate: this.data.returnDate,

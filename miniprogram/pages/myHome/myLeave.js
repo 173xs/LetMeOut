@@ -1,4 +1,5 @@
 // pages/myLeave/myLeave.js
+var app = getApp()
 Page({
 
   /**
@@ -23,6 +24,7 @@ Page({
     wx.cloud.callFunction({
         name: 'getleave',
         data: {
+          sno: app.globalData.regInfo.sno,
           funcName: funcName
         }
       })

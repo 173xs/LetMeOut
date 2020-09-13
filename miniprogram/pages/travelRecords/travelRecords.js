@@ -1,4 +1,5 @@
 // pages/travelRecords/travelRecords.js
+var app = getApp()
 var util = require('../../utils/util.js')
 Page({
 
@@ -15,6 +16,7 @@ Page({
     wx.cloud.callFunction({
         name: "getTravel",
         data: {
+          sno: app.globalData.regInfo.sno,
           date: queryDate
         }
       })
