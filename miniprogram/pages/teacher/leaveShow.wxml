@@ -1,0 +1,45 @@
+<!--miniprogram/pages/teacher/leaveShow.wxml-->
+<view class="coverBox">
+  <view class="canvasBox">
+    <canvas canvas-id="mypie" style="width:200px;height:200px;"></canvas>
+  </view>
+  <view class="picLabelBox">
+    <view class="picLabelList">
+      <view class="labelColor" style="background-color:#66ccff"></view>
+      <text class="labelText">未审批</text>
+    </view>
+    <view class="picLabelList">
+      <view class="labelColor" style="background-color:#ccccff"></view>
+      <text class="labelText">未使用</text>
+    </view>
+    <view class="picLabelList">
+      <view class="labelColor" style="background-color:#ccffff"></view>
+      <text class="labelText">待返回</text>
+    </view>
+  </view>
+</view>
+<text class="label">请假单概览</text>
+<view class="dataBox">
+  <view class="dataList">
+    <view class="radiusPoint"></view>
+    <text class="dataLabel">未审批：</text>
+    <text class="dataText">{{NnoCheck}}</text>
+    <text class="dataLabel">人</text>
+    <navigator url="/pages/teacher/leaveCheck" hover-class="noshadow">
+      <image src="/images/goto.png"></image>
+    </navigator>
+    
+  </view>
+  <view class="dataList">
+    <view class="radiusPoint"></view>
+    <text class="dataLabel">未使用：</text>
+    <text class="dataText">{{NnoUse}}</text>
+    <text class="dataLabel">人</text>
+  </view>
+  <view class="dataList">
+    <view class="radiusPoint"></view>
+    <text class="dataLabel">待返回：</text>
+    <text class="dataText">{{NnoReturn}}</text>
+    <text class="dataLabel">人</text>
+  </view>
+</view>

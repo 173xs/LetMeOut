@@ -13,7 +13,8 @@
     "pages/teacher/teaHomepage",
     "pages/regist/regist",
     "pages/teacher/leaveCheck",
-    "pages/teacher/tempShow"
+    "pages/teacher/tempShow",
+    "pages/teacher/leaveShow"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -18,7 +18,7 @@
       <text>异常处理</text>
     </navigator>
     <view class="gapBoxColumn"></view>
-    <navigator class="iconBox" url="/pages/travelRecords/travelRecords" hover-class="noshadow">
+    <navigator class="iconBox" url="/pages/teacher/leaveShow" hover-class="noshadow">
       <cover-image src="/images/record.png"></cover-image>
       <text>请假概览</text>
     </navigator>
