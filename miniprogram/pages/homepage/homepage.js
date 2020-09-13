@@ -83,6 +83,7 @@ Page({
     if (this.data.upTemp == 0) {
       wx.showToast({
         title: '输入有误',
+        icon:'none',
         duration: 1000,
         mask: true
       })
@@ -106,9 +107,21 @@ Page({
       })
       .then(res => {
         console.log('上传成功')
+        wx.showToast({
+          title: '上传成功',
+          icon:'none',
+          duration: 1000,
+          mask: true
+        })
       })
       .catch(err => {
         console.log('上传失败')
+        wx.showToast({
+          title: '上传失败',
+          icon:'none',
+          duration: 1000,
+          mask: true
+        })
       })
   },
 
