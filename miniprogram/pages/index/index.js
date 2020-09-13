@@ -10,7 +10,7 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
-  bindViewTap: function() {
+  bindViewTap: function () {
     wx.navigateTo({
       url: '../logs/logs'
     })
@@ -21,7 +21,7 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
+    } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
@@ -43,7 +43,7 @@ Page({
       })
     }
   },
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
@@ -51,27 +51,56 @@ Page({
       hasUserInfo: true
     })
   },
-  teaHome:function(){
-    //根据用户的appid判断用户是否已经注册
-    //如果已经注册，跳转首页
-    wx.redirectTo({
-      url: "/pages/teacher/teaHomepage",
-    })
-    //如果没有注册，跳转注册页面
-    // wx.redirectTo({
-    //   url: "/pages/teacher/teaRegist",
-    // })
-  },
-  stuHome:function(){
-    //根据用户的appid判断用户是否已经注册
-    //如果已经注册，跳转首页
-    wx.switchTab({
-      url: '/pages/homepage/homepage',
-    })
 
-    //如果没有注册，跳转注册页面
-    // wx.redirectTo({
-    //   url: "/pages/regist/regist",
-    // })
-  }
+  teaHome: function () {
+    //根据用户的appid判断用户是否已经注册
+    wx.cloud.callFunction({
+        name: 'getMyInfo',
+        data: {
+          user: 'tea'
+        }
+      })
+      .then(res => {
+        if (res.result.data.length == 1) {
+          app.globalData.regInfo = res.result.data[0]
+          //如果已经注册，跳转首页
+          wx.redirectTo({
+            url: "/pages/teacher/teaHomepage",
+          })
+        } else {
+          //如果没有注册，跳转注册页面
+          wx.redirectTo({
+            url: "/pages/teacher/teaRegist",
+          })
+        }
+      })
+      .catch(err => {
+        console.error(err)
+      })
+
+  },
+  stuHome: function () {
+    //根据用户的appid判断用户是否已经注册
+    wx.cloud.callFunction({
+        name: 'getMyInfo',
+        data: {
+          user: 'stu'
+        }
+      })
+      .then(res => {
+        if (res.result.data.length == 1) {
+          app.globalData.regInfo = res.result.data[0]
+          //如果已经注册，跳转首页
+          wx.switchTab({
+            url: '/pages/homepage/homepage',
+          })
+        } else {
+          //如果没有注册，跳转注册页面
+          wx.redirectTo({
+            url: "/pages/regist/regist",
+          })
+        }
+      })
+  },
+
 })

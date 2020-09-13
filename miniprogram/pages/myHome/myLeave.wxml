@@ -51,11 +51,12 @@
     <cover-view class="billReason">{{curLeaveBill.leaveReason}}</cover-view>
     <cover-view class="billListBox">
       <cover-view class="billListLabel">审核人：</cover-view>
-      <cover-view class="billListText">李四老师</cover-view>
+      <cover-view class="billListText">{{curLeaveBill.tname}}</cover-view>
     </cover-view>
     <cover-view class="billListBox">
       <cover-view class="billListLabel">使用状态：</cover-view>
-      <cover-view class="billListText">已使用</cover-view>
+      <cover-view class="billListText" wx:if="{{curLeaveBill.checkState==1}}">已使用</cover-view>
+      <cover-view class="billListText" wx:if="{{curLeaveBill.checkState==0}}">未使用</cover-view>
     </cover-view>
   </cover-view>
 </cover-view>

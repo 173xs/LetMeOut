@@ -1,4 +1,5 @@
 // pages/teaHomepage/leaveCheck.js
+var app = getApp()
 Page({
 
   /**
@@ -30,6 +31,7 @@ Page({
     wx.cloud.callFunction({
         name: 'approveLeave',
         data: {
+          tno:app.globalData.regInfo.tno,
           leaveId: res.currentTarget.dataset.id,
           approveState: -1
         }
@@ -48,6 +50,7 @@ Page({
     wx.cloud.callFunction({
         name: 'approveLeave',
         data: {
+          tno:app.globalData.regInfo.tno,
           leaveId: res.currentTarget.dataset.id,
           approveState: 1
         }
@@ -74,6 +77,7 @@ Page({
             limit: 3,
             // approvedList:approvedList
             skip: this.data.skip,
+            tacademy: app.globalData.regInfo.tacademy
           }
         }
       })
@@ -136,7 +140,8 @@ Page({
           condition: {
             limit: 3,
             // approvedList:approvedList
-            skip: this.data.skip
+            skip: this.data.skip,
+            tacademy: app.globalData.regInfo.tacademy
           }
         }
       })

@@ -1,4 +1,5 @@
 // pages/myLeave/myLeave.js
+var app = getApp()
 Page({
 
   /**
@@ -6,8 +7,8 @@ Page({
    */
   data: {
     coverBoxDisplay: "none",
-    reslist:[],
-    curLeaveBill:[],//初始化请假单的信息
+    reslist: [],
+    curLeaveBill: [], //初始化请假单的信息
 
     //菜单栏按钮选中时的样式
     noCheckWxss: 'addColor',
@@ -15,6 +16,48 @@ Page({
     backCheckWxss: ' '
   },
 
+  callGetLeave: function (funcName) {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    wx.cloud.callFunction({
+        name: 'getleave',
+        data: {
+          sno: app.globalData.regInfo.sno,
+          funcName: funcName
+        }
+      })
+      .then(res => {
+        console.log('请假单', res)
+        if (funcName == '2-a') {
+          this.setData({
+            reslist: res.result.data
+          })
+        } else {
+          this.setData({
+            reslist: res.result.list
+          })
+        }
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '加载成功',
+              icon: 'success',
+              mask: true,
+              duration: 500
+            })
+          },
+        })
+      })
+      .catch(err => {
+        wx.showToast({
+          title: '加载失败',
+          icon: 'fail',
+          mask: true
+        })
+      })
+  },
   //未审核按钮点击事件
   noCheckClick: function () {
     console.log('nocheckclick')
@@ -25,21 +68,8 @@ Page({
       backCheckWxss: ' '
     })
     //刷新列表，填充未审核的请假信息
-    wx.cloud.callFunction({
-        name: 'getleave',
-        data: {
-          funcName: '2-a'
-        }
-      })
-      .then(res => {
-        console.log('未审核的请假单', res)
-        this.setData({
-          reslist:res.result.data
-        })
-      })
-      .catch(err => {
+    this.callGetLeave('2-a')
 
-      })
   },
 
   //已审核按钮点击事件
@@ -51,21 +81,7 @@ Page({
       backCheckWxss: ' '
     })
     //刷新列表，填充已审核的请假信息
-    wx.cloud.callFunction({
-        name: 'getleave',
-        data: {
-          funcName: '2-b'
-        }
-      })
-      .then(res => {
-        console.log('已审核的请假单', res)
-        this.setData({
-          reslist:res.result.data
-        })
-      })
-      .catch(err => {
-
-      })
+    this.callGetLeave('2-b')
   },
 
   //驳回按钮点击事件
@@ -77,38 +93,24 @@ Page({
       backCheckWxss: 'addColor'
     })
     //刷新列表，填充驳回的请假信息
-    wx.cloud.callFunction({
-        name: 'getleave',
-        data: {
-          funcName: '2-c'
-        }
-      })
-      .then(res => {
-        console.log('驳回的请假单', res)
-        this.setData({
-          reslist:res.result.data
-        })
-      })
-      .catch(err => {
-
-      })
+    this.callGetLeave('2-c')
   },
 
 
   showBill: function (e) {
-    var curId=e.currentTarget.dataset.curid
-    var list=this.data.reslist
-    var bill=[]
+    var curId = e.currentTarget.dataset.curid
+    var list = this.data.reslist
+    var bill = []
     console.log(curId)
-    for(var i=0;i<list.length;++i){
-      if(list[i]._id===curId){
-        bill=list[i]
+    for (var i = 0; i < list.length; ++i) {
+      if (list[i]._id === curId) {
+        bill = list[i]
       }
     }
     console.log(bill)
     this.setData({
       coverBoxDisplay: "block",
-      curLeaveBill:bill
+      curLeaveBill: bill
     })
   },
   hideBill: function () {
@@ -121,21 +123,7 @@ Page({
    */
   onLoad: function (options) {
     //默认刷新未审核的
-    wx.cloud.callFunction({
-      name: 'getleave',
-      data: {
-        funcName: '2-a'
-      }
-    })
-    .then(res => {
-      console.log('未审核的请假单', res)
-      this.setData({
-        reslist:res.result.data
-      })
-    })
-    .catch(err => {
-
-    })
+    this.callGetLeave('2-a')
   },
 
   /**

@@ -7,20 +7,10 @@ const db = cloud.database();
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
 
-  var sno
-  await db.collection("stuInfo")
-    .where({
-      _openid: wxContext.OPENID,
-    })
-    .get()
-    .then(res => {
-      sno = res.data[0].sno
-    })
-
   return await db.collection("leave")
     .add({
       data: {
-        sno: sno,
+        sno: event.sno,
         leaveClass: event.leaveClass,
         leaveDate: event.leaveDate,
         leaveReason: event.leaveReason,
