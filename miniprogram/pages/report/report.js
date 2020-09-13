@@ -8,7 +8,7 @@ Page({
 
   },
   submit(e){
-    // console.log(e.detail.value)
+    console.log(e.detail.value)
     wx.cloud.callFunction({
       name:'report',
       data:{
@@ -20,11 +20,17 @@ Page({
       console.log('提交成功')
       wx.showToast({
         title: '提交成功',
-        icon:'success'
+        icon:'success',
+        mask: false
       })
     })
     .catch(err=>{
       console.error(err)
+      wx.showToast({
+        title: '提交失败',
+        icon: 'fail',
+        mask:true
+      })
     })
   },
   /**

@@ -62,7 +62,7 @@
   <view class="temperatureBox">
     <form class="temperatureForm">
       <input type="digit" placeholder="请输入体温" bindinput="bindReplaceInput"></input>
-      <button class="temUpBtn" style="background:{{tempBtnBGColor}}" bindtap="{{upTemp}}">体温上报</button>
+      <button class="temUpBtn" style="background:{{tempBtnBGColor}}" bindtap="{{upTempBtn}}">体温上报</button>
     </form>
   </view>
 
