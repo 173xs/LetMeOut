@@ -8,23 +8,17 @@ const $ = _.aggregate;
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const wxContext = cloud.getWXContext()
-
   console.log(event, event.date)
   return await db.collection('travelRecords')
     .aggregate()
     .lookup({
       from: "buildings",
       let: {
-        travel_sno: '$sno',
         travel_bnum: '$bnum',
-        //travel_date: '$date'
       },
       pipeline: $.pipeline()
         .match(_.expr($.and([
-          $.eq([event.sno, '$$travel_sno']),
           $.eq(['$bnum', '$$travel_bnum']),
-          //$.eq([event.date, '$$travel_date'])
         ])))
         .project({
           _id: 0,
@@ -43,6 +37,10 @@ exports.main = async (event, context) => {
     .project({
       buildInfo: 0
     })
+    .match(_.expr($.and([
+      $.eq([event.sno, '$sno']),
+      $.eq([event.date, '$date'])
+    ])))
     .end()
 
 }

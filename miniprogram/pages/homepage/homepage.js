@@ -69,7 +69,7 @@ Page({
             sno: app.globalData.regInfo.sno,
             date: d.getFullYear() + '-' + this.prefixInteger(d.getMonth()+1) + '-' + this.prefixInteger(d.getDate()),
             time: this.prefixInteger(d.getHours()) + ':' + this.prefixInteger(d.getMinutes()),
-            bunm: obj.num
+            bnum: obj.num
           }
         })
         .then(res=>{
