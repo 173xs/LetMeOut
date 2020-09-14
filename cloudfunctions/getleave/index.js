@@ -30,7 +30,7 @@ exports.main = async (event, context) => {
 async function getLeave1_a(event, context) {
   console.log('condition = ', event.condition)
 
-  let wxContext = cloud.getWXContext()
+  // let wxContext = cloud.getWXContext()
   let leave = await db.collection('leave')
   .aggregate()
   .lookup(
