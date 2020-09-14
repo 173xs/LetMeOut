@@ -4,12 +4,12 @@
   <view class="bannerBox"><image src="/images/banner.png"></image></view>
   <view class="menuBox">
     <navigator class="iconBox" url="/pages/teacher/leaveCheck" hover-class="noshadow">
-      <cover-image src="/images/scan.png"></cover-image>
+      <cover-image src="/images/leavecheck.png"></cover-image>
       <text>请假审核</text>
     </navigator>
     <view class="gapBoxColumn"></view>
     <navigator class="iconBox" url="/pages/teacher/tempShow" hover-class="noshadow">
-      <cover-image src="/images/leave2.png"></cover-image>
+      <cover-image src="/images/tempshow.png"></cover-image>
       <text>体温概览</text>
     </navigator>
     <view class="gapBoxRow"></view>
@@ -19,7 +19,7 @@
     </navigator>
     <view class="gapBoxColumn"></view>
     <navigator class="iconBox" url="/pages/teacher/leaveShow" hover-class="noshadow">
-      <cover-image src="/images/record.png"></cover-image>
+      <cover-image src="/images/leaveshow.png"></cover-image>
       <text>请假概览</text>
     </navigator>
   </view>
