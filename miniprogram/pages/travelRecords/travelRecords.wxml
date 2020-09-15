@@ -8,7 +8,10 @@
   </view>
 </view>
 
-<view wx:if="{{recordlist.length>0==0}}">你今天没有出行记录</view>
+<view wx:if="{{recordlist.length>0==0}}" class="emptyBox">
+  <image src="/images/empty.png"></image>
+  <text>你今天还没有出行记录哦</text>
+</view>
 <view class="recordBox" wx:if="{{recordlist.length>0}}">
   <view class="recordListBox">
     <view class="recordsList">

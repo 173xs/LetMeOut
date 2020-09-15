@@ -17,10 +17,7 @@ page{background-color: #f8f3f3;}
 .functionList navigator image{width:80rpx;height:80rpx;display: block;margin:20rpx auto 0;}
 .functionList navigator text{width:100%;line-height:60rpx;display:block;height:60rpx;margin:0 auto;text-align:center;font-size:28rpx}
 
-.setting{width:670rpx;height:100rpx;padding:0 40rpx;background-color: white;margin-top:150rpx;clear:both}
-.settingIcon{width:60rpx;height:60rpx;float:left;margin-top:20rpx;}
-.setting text{line-height:100rpx;margin-left:20rpx;float:left;font-size:28rpx}
 .gotoIcon{width:30rpx;height:30rpx;float:right;margin-top:35rpx;}
-.share{width:750rpx;height:100rpx;padding:0 40rpx;background-color: white;clear:both;margin-top: 5rpx;display:block}
+.share{width:750rpx;height:100rpx;padding:0 40rpx;background-color: white;clear:both;margin-top: 150rpx;display:block}
 .shareIcon{width:60rpx;height:60rpx;float:left;margin-top:20rpx;}
 .share text{line-height:100rpx;margin-left:20rpx;float:left;font-size:28rpx}

@@ -6,10 +6,10 @@ page{background-color:#f8f3f3;}
 .user{height:100rpx;line-height:100rpx;float:left;font-size:28rpx;}
 
 .titleBox{width:670rpx;margin:0 auto;height:100rpx;border-top:1px solid #f8f3f3;}
-.title{width:200rpx;height:100rpx;line-height:100rpx;font-size:36rpx;float:left}
+.title{width:670rpx;height:100rpx;line-height:100rpx;font-size:32rpx;float:left}
 .time{height:50rpx;float:right;color:#808080;line-height:100rpx;}
 .detailBox{width:670rpx;margin:0 auto;min-height:50rpx;}
-.detail{line-height:50rpx;font-size:28rpx;text-indent: 2em;}
+.detail{line-height:50rpx;font-size:26rpx;text-indent: 2em;}
 
 .buttonList{width:600rpx;height:60rpx;margin:20rpx auto 0;padding-top:20rpx;border-top:1px solid #f8f3f3;}
 .buttonList button{width:200rpx;height:60rpx;color:white;line-height:60rpx;font-size:28rpx;margin:0 auto;background-color: rgb(88, 187, 88);}
