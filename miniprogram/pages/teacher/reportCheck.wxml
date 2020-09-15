@@ -1,18 +1,18 @@
 <!--miniprogram/pages/teacher/reportCheck.wxml-->
 
 
-<view class="reportList">
+<view class="reportList" wx:for="{{reportList}}" wx:key="index">
   <view class="userBox">
-    <text class="user">E19333333张三</text>
+    <text class="user">{{item.sno}}-{{item.sname}}</text>
   </view>
   <view class="titleBox">
-    <text class="title">标题</text>
-    <text class="time">2020-09-12</text>
+    <text class="title">{{item.title}}</text>
+    <text class="time">{{item.subDate}}</text>
   </view>
   <view class="detailBox">
-    <view class="detail">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
+    <view class="detail">{{item.detail}}</view>
   </view>
   <view class="buttonList">
-    <button class='okBtn' >已查阅</button>
+    <button class='okBtn' bindtap="okBtn" data-id="{{item._id}}" data-idx="{{index}}">已查阅</button>
   </view>
 </view>

@@ -10,6 +10,7 @@ const $ = _.aggregate
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
 
+  console.log(event)
   return await db.collection('abnormal')
   .aggregate()
   .lookup(
@@ -37,8 +38,11 @@ exports.main = async (event, context) => {
   .project({
     stuInfo:0
   })
-  .match({
-    sacademy: event.tacademy
-  })
+  .match(_.expr($.and([
+    $.eq([event.tacademy,'$sacademy']),
+    $.eq([false,'$checkState'])
+  ])))
+  .limit(event.limit)
+  .skip(event.skip)
   .end()
 }

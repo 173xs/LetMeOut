@@ -14,7 +14,8 @@ exports.main = async (event, context) => {
         sno:event.sno,
         title:event.title,
         detail:event.detail,
-        subDate: Date()
+        subDate: event.subDate,
+        checkState: false //默认没有查阅
       }
     })
 

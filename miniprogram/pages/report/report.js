@@ -8,32 +8,43 @@ Page({
   data: {
 
   },
-  submit(e){
+  //不足两位数的数字前面补零
+  prefixInteger: function (num) {
+    return (Array(2).join('0') + num).slice(-2);
+  },
+  //获取日期
+  getDate: function (d) {
+    return d.getFullYear() + '-' + this.prefixInteger(d.getMonth() + 1) + '-' + this.prefixInteger(d.getDate())
+  },
+  submit(e) {
+    var d = new Date()
+
     console.log(e.detail.value)
     wx.cloud.callFunction({
-      name:'report',
-      data:{
-        sno: app.globalData.regInfo.sno,
-        title:e.detail.value.title,
-        detail:e.detail.value.detail
-      }
-    })
-    .then(res=>{
-      console.log('提交成功')
-      wx.showToast({
-        title: '提交成功',
-        icon:'success',
-        mask: false
+        name: 'report',
+        data: {
+          sno: app.globalData.regInfo.sno,
+          title: e.detail.value.title,
+          detail: e.detail.value.detail,
+          sudDate: this.getDate()
+        }
       })
-    })
-    .catch(err=>{
-      console.error(err)
-      wx.showToast({
-        title: '提交失败',
-        icon: 'fail',
-        mask:true
+      .then(res => {
+        console.log('提交成功')
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success',
+          mask: false
+        })
       })
-    })
+      .catch(err => {
+        console.error(err)
+        wx.showToast({
+          title: '提交失败',
+          icon: 'fail',
+          mask: true
+        })
+      })
   },
   /**
    * 生命周期函数--监听页面加载
