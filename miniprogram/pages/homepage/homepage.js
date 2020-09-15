@@ -48,18 +48,7 @@ Page({
   onLoad: function (options) {
 
   },
-  //不足两位数的数字前面补零
-  prefixInteger: function (num) {
-    return (Array(2).join('0') + num).slice(-2);
-  },
-  //获取日期
-  getDate: function (d) {
-    return d.getFullYear() + '-' + this.prefixInteger(d.getMonth() + 1) + '-' + this.prefixInteger(d.getDate())
-  },
-  //获取时间
-  getTime: function (d) {
-    return this.prefixInteger(d.getHours()) + ':' + this.prefixInteger(d.getMinutes())
-  },
+
   //调用云函数提交行程
   callUpTravel: function (building) {
     wx.showLoading({
@@ -68,12 +57,13 @@ Page({
 
     // console.log(obj)
     let d = new Date()
+    console.log(util.formatTime(d))
     wx.cloud.callFunction({
         name: 'upTravel',
         data: {
           sno: app.globalData.regInfo.sno,
-          date: this.getDate(d),
-          time: this.getTime(d),
+          date: util.formatDay(d),
+          time: util.formatTime(d),
           bnum: building.num
         }
       })
@@ -103,7 +93,7 @@ Page({
           funcName: '2-d',
           sno: app.globalData.regInfo.sno,
           checkState: -1, //未使用
-          //curDate: this.getDate(new Date())
+
         }
       })
       .then(res => {
@@ -118,7 +108,6 @@ Page({
                 funcName: '2-d',
                 sno: app.globalData.regInfo.sno,
                 checkState: 0, //正在使用中的状态，即出了校园
-                //curDate: this.getDate(new Date())
               }
             })
             .then(res => {
@@ -144,7 +133,7 @@ Page({
         }
         //有这样的请假单在判断时间是否符合
         let leave = res.result.list[0]
-        if (this.getDate(new Date()) != leave.leaveDate){
+        if (util.formatDay(new Date()) != leave.leaveDate){
           console.error('时间不匹配')
           return 
         } 
@@ -233,7 +222,7 @@ Page({
         data: {
           sno: app.globalData.regInfo.sno,
           temperature: this.data.upTemp,
-          date: this.getDate(d),
+          date: util.formatDay(d),
           timeFlag: timeFlag
         }
       })
@@ -265,7 +254,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**

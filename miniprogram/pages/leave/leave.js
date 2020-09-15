@@ -37,6 +37,7 @@ bindReturnDateChange: function(e) {
       leaveDate: today,
       returnDate: today
     })
+    console.log(today)
   },
   submit: function(e) {
     // console.log('form submit 事件',e.detail.value)

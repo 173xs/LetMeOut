@@ -1,5 +1,6 @@
 // miniprogram/pages/teacher/reportCheck.js
 var app = getApp()
+var util = require('../../utils/util.js')
 Page({
 
   /**
@@ -10,21 +11,14 @@ Page({
     limit:4,
     skip: 0,
   },
-  //不足两位数的数字前面补零
-  prefixInteger: function (num) {
-    return (Array(2).join('0') + num).slice(-2);
-  },
-  //获取日期
-  getDate: function (d) {
-    return d.getFullYear() + '-' + this.prefixInteger(d.getMonth() + 1) + '-' + this.prefixInteger(d.getDate())
-  },
+
   okBtn: function (e) {
     console.log(e.target.dataset)
     wx.cloud.callFunction({
         name: 'reviewReport',
         data: {
           reportId: e.target.dataset.id,
-          reviewDate: this.getDate(new Date()),
+          reviewDate: util.formatDay(new Date()),
           tno: app.globalData.regInfo.tno
         }
       })

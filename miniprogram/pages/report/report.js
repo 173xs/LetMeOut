@@ -1,5 +1,6 @@
 // pages/report/report.js
 var app = getApp()
+var util = require('../../utils/util.js')
 Page({
 
   /**
@@ -8,28 +9,27 @@ Page({
   data: {
 
   },
-  //不足两位数的数字前面补零
-  prefixInteger: function (num) {
-    return (Array(2).join('0') + num).slice(-2);
-  },
-  //获取日期
-  getDate: function (d) {
-    return d.getFullYear() + '-' + this.prefixInteger(d.getMonth() + 1) + '-' + this.prefixInteger(d.getDate())
-  },
-  submit(e) {
-    var d = new Date()
 
+  submit(e) {
     console.log(e.detail.value)
+    wx.showLoading({
+      title: '提交中',
+      mask: true,
+    })
     wx.cloud.callFunction({
         name: 'report',
         data: {
           sno: app.globalData.regInfo.sno,
           title: e.detail.value.title,
           detail: e.detail.value.detail,
-          sudDate: this.getDate()
+          subDate: util.formatDay(new Date())
         }
       })
       .then(res => {
+        // if (res.result)
+        wx.hideLoading({
+          success: (res) => {},
+        })
         console.log('提交成功')
         wx.showToast({
           title: '提交成功',
