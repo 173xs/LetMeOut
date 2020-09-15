@@ -166,7 +166,9 @@ Page({
           //扫的是校门，即出校门或者返回学校
           //调用letmeout函数，将请假单的checkState改成已使用
           //并把将审批通过的请假单出示给门卫
-          this.callLetMeOut(building)
+          wx.navigateTo({
+            url: '/pages/myHome/myleave'
+          })
         }
       },
       fail: (res) => {},

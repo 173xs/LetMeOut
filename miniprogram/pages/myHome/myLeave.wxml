@@ -62,6 +62,7 @@
       <cover-view class="billListText" wx:if="{{curLeaveBill.checkState==1}}">已使用</cover-view>
       <cover-view class="billListText" wx:if="{{curLeaveBill.checkState==0}}">未使用</cover-view>
     </cover-view>
+    <cover-view class="billUseBtn"  bindtap="scancode" data-id="{{curLeaveBill._id}}">使用</cover-view>
   </cover-view>
 </cover-view>
 
