@@ -19,9 +19,5 @@
   <view class="infoTitle">宿舍</view>
   <view class="infoContent" >{{sdorm}}</view>
 </view>
-<view class="infoList">
-  <view class="infoTitle">其他</view>
-  <navigator class="infoAlter"><image src="/images/goto.png" class="gotoIcon"></image></navigator>
-  <view class="infoContent">可修改</view>
-</view>
+
 

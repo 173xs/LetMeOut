@@ -31,11 +31,6 @@
   </view>
 </view>
 
-<navigator class="setting" hover-class="noshadow">
-  <image src="/images/setting.png" class="settingIcon"></image>
-  <text>设置</text>
-  <image src="/images/goto.png" class="gotoIcon"></image>
-</navigator>
 <button class="share" open-type="share">
   <image src="/images/share.png" class="shareIcon"></image>
   <text>分享</text>

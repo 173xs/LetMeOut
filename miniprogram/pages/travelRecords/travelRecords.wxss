@@ -17,3 +17,7 @@ page{background-color:#f8f3f3;}
 .radiusPoint{width:10rpx;height:10rpx;margin-top:25rpx;border-radius: 5rpx;background-color: #66ccff;float:left;}
 .recordPlace{height:60rpx;margin-left:20rpx;line-height: 60rpx;font-size:28rpx;float:left;}
 .recoreTime{height:60rpx;margin-left:40rpx;line-height: 60rpx;font-size:24rpx;color:#808080;float:left;}
+
+.emptyBox{width:100%}
+.emptyBox image{width:400rpx;height:250rpx;margin:100rpx auto;display:block}
+.emptyBox text{width:750rpx;line-height:100rpx;text-align:center;font-size:32rpx;color:#808080;display:block}

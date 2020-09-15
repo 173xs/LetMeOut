@@ -4,10 +4,10 @@
 <view class="reportList" wx:for="{{reportList}}" wx:key="index">
   <view class="userBox">
     <text class="user">{{item.sno}}-{{item.sname}}</text>
+    <text class="time">{{item.subDate}}</text>
   </view>
   <view class="titleBox">
     <text class="title">{{item.title}}</text>
-    <text class="time">{{item.subDate}}</text>
   </view>
   <view class="detailBox">
     <view class="detail">{{item.detail}}</view>

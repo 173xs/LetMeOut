@@ -3,13 +3,13 @@
 <view class="reportTitleBox">
   <view class="signBox"></view>
   <view class="reportTtile">标题</view>
-  <view  class="titleText"><input type="text" placeholder="请输入标题" name="title"></input></view>
+  <view  class="titleText"><input type="text" placeholder="请输入标题(20字以内)" name="title" maxlength="20"></input></view>
 </view>
 <view class="reportDetailBox">
   <view class="signBox"></view>
   <view class="detailTtile">请描述你的问题</view>
   <view  class="detailText">
-    <textarea type="text" placeholder="请输入问题" name="detail" maxlength="150" bindinput="textCount" show-confirm-bar="false"></textarea>
+    <textarea type="text" placeholder="请输入问题(最多150字)" name="detail" maxlength="150" bindinput="textCount" show-confirm-bar="false"></textarea>
   </view>
   <view class="textCount"><text>/150</text><text style="color:#26d7d8">{{reasonLength}}</text></view>
 </view>
