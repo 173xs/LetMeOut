@@ -6,9 +6,9 @@ Page({
      * 页面的初始数据
      */
     data: {
-        NnoCheck: 100,
-        NnoUse: 10,
-        NnoReturn: 10
+        NnoCheck: 0,
+        NnoUse: 0,
+        NnoReturn: 0
     },
 
     /**
@@ -41,7 +41,12 @@ Page({
         var context = wx.createContext();
         // 画饼图
         //    数据源
-        var array = [this.data.NnoCheck, this.data.NnoUse, this.data.NnoReturn];
+        if(this.data.NnoCheck==0 & this.data.NnoUse==0 & this.data.NnoReturn==0){
+            var array=[1,1,1]
+        }
+        else{
+            var array = [this.data.NnoCheck, this.data.NnoUse, this.data.NnoReturn];
+        }
         var colors = ["#66ccff", "#ccccff", "#ccffff"];
         var total = 0;
         //    计算总量
