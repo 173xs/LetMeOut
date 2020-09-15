@@ -1,36 +1,86 @@
 <!--pages/inform/inform.wxml-->
-<view class="informBox">
+<view  wx:for="reslist" wx:key="index">
+
+<view class="informBox" wx:if="item.type==leave">
   <text class="informTitle">请假审核</text>
-  <view class="informLabel">你提交的请假请求已经审核通过，请前往"我的请假"里面查看请假单，出示请假单即可出校</view>
+  <view class="informLabel" wx:if="{{curLeaveBill.checkState==-1}}">很遗憾，你提交的请假单管理员没有审核通过，你可以完善请假理由重新申请或者联系管理员</view>
+  <view class="informLabel" wx:if="{{curLeaveBill.checkState==1}}">你提交的请假请求已经审核通过，请前往"我的请假"里面查看请假单，出示请假单即可出校</view>
   <view class="informUrlBox">
     <image src="/images/leave2.png" class="informUrlImage"></image>
-    <view class="informUrlDetail">
-      <view class="informUrlTitle">我要回家探亲</view>
+    <view class="informUrlDetail" data-curid="{{item.id}}" bindtap="showBill">
+      <view class="informUrlTitle">{{item.title}}事假2020-09-10~2020-09-12</view>
       <view class="informUrlContent">
-        <text class="contentTitle">审核状态：</text><text class="contentDetail">已通过</text><text class="contentTitle">审核人：</text><text class="contentDetail">张三</text>
+        <text class="contentTitle">审核状态：</text>
+        <text class="contentDetail" wx:if="{{curLeaveBill.checkState==-1}}">{{item.checkState}}已驳回</text>
+        <text class="contentDetail" wx:if="{{curLeaveBill.checkState==1}}">{{item.checkState}}已通过</text>
+        <text class="contentTitle">审核人：</text>
+        <text class="contentDetail">{{item.tname}}</text>
       </view>
     </view>
   </view>
   <view class="otherBox">
-    <text class="informTime">08月17号 11:10</text>
+    <text class="informTime">{{item.time}}</text>
     <image class="deleteIcon" src="/images/delete.png"></image>
   </view>
 </view>
-
-<view class="informBox">
+<view class="informBox"  wx:if="item.type==leave">
   <text class="informTitle">异常上报</text>
   <view class="informLabel">你上报的异常审批人已经查阅，我们会妥善进行相关处理，感谢你的上报。</view>
   <view class="informUrlBox">
     <image src="/images/report1.png" class="informUrlImage"></image>
     <view class="informUrlDetail">
-      <view class="informUrlTitle">他好像有点发烧</view>
+      <view class="informUrlTitle">{{item.title}}</view>
       <view class="informUrlContent">
-        <text class="contentTitle">审核状态：</text><text class="contentDetail">已查阅</text><text class="contentTitle">审核人：</text><text class="contentDetail">李四</text>
+        <text class="contentTitle">审核状态：</text>
+        <text class="contentDetail">已查阅</text>
+        <text class="contentTitle">审核人：</text>
+        <text class="contentDetail">{{item.tname}}</text>
       </view>
     </view>
   </view>
   <view class="otherBox">
-    <text class="informTime">08月17号 11:10</text>
+    <text class="informTime">{{item.time}}</text>
     <image class="deleteIcon" src="/images/delete.png"></image>
   </view>
 </view>
+</view>
+
+<cover-view class="coverBillBox" style="display:{{coverBoxDisplay}}" bindtap="hideBill">
+  <cover-view class="coverGray"></cover-view>
+  <cover-view class="showBillBox">
+    <cover-view class="BillTitle">请假单</cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">学号：</cover-view>
+      <cover-view class="billListText">{{curLeaveBill.sno}}</cover-view>
+    </cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">姓名：</cover-view>
+      <cover-view class="billListText">{{sname}}</cover-view>
+    </cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">学院：</cover-view>
+      <cover-view class="billListText">计算机科学与技术学院</cover-view>
+    </cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">类别：</cover-view>
+      <cover-view class="billListText">{{curLeaveBill.leaveClass}}</cover-view>
+    </cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">时间：</cover-view>
+      <cover-view class="billListText">{{curLeaveBill.leaveDate}} 到 {{curLeaveBill.returnDate}}</cover-view>
+    </cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">请假理由：</cover-view>
+    </cover-view>
+    <cover-view class="billReason">{{curLeaveBill.leaveReason}}</cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">审核人：</cover-view>
+      <cover-view class="billListText">{{curLeaveBill.tname}}</cover-view>
+    </cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">使用状态：</cover-view>
+      <cover-view class="billListText" wx:if="{{curLeaveBill.checkState==1}}">已使用</cover-view>
+      <cover-view class="billListText" wx:if="{{curLeaveBill.checkState==0}}">未使用</cover-view>
+    </cover-view>
+  </cover-view>
+</cover-view>

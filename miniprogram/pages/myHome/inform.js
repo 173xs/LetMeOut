@@ -5,9 +5,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    curLeaveBill: [], //初始化请假单的信息
   },
-
+  showBill: function (e) {
+    var curId = e.currentTarget.dataset.curid
+    /*
+    这里根据curId获取一下请假单的信息bill
+    */
+    this.setData({
+      coverBoxDisplay: "block",
+      curLeaveBill: bill
+    })
+  },
+  hideBill: function () {
+    this.setData({
+      coverBoxDisplay: "none"
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

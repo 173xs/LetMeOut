@@ -11,13 +11,37 @@ Page({
     curLeaveBill: [], //初始化请假单的信息
 
     //菜单栏按钮选中时的样式
-    noCheckWxss: 'addColor',
-    yesCheckWxss: ' ',
+    noCheckWxss: '',
+    yesCheckWxss: 'addColor',
     backCheckWxss: ' ',
 
     sname: ''
   },
+  //扫一扫
+  scancode(e) {
+    wx.scanCode({
+      onlyFromCamera: true,
+      scanType: ['qrCode'],
+      success: (res) => {
+        //获取请假单id
+        var curId=e.currentTarget.dataset.id
+        console.log(curId)
+        //从二维码读取建筑信息
+        var building = JSON.parse(res.result)
+        console.log('building = ', building)
+        this.callUpTravel(building)
 
+        if ('gate' == building.type) {
+          //扫的是校门，即出校门或者返回学校
+          //调用letmeout函数，将请假单的checkState改成已使用
+          //并把将审批通过的请假单出示给门卫
+          this.callLetMeOut(building)
+        }
+      },
+      fail: (res) => {},
+      complete: (res) => {},
+    })
+  },
   callGetLeave: function (funcName) {
     wx.showLoading({
       title: '加载中',

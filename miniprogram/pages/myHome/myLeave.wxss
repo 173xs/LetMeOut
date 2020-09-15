@@ -28,3 +28,4 @@ page{background-color:#f8f3f3;}
 .billListText{width:420rpx;float:right;height:100%;line-height:80rpx;font-size:28rpx}
 
 .billReason{width:500rpx;height:auto;line-height:50rpx;font-size:28rpx;margin:0 auto;text-indent: 2em;word-break: break-all;word-wrap: break-word;white-space: pre-line;}
+.billUseBtn{width:500rpx;height:80rpx;background-color: #47f3f3;text-align:center;line-height:80rpx;color:white;font-size:28rpx;margin:0 auto;border-radius: 20rpx;margin-top: 20rpx;}
