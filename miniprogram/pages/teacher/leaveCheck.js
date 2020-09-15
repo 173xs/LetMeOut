@@ -8,6 +8,7 @@ Page({
   data: {
     leaveList: [],
     approvedList:[],
+    limit:4,
     skip: 0
   },
 
@@ -74,7 +75,7 @@ Page({
         data: {
           funcName: '1-a',
           condition: {
-            limit: 3,
+            limit: this.data.limit,
             // approvedList:approvedList
             skip: this.data.skip,
             tacademy: app.globalData.regInfo.tacademy
@@ -83,9 +84,9 @@ Page({
       })
       .then(res => {
         this.setData({
-          leaveList: res.result.list
+          leaveList: res.result.list,
+          skip : res.result.list.length
         })
-        this.data.skip = 3
         console.log('待审核请假单:', this.data.leaveList)
       })
       .catch(err => {
@@ -138,7 +139,7 @@ Page({
         data: {
           funcName: '1-a',
           condition: {
-            limit: 3,
+            limit: this.data.limit + this.data.skip,
             // approvedList:approvedList
             skip: this.data.skip,
             tacademy: app.globalData.regInfo.tacademy
@@ -146,6 +147,7 @@ Page({
         }
       })
       .then(res => {
+        console.log(res)
         let oldList = this.data.leaveList
         let newList = oldList.concat(res.result.list)
         this.setData({

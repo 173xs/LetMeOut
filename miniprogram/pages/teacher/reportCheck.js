@@ -7,6 +7,7 @@ Page({
    */
   data: {
     reportList: [],
+    limit:4,
     skip: 0,
   },
   //不足两位数的数字前面补零
@@ -40,7 +41,7 @@ Page({
         name: 'getReport',
         data: {
           tacademy: app.globalData.regInfo.tacademy,
-          limit: 4,
+          limit: this.data.limit,
           skip: this.data.skip
         }
       })
@@ -96,7 +97,7 @@ Page({
         name: 'getReport',
         data: {
           tacademy: app.globalData.regInfo.tacademy,
-          limit: 4 + this.data.skip,
+          limit: this.data.limit + this.data.skip,
           skip: this.data.skip
         }
       })
