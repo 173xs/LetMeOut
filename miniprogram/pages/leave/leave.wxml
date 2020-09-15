@@ -1,12 +1,6 @@
 <!--pages/leave/leave.wxml-->
 <form class="formBox" bindsubmit="submit">
-  <!-- <view class="titleBox">
-    <view class="signBox"></view>
-    <view class="titleTtile">标题</view>
-    <view  class="titleText"><input type="text" value="请输入" ></input></view>
-  </view> -->
 
-  <!-- 这里是两个radio,name你可以自己随便写 -->
   <radio-group class="leaveClassBox" name="leaveClass">
     <view class="leaveClassList">
       <radio checked="true" value='事假' class="classRadio"></radio>
@@ -34,9 +28,9 @@
   <view class="reasonBox">
     <view class="signBox"></view>
     <view class="reasonTtile">请假理由</view>
-    <!-- 这里是请假理由 -->
-    <view  class="reasonText"><input type="text" placeholder="请输入" name="leaveReason"></input></view>
+    <view  class="reasonText"><textarea placeholder="请输入" name="leaveReason" maxlength="150" bindinput="textCount" show-confirm-bar="false"></textarea></view>
+    <view class="textCount"><text>/150</text><text style="color:#26d7d8">{{reasonLength}}</text></view>
   </view>
-    <!-- 这是button,点击事件你可以自己随便写 -->
+
   <button class="submitBtn" form-type="submit">提交</button>
 </form>

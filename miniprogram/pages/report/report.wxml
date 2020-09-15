@@ -8,7 +8,10 @@
 <view class="reportDetailBox">
   <view class="signBox"></view>
   <view class="detailTtile">请描述你的问题</view>
-  <view  class="detailText"><input type="text" placeholder="请输入问题" name="detail" ></input></view>
+  <view  class="detailText">
+    <textarea type="text" placeholder="请输入问题" name="detail" maxlength="150" bindinput="textCount" show-confirm-bar="false"></textarea>
+  </view>
+  <view class="textCount"><text>/150</text><text style="color:#26d7d8">{{reasonLength}}</text></view>
 </view>
 <button class="submitBtn" form-type="submit">提交</button>
 </form>

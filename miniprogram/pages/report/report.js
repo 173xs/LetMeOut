@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    reasonLength:0,
   },
 
   submit(e) {
@@ -45,6 +45,14 @@ Page({
           mask: true
         })
       })
+  },
+  textCount:function(e){
+    var len=e.detail.value.length
+    if(len<=150){
+      this.setData({
+        reasonLength:len,
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载

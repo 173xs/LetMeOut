@@ -10,6 +10,7 @@ Page({
     leaveDate:'',
     returnDate:'',
     endDate:'2021-09-01',
+    reasonLength:0,
   },
 
   // 离开日期变化时返回日期最小为离开日期
@@ -25,6 +26,14 @@ bindReturnDateChange: function(e) {
   this.setData({
     returnDate: e.detail.value
   })
+},
+textCount:function(e){
+  var len=e.detail.value.length
+	if(len<=150){
+    this.setData({
+      reasonLength:len,
+    })
+  }
 },
   /**
    * 生命周期函数--监听页面加载
