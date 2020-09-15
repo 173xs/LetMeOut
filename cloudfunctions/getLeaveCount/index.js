@@ -32,9 +32,18 @@ exports.main = async (event, context) => {
 
   //拼接最后结果
   let result = {
-    ...noCheck.list[0],
-    ...noUse.list[0],
-    ...noReturn.list[0]
+    noCheck: 0,
+    noUse: 0,
+    noReturn: 0
+  }
+  if (0 != noCheck.list.length) {
+    result.noCheck = noCheck.list[0].noCheck
+  }
+  if (0 != noUse.list.length) {
+    result.noUse = noUse.list[0].noUse
+  }
+  if (0 != noReturn.list.length) {
+    result.noReturn = noReturn.list[0].noReturn
   }
   //console.log(result)
   return result
