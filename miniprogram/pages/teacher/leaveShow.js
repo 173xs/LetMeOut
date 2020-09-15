@@ -6,9 +6,9 @@ Page({
      * 页面的初始数据
      */
     data: {
-        NnoCheck: 1,
-        NnoUse: 10,
-        NnoReturn:10
+        NnoCheck: 0,
+        NnoUse: 0,
+        NnoReturn: 0
     },
 
     /**
