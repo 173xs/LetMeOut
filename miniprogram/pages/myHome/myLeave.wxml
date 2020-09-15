@@ -30,8 +30,12 @@
   <cover-view class="showBillBox">
     <cover-view class="BillTitle">请假单</cover-view>
     <cover-view class="billListBox">
-      <cover-view class="billListLabel">姓名：</cover-view>
+      <cover-view class="billListLabel">学号：</cover-view>
       <cover-view class="billListText">{{curLeaveBill.sno}}</cover-view>
+    </cover-view>
+    <cover-view class="billListBox">
+      <cover-view class="billListLabel">姓名：</cover-view>
+      <cover-view class="billListText">{{sname}}</cover-view>
     </cover-view>
     <cover-view class="billListBox">
       <cover-view class="billListLabel">学院：</cover-view>

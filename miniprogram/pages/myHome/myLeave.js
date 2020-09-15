@@ -13,7 +13,9 @@ Page({
     //菜单栏按钮选中时的样式
     noCheckWxss: 'addColor',
     yesCheckWxss: ' ',
-    backCheckWxss: ' '
+    backCheckWxss: ' ',
+
+    sname: ''
   },
 
   callGetLeave: function (funcName) {
@@ -124,6 +126,10 @@ Page({
   onLoad: function (options) {
     //默认刷新未审核的
     this.callGetLeave('2-a')
+
+    this.setData({
+      sname: app.globalData.regInfo.sname
+    })
   },
 
   /**

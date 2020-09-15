@@ -48,45 +48,137 @@ Page({
   onLoad: function (options) {
 
   },
-   prefixInteger:function(num) {
+  //不足两位数的数字前面补零
+  prefixInteger: function (num) {
     return (Array(2).join('0') + num).slice(-2);
-   },
+  },
+  //获取日期
+  getDate: function (d) {
+    return d.getFullYear() + '-' + this.prefixInteger(d.getMonth() + 1) + '-' + this.prefixInteger(d.getDate())
+  },
+  //获取时间
+  getTime: function (d) {
+    return this.prefixInteger(d.getHours()) + ':' + this.prefixInteger(d.getMinutes())
+  },
+  //调用云函数提交行程
+  callUpTravel: function (building) {
+    wx.showLoading({
+      title: '行程提交中',
+    })
+
+    // console.log(obj)
+    let d = new Date()
+    wx.cloud.callFunction({
+        name: 'upTravel',
+        data: {
+          sno: app.globalData.regInfo.sno,
+          date: this.getDate(d),
+          time: this.getTime(d),
+          bnum: building.num
+        }
+      })
+      .then(res => {
+        //console.log(res)
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '提交成功',
+              icon: 'success',
+              duration: 1500
+            })
+          },
+        })
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  },
+
+  callLetMeOut: function (building) {
+
+    //先查有没有审核通过未使用的请假单
+    wx.cloud.callFunction({
+        name: 'getleave',
+        data: {
+          funcName: '2-d',
+          sno: app.globalData.regInfo.sno,
+          checkState: -1, //未使用
+          //curDate: this.getDate(new Date())
+        }
+      })
+      .then(res => {
+        console.log('未使用的请假单', res.result)
+        if (0 == res.result.list.length) {
+          console.error('离校：没有符合条件的请假单')
+          //看是不是已经出了校门，查询是不是有一个正在使用的请假条
+
+          wx.cloud.callFunction({
+              name: 'getleave',
+              data: {
+                funcName: '2-d',
+                sno: app.globalData.regInfo.sno,
+                checkState: 0, //正在使用中的状态，即出了校园
+                //curDate: this.getDate(new Date())
+              }
+            })
+            .then(res => {
+              console.log('正在使用的请假单', res.result)
+              if (0 == res.result.list.length) {
+                console.error('返校：没有符合条件的请假单')
+                return
+              }
+              let leave = res.result.list[0]
+              wx.cloud.callFunction({
+                  name: 'letMeOut',
+                  data: {
+                    checkState: 1,
+                    _id: leave._id,
+                    gateNum: building.num
+                  }
+                })
+                .then(res => {
+                  console.log('返校：更新成功')
+                })
+            })
+          return
+        }
+        //有这样的请假单在判断时间是否符合
+        let leave = res.result.list[0]
+        if (this.getDate(new Date()) != leave.leaveDate){
+          console.error('时间不匹配')
+          return 
+        } 
+        //调用出校门云函数，记录出校门的地点，更新请假条的状态
+        wx.cloud.callFunction({
+            name: 'letMeOut',
+            data: {
+              checkState: 0, //改为正在使用
+              _id: leave._id,
+              gateNum: building.num
+            }
+          })
+          .then(res => {
+            console.log('离校：更新成功')
+          })
+      })
+  },
   //扫一扫
   scancode() {
     wx.scanCode({
       onlyFromCamera: true,
       scanType: ['qrCode'],
       success: (res) => {
-        wx.showLoading({
-          title: '行程提交中',
-        })
-        var obj = JSON.parse(res.result)
-        // console.log(obj)
-        let d = new Date()
-        wx.cloud.callFunction({
-          name:'upTravel',
-          data:{
-            sno: app.globalData.regInfo.sno,
-            date: d.getFullYear() + '-' + this.prefixInteger(d.getMonth()+1) + '-' + this.prefixInteger(d.getDate()),
-            time: this.prefixInteger(d.getHours()) + ':' + this.prefixInteger(d.getMinutes()),
-            bunm: obj.num
-          }
-        })
-        .then(res=>{
-          //console.log(res)
-          wx.hideLoading({
-            success: (res) => {
-              wx.showToast({
-                title: '提交成功',
-                icon:'success',
-                duration:1500
-              })
-            },
-          })
-        })
-        .catch(err=>{
-          console.error(err)
-        })
+        //从二维码读取建筑信息
+        var building = JSON.parse(res.result)
+        console.log('building = ', building)
+        this.callUpTravel(building)
+
+        if ('gate' == building.type) {
+          //扫的是校门，即出校门或者返回学校
+          //调用letmeout函数，将请假单的checkState改成已使用
+          //并把将审批通过的请假单出示给门卫
+          this.callLetMeOut(building)
+        }
       },
       fail: (res) => {},
       complete: (res) => {},
@@ -118,7 +210,7 @@ Page({
     if (this.data.upTemp == 0) {
       wx.showToast({
         title: '输入有误',
-        icon:'none',
+        icon: 'none',
         duration: 1000,
         mask: true
       })
@@ -132,29 +224,37 @@ Page({
     } else if (d.getHours() > 14) {
       timeFlag = 2
     }
+    wx.showLoading({
+      title: '体温提交中',
+      mask: true
+    })
     wx.cloud.callFunction({
         name: 'upTemp',
         data: {
           sno: app.globalData.regInfo.sno,
           temperature: this.data.upTemp,
-          date: d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate(),
+          date: this.getDate(d),
           timeFlag: timeFlag
         }
       })
       .then(res => {
         console.log('上传成功')
-        wx.showToast({
-          title: '上传成功',
-          icon:'none',
-          duration: 1000,
-          mask: true
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '上传成功',
+              icon: 'success',
+              duration: 1000,
+              mask: true
+            })
+          },
         })
       })
       .catch(err => {
         console.log('上传失败')
         wx.showToast({
           title: '上传失败',
-          icon:'none',
+          icon: 'fail',
           duration: 1000,
           mask: true
         })
