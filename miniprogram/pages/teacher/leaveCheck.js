@@ -1,5 +1,6 @@
 // pages/teaHomepage/leaveCheck.js
 var app = getApp()
+var util = require('../../utils/util.js')
 Page({
 
   /**
@@ -7,64 +8,56 @@ Page({
    */
   data: {
     leaveList: [],
-    approvedList:[],
-    limit:4,
+    approvedList: [],
+    limit: 4,
     skip: 0
   },
 
-  callApproveFunc(id, approveSate) {
+  callApproveFunc(leave, approveState) {
+    console.log('leave = ', leave, approveState)
     wx.cloud.callFunction({
         name: 'approveLeave',
         data: {
-          leaveId: id,
-          approveState: approveSate
+          tno: app.globalData.regInfo.tno,
+          leaveId: leave.id,
+          approveState: approveState
         }
       })
       .then(res => {
         console.log('完成审批')
+        this.data.skip -= 1
+        this.callUpMsg(leave.sno,
+          'leave',
+          leave.id,
+          new Date())
       })
       .catch(err => {
         console.error(err)
+      })
+  },
+  callUpMsg(sno, type, id, d) {
+    console.log(sno,type,id)
+    wx.cloud.callFunction({
+        name: 'upMsg',
+        data: {
+          sno: sno,
+          type: type,
+          id: id,
+          checkTime: util.formatTime(d),
+          tname: app.globalData.regInfo.tname
+        }
+      })
+      .then(res => {
+        console.log(res)
+        console.log(id,'消息记录成功')
       })
   },
   backBtn(res) {
-    // callApproveFunc(res.currentTarget.dataset.id,-1)
-    wx.cloud.callFunction({
-        name: 'approveLeave',
-        data: {
-          tno:app.globalData.regInfo.tno,
-          leaveId: res.currentTarget.dataset.id,
-          approveState: -1
-        }
-      })
-      .then(res => {
-        console.log('完成审批')
-        // approvedList.push(res.currentTarget.dataset.id)
-        this.data.skip -= 1
-      })
-      .catch(err => {
-        console.error(err)
-      })
+    this.callApproveFunc(res.currentTarget.dataset, -1)
   },
-  okBtn(res) {
-    // callApproveFunc(res.currentTarget.dataset.id,1)
-    wx.cloud.callFunction({
-        name: 'approveLeave',
-        data: {
-          tno:app.globalData.regInfo.tno,
-          leaveId: res.currentTarget.dataset.id,
-          approveState: 1
-        }
-      })
-      .then(res => {
-        console.log('完成审批')
-        // approvedList.push(res.currentTarget.dataset.id)
-        this.data.skip -= 1
-      })
-      .catch(err => {
-        console.error(err)
-      })
 
+  okBtn(res) {
+    this.callApproveFunc(res.currentTarget.dataset, 1)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -85,7 +78,7 @@ Page({
       .then(res => {
         this.setData({
           leaveList: res.result.list,
-          skip : res.result.list.length
+          skip: res.result.list.length
         })
         console.log('待审核请假单:', this.data.leaveList)
       })

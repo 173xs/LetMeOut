@@ -13,6 +13,6 @@
     <view class="detail">{{item.detail}}</view>
   </view>
   <view class="buttonList">
-    <button class='okBtn' bindtap="okBtn" data-id="{{item._id}}" data-idx="{{index}}">已查阅</button>
+    <button class='okBtn' bindtap="okBtn" data-id="{{item._id}}" data-idx="{{index}}" data-sno="{{item.sno}}">已查阅</button>
   </view>
 </view>

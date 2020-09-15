@@ -11,7 +11,22 @@ Page({
     limit:4,
     skip: 0,
   },
+  callUpMsg(sno,type,id,d){
+    wx.cloud.callFunction({
+      name:'upMsg',
+      data: {
+        sno:sno,
+        type:type,
+        id:id,
+        checkTime:util.formatTime(d),
+        tname: app.globalData.regInfo.tname
+      }
+    })
+    .then(res=>{
+      console.log('消息记录成功')
+    })
 
+  },
   okBtn: function (e) {
     console.log(e.target.dataset)
     wx.cloud.callFunction({
@@ -25,6 +40,10 @@ Page({
       .then(res => {
         console.log(res)
         this.data.skip -= 1
+        this.callUpMsg(e.target.dataset.sno,
+          'abnormal',
+          e.target.dataset.id,
+          new Date())
       })
   },
   /**

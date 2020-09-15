@@ -15,8 +15,8 @@
     <view class="noDetail">{{item.leaveReason}}</view>
   </view>
   <view class="buttonList">
-    <button class='backBtn' bindtap="backBtn" data-id="{{item._id}}" data-idx="{{index}}">驳回</button>
-    <button class='okBtn' bindtap="okBtn" data-id="{{item._id}}" data-idx="{{index}}">通过</button>
+    <button class='backBtn' bindtap="backBtn" data-id="{{item._id}}" data-idx="{{index}}" data-sno="{{item.sno}}">驳回</button>
+    <button class='okBtn' bindtap="okBtn" data-id="{{item._id}}" data-idx="{{index}}"data-sno="{{item.sno}}">通过</button>
   </view>
 </view>
 
