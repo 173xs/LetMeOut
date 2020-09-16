@@ -31,7 +31,7 @@
   <text>这里空空如也</text>
 </view>
 
-<cover-view class="coverBillBox" style="display:{{coverBoxDisplay}}" bindtap="hideBill">
+<cover-view class="coverBillBox" style="display:{{coverBoxDisplay}}">
   <cover-view class="coverGray"></cover-view>
   <cover-view class="showBillBox">
     <cover-view class="BillTitle">请假单</cover-view>
@@ -66,6 +66,7 @@
     <cover-view class="billListBox">
       <cover-view class="billListLabel">使用状态：</cover-view>
       <cover-view class="billListText" wx:if="{{curLeaveBill.checkState==1}}">已使用</cover-view>
+      <cover-view class="billListText" wx:if="{{curLeaveBill.checkState==0}}">使用中</cover-view>
       <cover-view class="billListText" wx:if="{{curLeaveBill.checkState==-1}}">未使用</cover-view>
     </cover-view>
     <cover-view class="billUseBtn"  bindtap="useBill" data-id="{{curLeaveBill._id}}" data-checkState="{{curLeaveBill.checkState}}">使用</cover-view>

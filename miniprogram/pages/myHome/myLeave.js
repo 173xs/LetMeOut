@@ -1,4 +1,5 @@
 // pages/myLeave/myLeave.js
+const util = require('../../utils/util.js')
 var app = getApp()
 Page({
 
@@ -17,6 +18,40 @@ Page({
 
     sname: ''
   },
+  //调用云函数提交行程
+  callUpTravel: function (building) {
+    wx.showLoading({
+      title: '行程提交中',
+    })
+
+    // console.log(obj)
+    let d = new Date()
+    console.log(util.formatTime(d))
+    wx.cloud.callFunction({
+        name: 'upTravel',
+        data: {
+          sno: app.globalData.regInfo.sno,
+          date: util.formatDay(d),
+          time: util.formatTime(d),
+          bnum: building.num
+        }
+      })
+      .then(res => {
+        //console.log(res)
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '提交成功',
+              icon: 'success',
+              duration: 1500
+            })
+          },
+        })
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  },
   callLetMeOut(curId, checkState, building) {
     wx.cloud.callFunction({
         name: 'letMeOut',
@@ -27,9 +62,9 @@ Page({
         }
       })
       .then(res => {
-        if (-1 == checkState){
+        if (-1 == checkState) {
           console.log('离校：更新成功')
-        }else{
+        } else {
           console.log('返校：更新成功')
         }
         //清理掉building
@@ -42,8 +77,8 @@ Page({
       })
   },
   //使用请假单
-  useBill: function(e) {
-    console.log('useBill = '.e)
+  useBill: function (e) {
+    console.log('useBill = ', e)
     /*先判断是通过扫一扫跳转过来此处，还是直接点击过来
     如果是直接扫一扫过来的就可以从storge获取building
     */
@@ -52,31 +87,32 @@ Page({
     try {
       var value = wx.getStorageSync('building')
       if (value) {
-        console.log('value = ',value)
+        console.log('value = ', value)
         building = value
         // Do something with return value
+      } else {
+        //直接点击过来
+        //先从二维码读取建筑信息
+        wx.scanCode({
+          onlyFromCamera: true,
+          scanType: ['qrCode'],
+          success: (res) => {
+            building = JSON.parse(res.result)
+            console.log('building = ', building)
+            this.callUpTravel(building)
+          },
+          fail: (res) => {
+            console.error(res)
+          },
+          complete: (res) => {},
+        })
       }
     } catch (err) {
-      console.error('err = ',err)
+      console.error('err = ', err)
       // Do something when catch error
-      //直接点击过来
-      //先从二维码读取建筑信息
-      wx.scanCode({
-        onlyFromCamera: true,
-        scanType: ['qrCode'],
-        success: (res) => {
-          building = JSON.parse(res.result)
-          console.log('building = ', building)
-          this.callUpTravel(building)
-        },
-        fail: (res) => {
-          console.error(res)
-        },
-        complete: (res) => {},
-      })
     }
 
-    if (1 == e.currentTarget.dataset.checkState) {
+    if (1 == e.currentTarget.dataset.checkstate) {
       console.log('此请假单已经使用')
       return
     }
@@ -84,8 +120,8 @@ Page({
     var curId = e.currentTarget.dataset.id
     // console.log(curId)
     //获取请假单的使用状态，判断是出校门还是返校
-    var checkState = e.currentTarget.dataset.checkState
-    console.log('---',curId,checkState,building)
+    var checkState = e.currentTarget.dataset.checkstate
+    console.log('---', curId, checkState, building)
     //扫的是校门，调用出校门云函数
     this.callLetMeOut(curId, checkState, building)
   },
