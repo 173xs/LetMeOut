@@ -16,3 +16,8 @@
     <button class='okBtn' bindtap="okBtn" data-id="{{item._id}}" data-idx="{{index}}" data-sno="{{item.sno}}">已查阅</button>
   </view>
 </view>
+
+<view wx:if="{{reportList.length>0==0}}" class="emptyBox">
+  <image src="/images/empty.png"></image>
+  <text>这里空空如也</text>
+</view>

@@ -5,7 +5,6 @@
   <view class="{{backCheckWxss}}"  bindtap="backCheckClick">已驳回</view>
 </view>
 
-
 <view class="yesCheckList" wx:if="{{yesCheckWxss != 0}}" wx:for="{{reslist}}" wx:key="index">
   <view class="yesDetailBox">
     <view class="yesClass">{{item.leaveClass}}</view>
@@ -25,7 +24,14 @@
     <view class="noDetail">{{item.leaveReason}}</view>
   </view>
 </view>
-<cover-view class="coverBillBox" style="display:{{coverBoxDisplay}}" >
+
+
+<view wx:if="{{reslist.length>0==0}}" class="emptyBox">
+  <image src="/images/empty.png"></image>
+  <text>这里空空如也</text>
+</view>
+
+<cover-view class="coverBillBox" style="display:{{coverBoxDisplay}}" bindtap="hideBill">
   <cover-view class="coverGray"></cover-view>
   <cover-view class="showBillBox">
     <cover-view class="BillTitle">请假单</cover-view>
