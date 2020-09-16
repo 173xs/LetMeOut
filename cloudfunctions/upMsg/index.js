@@ -13,6 +13,7 @@ exports.main = async (event, context) => {
         type: event.type,//'leave' or 'abnormal'
         id: event.id,//请假单或者异常的id
         checkTime: event.checkTime,//审批的时间
+        tname: event.tname//审批人姓名
       }
     ]
   })
