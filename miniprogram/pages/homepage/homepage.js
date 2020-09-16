@@ -133,10 +133,10 @@ Page({
         }
         //有这样的请假单在判断时间是否符合
         let leave = res.result.list[0]
-        if (util.formatDay(new Date()) != leave.leaveDate){
+        if (util.formatDay(new Date()) != leave.leaveDate) {
           console.error('时间不匹配')
-          return 
-        } 
+          return
+        }
         //调用出校门云函数，记录出校门的地点，更新请假条的状态
         wx.cloud.callFunction({
             name: 'letMeOut',
@@ -163,11 +163,13 @@ Page({
         this.callUpTravel(building)
 
         if ('gate' == building.type) {
-          //扫的是校门，即出校门或者返回学校
-          //调用letmeout函数，将请假单的checkState改成已使用
-          //并把将审批通过的请假单出示给门卫
+          /*
+          扫的是校门，即出校门或者返回学校
+          跳转请假单界面，选取请假单出示并使用
+          */
+         wx.setStorageSync('building', building)
           wx.navigateTo({
-            url: '/pages/myHome/myleave'
+            url: '../../pages/myHome/myLeave'
           })
         }
       },
@@ -255,8 +257,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  },
+  onReady: function () {},
 
   /**
    * 生命周期函数--监听页面显示

@@ -17,31 +17,79 @@ Page({
 
     sname: ''
   },
-  //扫一扫
-  scancode(e) {
-    wx.scanCode({
-      onlyFromCamera: true,
-      scanType: ['qrCode'],
-      success: (res) => {
-        //获取请假单id
-        var curId=e.currentTarget.dataset.id
-        console.log(curId)
-        //从二维码读取建筑信息
-        var building = JSON.parse(res.result)
-        console.log('building = ', building)
-        this.callUpTravel(building)
-
-        if ('gate' == building.type) {
-          //扫的是校门，即出校门或者返回学校
-          //调用letmeout函数，将请假单的checkState改成已使用
-          //并把将审批通过的请假单出示给门卫
-          this.callLetMeOut(building)
+  callLetMeOut(curId, checkState, building) {
+    wx.cloud.callFunction({
+        name: 'letMeOut',
+        data: {
+          checkState: checkState + 1,
+          _id: curId,
+          gateNum: building.num
         }
-      },
-      fail: (res) => {},
-      complete: (res) => {},
-    })
+      })
+      .then(res => {
+        if (-1 == checkState){
+          console.log('离校：更新成功')
+        }else{
+          console.log('返校：更新成功')
+        }
+        //清理掉building
+        try {
+          wx.removeStorageSync('building')
+        } catch (e) {
+          console.error(e)
+          // Do something when catch error
+        }
+      })
   },
+  //使用请假单
+  useBill: function(e) {
+    console.log('useBill = '.e)
+    /*先判断是通过扫一扫跳转过来此处，还是直接点击过来
+    如果是直接扫一扫过来的就可以从storge获取building
+    */
+    var building = {}
+    //扫一扫过来
+    try {
+      var value = wx.getStorageSync('building')
+      if (value) {
+        console.log('value = ',value)
+        building = value
+        // Do something with return value
+      }
+    } catch (err) {
+      console.error('err = ',err)
+      // Do something when catch error
+      //直接点击过来
+      //先从二维码读取建筑信息
+      wx.scanCode({
+        onlyFromCamera: true,
+        scanType: ['qrCode'],
+        success: (res) => {
+          building = JSON.parse(res.result)
+          console.log('building = ', building)
+          this.callUpTravel(building)
+        },
+        fail: (res) => {
+          console.error(res)
+        },
+        complete: (res) => {},
+      })
+    }
+
+    if (1 == e.currentTarget.dataset.checkState) {
+      console.log('此请假单已经使用')
+      return
+    }
+    //获取请假单id
+    var curId = e.currentTarget.dataset.id
+    // console.log(curId)
+    //获取请假单的使用状态，判断是出校门还是返校
+    var checkState = e.currentTarget.dataset.checkState
+    console.log('---',curId,checkState,building)
+    //扫的是校门，调用出校门云函数
+    this.callLetMeOut(curId, checkState, building)
+  },
+
   callGetLeave: function (funcName) {
     wx.showLoading({
       title: '加载中',
@@ -127,13 +175,13 @@ Page({
     var curId = e.currentTarget.dataset.curid
     var list = this.data.reslist
     var bill = []
-    console.log(curId)
+    //console.log(curId)
     for (var i = 0; i < list.length; ++i) {
       if (list[i]._id === curId) {
         bill = list[i]
       }
     }
-    console.log(bill)
+    //console.log(bill)
     this.setData({
       coverBoxDisplay: "block",
       curLeaveBill: bill
@@ -148,8 +196,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //默认刷新未审核的
-    this.callGetLeave('2-a')
+    //默认刷新已通过的
+    this.callGetLeave('2-b')
 
     this.setData({
       sname: app.globalData.regInfo.sname

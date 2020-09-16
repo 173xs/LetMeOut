@@ -82,7 +82,7 @@
     <cover-view class="billListBox" wx:if="{{curLeaveBill.detail.approveState==1}}">
       <cover-view class="billListLabel">使用状态：</cover-view>
       <cover-view class="billListText" wx:if="{{curLeaveBill.detail.checkState==1}}">已使用</cover-view>
-      <cover-view class="billListText" wx:if="{{curLeaveBill.detail.checkState==0}}">未使用</cover-view>
+      <cover-view class="billListText" wx:if="{{curLeaveBill.detail.checkState==-1}}">未使用</cover-view>
     </cover-view>
   </cover-view>
 </cover-view>
