@@ -15,6 +15,10 @@ Page({
 
   callApproveFunc(leave, approveState) {
     console.log('leave = ', leave, approveState)
+    wx.showLoading({
+      title: '审批提交中',
+      mask: true
+    })
     wx.cloud.callFunction({
         name: 'approveLeave',
         data: {
@@ -36,7 +40,7 @@ Page({
       })
   },
   callUpMsg(sno, type, id, d) {
-    console.log(sno,type,id)
+    console.log(sno, type, id)
     wx.cloud.callFunction({
         name: 'upMsg',
         data: {
@@ -48,8 +52,16 @@ Page({
         }
       })
       .then(res => {
-        console.log(res)
-        console.log(id,'消息记录成功')
+        // console.log(res)
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '提交成功',
+              duration: 800
+            })
+            // console.log(id,'消息记录成功')
+          },
+        })
       })
   },
   backBtn(res) {

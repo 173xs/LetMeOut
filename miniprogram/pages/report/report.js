@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    reasonLength:0,
+    reasonLength: 0,
   },
 
   submit(e) {
@@ -28,29 +28,36 @@ Page({
       .then(res => {
         // if (res.result)
         wx.hideLoading({
-          success: (res) => {},
+          success: (res) => {
+            console.log('提交成功')
+            wx.showToast({
+              title: '提交成功',
+              icon: 'success',
+              mask: true
+            })
+          },
         })
-        console.log('提交成功')
-        wx.showToast({
-          title: '提交成功',
-          icon: 'success',
-          mask: false
-        })
+
       })
       .catch(err => {
-        console.error(err)
-        wx.showToast({
-          title: '提交失败',
-          icon: 'fail',
-          mask: true
+        // console.error(err)
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '提交失败',
+              icon: 'none',
+              mask: true
+            })
+          },
         })
+
       })
   },
-  textCount:function(e){
-    var len=e.detail.value.length
-    if(len<=150){
+  textCount: function (e) {
+    var len = e.detail.value.length
+    if (len <= 150) {
       this.setData({
-        reasonLength:len,
+        reasonLength: len,
       })
     }
   },

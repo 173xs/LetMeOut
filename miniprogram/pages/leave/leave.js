@@ -51,7 +51,7 @@ textCount:function(e){
   submit: function(e) {
     // console.log('form submit 事件',e.detail.value)
     wx.showLoading({
-      title: '提交中...',
+      title: '申请提交中...',
       mask:true
     })
     var data = {
@@ -73,15 +73,15 @@ textCount:function(e){
       wx.showToast({
         title: '提交成功',
         icon:'success',
-        duration:1000,
+        duration:800,
         mask:true
       })
     })
     .catch(err=>{
       wx.showToast({
         title: '提交失败',
-        icon:'fail',
-        duration:1000,
+        icon:'none',
+        duration:800,
         mask:true
       })
       console.log(err)

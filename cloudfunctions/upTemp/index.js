@@ -15,7 +15,6 @@ exports.main = async (event, context) => {
         sno: event.sno,
         temperature: event.temperature,
         date: event.date,
-        timeFlag: event.timeFlag
       }
     ]
   })

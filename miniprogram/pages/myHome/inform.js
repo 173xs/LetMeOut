@@ -43,21 +43,24 @@ Page({
       })
       .then(res => {
         console.log('消息列表', res.result)
-        let list = []
-        for (var item of res.result) {
-          if ('leave' == item.type) {
-            item.title = item.detail.leaveClass +
-              ':' +
-              item.detail.leaveDate +
-              '~' +
-              item.detail.returnDate
-          } else {
-            item.title
-          }
-          list.push(item)
-        }
+        // let list = []
+        // for (var item of res.result) {
+        //   if ('leave' == item.type) {
+        //     item.title = item.detail.leaveClass +
+        //       ':' +
+        //       item.detail.leaveDate +
+        //       '~' +
+        //       item.detail.returnDate
+        //   } else {
+        //     item.title
+        //   }
+        //   list.push(item)
+        // }
+        // this.setData({
+        //   reslist: list
+        // })
         this.setData({
-          reslist: list
+          reslist: res.result
         })
       })
   },

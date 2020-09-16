@@ -23,12 +23,24 @@ Page({
       }
     })
     .then(res=>{
-      console.log('消息记录成功')
+      wx.hideLoading({
+        success: (res) => {
+          //console.log('消息记录成功')
+          wx.showToast({
+            title: '提交成功',
+            duration: 800
+          })
+        },
+      })
     })
 
   },
   okBtn: function (e) {
     console.log(e.target.dataset)
+    wx.showLoading({
+      title: '审批提交中',
+      mask:true
+    })
     wx.cloud.callFunction({
         name: 'reviewReport',
         data: {

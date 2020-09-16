@@ -9,7 +9,7 @@
       <image src="/images/leave2.png" class="informUrlImage" data-curidx="{{index}}"
         bindtap="showBill"></image>
       <view class="informUrlDetail">
-        <view class="informUrlTitle">{{item.title}}</view>
+        <view class="informUrlTitle">{{item.detail.leaveClass}}</view>
         <view class="informUrlContent">
           <text class="contentTitle">审核状态：</text>
           <text class="contentDetail" wx:if="{{item.detail.approveState==-1}}">已驳回</text>
@@ -20,7 +20,7 @@
       </view>
     </view>
     <view class="otherBox">
-      <text class="informTime">{{item.time}}</text>
+      <text class="informTime">审批时间：{{item.time}}</text>
       <image class="deleteIcon" src="/images/delete.png"></image>
     </view>
   </view>
@@ -40,7 +40,7 @@
       </view>
     </view>
     <view class="otherBox">
-      <text class="informTime">{{item.time}}</text>
+      <text class="informTime">审批时间：{{item.time}}</text>
       <image class="deleteIcon" src="/images/delete.png"></image>
     </view>
   </view>

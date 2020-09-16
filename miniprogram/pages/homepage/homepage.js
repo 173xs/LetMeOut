@@ -167,7 +167,7 @@ Page({
           扫的是校门，即出校门或者返回学校
           跳转请假单界面，选取请假单出示并使用
           */
-         wx.setStorageSync('building', building)
+          wx.setStorageSync('building', building)
           wx.navigateTo({
             url: '../../pages/myHome/myLeave'
           })
@@ -209,14 +209,6 @@ Page({
       })
     }
     var d = new Date()
-    let timeFlag
-    if (d.getHours() <= 10 && d.getHours() >= 6) {
-      timeFlag = 0
-    } else if (d.getHours() > 10 && d.getHours() <= 14) {
-      timeFlag = 1
-    } else if (d.getHours() > 14) {
-      timeFlag = 2
-    }
     wx.showLoading({
       title: '体温提交中',
       mask: true
@@ -227,7 +219,6 @@ Page({
           sno: app.globalData.regInfo.sno,
           temperature: this.data.upTemp,
           date: util.formatDay(d),
-          timeFlag: timeFlag
         }
       })
       .then(res => {
@@ -245,12 +236,17 @@ Page({
       })
       .catch(err => {
         console.log('上传失败')
-        wx.showToast({
-          title: '上传失败',
-          icon: 'fail',
-          duration: 1000,
-          mask: true
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '上传失败',
+              icon: 'none',
+              duration: 1000,
+              mask: true
+            })
+          },
         })
+
       })
   },
 
