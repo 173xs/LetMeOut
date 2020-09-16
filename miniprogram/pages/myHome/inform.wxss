@@ -31,3 +31,6 @@ page{background-color:#f8f3f3;}
 .billListBox{width:100%;height:80rpx;}
 .billListLabel{width:200rpx;float:left;text-align:right;height:100%;line-height:80rpx;font-size:32rpx;font-weight: bold;}
 .billListText{width:420rpx;float:right;height:100%;line-height:80rpx;font-size:28rpx}
+.emptyBox{width:100%}
+.emptyBox image{width:400rpx;height:250rpx;margin:100rpx auto;display:block}
+.emptyBox text{width:750rpx;line-height:100rpx;text-align:center;font-size:32rpx;color:#808080;display:block}

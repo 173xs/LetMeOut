@@ -45,7 +45,10 @@
     </view>
   </view>
 </view>
-
+<view wx:if="{{reslist.length>0==0}}" class="emptyBox">
+  <image src="/images/empty.png"></image>
+  <text>这里空空如也</text>
+</view>
 <cover-view class="coverBillBox" style="display:{{coverBoxDisplay}}" bindtap="hideBill">
   <cover-view class="coverGray"></cover-view>
   <cover-view class="showBillBox">
