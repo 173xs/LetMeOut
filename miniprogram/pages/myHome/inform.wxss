@@ -21,3 +21,13 @@ page{background-color:#f8f3f3;}
 .billListText{width:420rpx;float:right;height:100%;line-height:80rpx;font-size:28rpx}
 
 .billReason{width:500rpx;height:auto;line-height:50rpx;font-size:28rpx;margin:0 auto;text-indent: 2em;word-break: break-all;word-wrap: break-word;white-space: pre-line;}
+
+
+.coverBillBox{width:100%;height:100%;position:absolute;top:0;left:0}
+.coverGray{width:100%;height:100%;background-color: #808080;opacity: 0.5;position:absolute;top:0;left:0}
+.showBillBox{width:650rpx;margin:0 auto;background-color: white;opacity: 1.0;position:absolute;top:50rpx;left:50rpx;padding-bottom: 50rpx;word-break: keep-all;word-wrap: break-word;white-space: pre-line;}
+.BillTitle{width:200rpx;height:150rpx;line-height:150rpx;margin:0 auto;text-align:center}
+
+.billListBox{width:100%;height:80rpx;}
+.billListLabel{width:200rpx;float:left;text-align:right;height:100%;line-height:80rpx;font-size:32rpx;font-weight: bold;}
+.billListText{width:420rpx;float:right;height:100%;line-height:80rpx;font-size:28rpx}

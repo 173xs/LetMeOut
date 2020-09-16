@@ -148,8 +148,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //默认刷新未审核的
-    this.callGetLeave('2-a')
+    //默认刷新已通过的
+    this.callGetLeave('2-b')
 
     this.setData({
       sname: app.globalData.regInfo.sname
