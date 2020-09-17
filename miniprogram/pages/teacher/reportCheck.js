@@ -56,6 +56,11 @@ Page({
           'abnormal',
           e.target.dataset.id,
           new Date())
+          let newList = this.data.reportList
+          newList[e.currentTarget.dataset.idx].check = 1
+          this.setData({
+            reportList: newList
+          })
       })
   },
   /**

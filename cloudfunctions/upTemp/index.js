@@ -8,12 +8,13 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
 
+  temperature = parseFloat(event.temperature)
   return await db.collection('temperature')
   .add({
     data: [
       {
         sno: event.sno,
-        temperature: event.temperature,
+        temperature: temperature,
         date: event.date,
       }
     ]

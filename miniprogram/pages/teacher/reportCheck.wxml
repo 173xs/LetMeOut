@@ -2,7 +2,10 @@
 
 
 <view class="reportList" wx:for="{{reportList}}" wx:key="index">
+  
   <view class="userBox">
+    <text class="time" wx:if="{{item.check==1}}">已查阅</text>
+    <text class="time" wx:if="{{item.check==0}}">已查阅</text>
     <text class="user">{{item.sno}}-{{item.sname}}</text>
     <text class="time">{{item.subDate}}</text>
   </view>
