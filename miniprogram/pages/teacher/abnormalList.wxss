@@ -1,0 +1,8 @@
+/* miniprogram/pages/teacher/abnormalList.wxss */
+page{height: 100%;background-color:#f8f3f3;}
+.menuBox{width:100%;height:100rpx;margin:5rpx auto 0;background-color: white;}
+.pickerBox{width:250rpx;height:100rpx;margin:0 auto}
+.pickerBox view{width:200rpx;margin:0 auto;height:auto;line-height:100rpx;font-size:32rpx;text-decoration: underline;text-align:center}
+
+.abnormalList{width:670rpx;height:80rpx;margin:20rpx auto 0;padding:0 20rpx;border-radius: 20rpx;background-color: white;}
+.abnormalList text{line-height:80rpx;font-size:28rpx;float:left;}

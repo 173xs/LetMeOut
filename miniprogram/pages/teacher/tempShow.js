@@ -44,7 +44,7 @@ Page({
         //    定义圆心坐标
         var point = { x: 100, y: 100 };
         //    定义半径大小
-        var radius = 80;
+        var radius = 60;
         /*    循环遍历所有的pie */
         for( var i = 0;i < 2;i++ ) {
             context.beginPath();

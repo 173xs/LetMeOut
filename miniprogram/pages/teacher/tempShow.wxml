@@ -8,6 +8,16 @@
   <view class="canvasBox">
     <canvas canvas-id="mypie" style="width:200px;height:200px;"></canvas>
   </view>
+  <view class="picLabelBox">
+    <view class="picLabelList">
+      <view class="labelColor" style="background-color:#68ed50"></view>
+      <text class="labelText">正常</text>
+    </view>
+    <view class="picLabelList">
+      <view class="labelColor" style="background-color:#f6b943"></view>
+      <text class="labelText">异常</text>
+    </view>
+  </view>
 </view>
 <text class="label">{{queryDate}}体温上报概况</text>
 <view class="dataBox">
@@ -34,4 +44,4 @@
   </view>
 </view>
 
-<button class="hotDetail">查看体温异常人员名单</button>
+<navigator class="hotDetail" url="/pages/teacher/abnormalList">查看体温异常人员名单</navigator>
