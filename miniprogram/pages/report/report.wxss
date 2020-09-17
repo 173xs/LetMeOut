@@ -3,12 +3,13 @@ page{background-color:#f8f3f3;}
 .signBox{width:6rpx;height:30rpx;float:left;background-color: #66ffff;margin:35rpx 20rpx;}
 
 .reportTitleBox{width:710rpx;height:200rpx;margin:20rpx 20rpx 0;background:white;border-radius: 20rpx;}
-.reportTtile{width:200rpx;height:100rpx;font-size:28rpx;float:left;line-height:100rpx;}
+.reportTtile{width:100rpx;height:100rpx;font-size:28rpx;float:left;line-height:100rpx;}
+.errmsg{width:400rpx;height:100rpx;font-size:24rpx;float:left;line-height:100rpx;color:red}
 .titleText{width:670rpx;height:100rpx;margin:0 20rpx;clear:both;border-top:1px solid #f8f3f3;}
 .titleText input{width:710rpx;height:100rpx;line-height:100rpx;font-size:24rpx;color:#808080;}
 
 .reportDetailBox{width:710rpx;height:400rpx;margin:20rpx 20rpx 0;background:white;border-radius: 20rpx;}
-.detailTtile{width:200rpx;height:100rpx;font-size:28rpx;float:left;line-height:100rpx;}
+.detailTtile{width:100rpx;height:100rpx;font-size:28rpx;float:left;line-height:100rpx;}
 .detailText{width:670rpx;height:200rpx;margin:0 20rpx;clear:both;}
 .detailText textarea{width:670rpx;line-height:50rpx;font-size:24rpx;color:#808080;height:200rpx}
 .textCount{width:200rpx;height:100rpx;float:right;margin-right:20rpx;}

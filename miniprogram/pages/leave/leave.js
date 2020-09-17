@@ -11,6 +11,7 @@ Page({
     returnDate:'',
     endDate:'2021-09-01',
     reasonLength:0,
+    errmsg:""
   },
 
   // 离开日期变化时返回日期最小为离开日期
@@ -35,6 +36,18 @@ textCount:function(e){
     })
   }
 },
+textBlur:function(e){
+  var len=e.detail.value.length
+	if(len==0){
+    this.setData({
+      errmsg:"*啥都不写，感觉辅导员不会批准哦"
+    })
+  }else if(len<10){
+    this.setData({
+      errmsg:"*这么一丢丢，你再多写一点嘛"
+    })
+  }
+},
   /**
    * 生命周期函数--监听页面加载
    */
@@ -49,43 +62,56 @@ textCount:function(e){
     console.log(today)
   },
   submit: function(e) {
-    // console.log('form submit 事件',e.detail.value)
-    wx.showLoading({
-      title: '申请提交中...',
-      mask:true
-    })
-    var data = {
-      sno: app.globalData.regInfo.sno,
-      leaveClass: e.detail.value.leaveClass,
-      leaveDate: this.data.leaveDate,
-      returnDate: this.data.returnDate,
-      leaveReason: e.detail.value.leaveReason,
-      subDate: this.data.nowDate
+    var reasonLen=e.detail.value.leaveReason.length
+    if(reasonLen>10){
+      // console.log('form submit 事件',e.detail.value)
+      wx.showLoading({
+        title: '申请提交中...',
+        mask:true
+      })
+      var data = {
+        sno: app.globalData.regInfo.sno,
+        leaveClass: e.detail.value.leaveClass,
+        leaveDate: this.data.leaveDate,
+        returnDate: this.data.returnDate,
+        leaveReason: e.detail.value.leaveReason,
+        subDate: this.data.nowDate
+      }
+      console.log('data = ',data)
+      wx.cloud.callFunction({
+        name:"upleave",
+        data:data
+      })
+      .then(res=>{
+        // console.log(res)
+        wx.hideLoading()
+        wx.showToast({
+          title: '提交成功',
+          icon:'success',
+          duration:800,
+          mask:true
+        })
+      })
+      .catch(err=>{
+        wx.showToast({
+          title: '提交失败',
+          icon:'none',
+          duration:800,
+          mask:true
+        })
+        console.log(err)
+      })
+    }else{
+      if(len==0){
+        this.setData({
+          errmsg:"*啥都不写，感觉辅导员不会批准哦"
+        })
+      }else if(len<10){
+        this.setData({
+          errmsg:"*这么一丢丢，你再多写一点嘛"
+        })
+      }
     }
-    console.log('data = ',data)
-    wx.cloud.callFunction({
-      name:"upleave",
-      data:data
-    })
-    .then(res=>{
-      // console.log(res)
-      wx.hideLoading()
-      wx.showToast({
-        title: '提交成功',
-        icon:'success',
-        duration:800,
-        mask:true
-      })
-    })
-    .catch(err=>{
-      wx.showToast({
-        title: '提交失败',
-        icon:'none',
-        duration:800,
-        mask:true
-      })
-      console.log(err)
-    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

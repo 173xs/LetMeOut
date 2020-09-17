@@ -8,50 +8,81 @@ Page({
    */
   data: {
     reasonLength: 0,
+    errmsg1:"",
+    errmsg2:""
   },
-
+  inputBlur:function(e){
+    var len=e.detail.value.length
+    if(len==0){
+      this.setData({
+        errmsg1:"*来都来了，啥都不写吗"
+      })
+    }
+  },
+  textBlur:function(e){
+    var len=e.detail.value.length
+    if(len==0){
+      this.setData({
+        errmsg2:"*来都来了，啥都不写吗"
+      })
+    }else if(len<10){
+      this.setData({
+        errmsg2:"*这么一丢丢，你再多写一点嘛"
+      })
+    }
+  },
   submit(e) {
-    console.log(e.detail.value)
-    wx.showLoading({
-      title: '提交中',
-      mask: true,
-    })
-    wx.cloud.callFunction({
-        name: 'report',
-        data: {
-          sno: app.globalData.regInfo.sno,
-          title: e.detail.value.title,
-          detail: e.detail.value.detail,
-          subDate: util.formatDay(new Date())
-        }
+    var titleLen=e.detail.value.title.length
+    var qosLen=e.detail.value.detail.length
+    if(titleLen>0 & qosLen>10){
+      console.log(e.detail.value)
+      wx.showLoading({
+        title: '提交中',
+        mask: true,
       })
-      .then(res => {
-        // if (res.result)
-        wx.hideLoading({
-          success: (res) => {
-            console.log('提交成功')
-            wx.showToast({
-              title: '提交成功',
-              icon: 'success',
-              mask: true
-            })
-          },
+      wx.cloud.callFunction({
+          name: 'report',
+          data: {
+            sno: app.globalData.regInfo.sno,
+            title: e.detail.value.title,
+            detail: e.detail.value.detail,
+            subDate: util.formatDay(new Date())
+          }
         })
-
-      })
-      .catch(err => {
-        // console.error(err)
-        wx.hideLoading({
-          success: (res) => {
-            wx.showToast({
-              title: '提交失败',
-              icon: 'none',
-              mask: true
-            })
-          },
+        .then(res => {
+          // if (res.result)
+          wx.hideLoading({
+            success: (res) => {
+              console.log('提交成功')
+              wx.showToast({
+                title: '提交成功',
+                icon: 'success',
+                mask: true
+              })
+            },
+          })
+  
         })
-
+        .catch(err => {
+          // console.error(err)
+          wx.hideLoading({
+            success: (res) => {
+              wx.showToast({
+                title: '提交失败',
+                icon: 'none',
+                mask: true
+              })
+            },
+          })
+  
+        })
+    }else{
+      this.setData({
+        errmsg1:"*来都来了，啥都不写吗",
+        errmsg2:"*来都来了，啥都不写吗"
       })
+    }
+    
   },
   textCount: function (e) {
     var len = e.detail.value.length

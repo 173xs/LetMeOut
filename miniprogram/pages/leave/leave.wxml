@@ -27,8 +27,8 @@
   </view>
   <view class="reasonBox">
     <view class="signBox"></view>
-    <view class="reasonTtile">请假理由</view>
-    <view  class="reasonText"><textarea placeholder="请输入(150字以内)" name="leaveReason" maxlength="150" bindinput="textCount" show-confirm-bar="false"></textarea></view>
+    <view class="reasonTtile">请假理由</view><view class="errmsg">{{errmsg}}</view>
+    <view  class="reasonText"><textarea placeholder="请输入(150字以内)" name="leaveReason" maxlength="150" bindinput="textCount" bindblur="textBlur"></textarea></view>
     <view class="textCount"><text>/150</text><text style="color:#26d7d8">{{reasonLength}}</text></view>
   </view>
 
