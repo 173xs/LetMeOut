@@ -79,6 +79,15 @@ Page({
   //使用请假单
   useBill: function (e) {
     console.log('useBill = ', e)
+    let bill = this.data.curLeaveBill
+    if (bill.checkState == -1 && util.formatDay(new Date()) != bill.leaveDate){
+      wx.showToast({
+        title: '请假单不符合出校条件',
+        icon: 'none',
+        mask:true
+      })
+      return
+    }
     /*先判断是通过扫一扫跳转过来此处，还是直接点击过来
     如果是直接扫一扫过来的就可以从storge获取building
     */
@@ -112,18 +121,8 @@ Page({
       // Do something when catch error
     }
 
-    if (1 == e.currentTarget.dataset.checkstate) {
-      console.log('此请假单已经使用')
-      return
-    }
-    //获取请假单id
-    var curId = e.currentTarget.dataset.id
-    // console.log(curId)
-    //获取请假单的使用状态，判断是出校门还是返校
-    var checkState = e.currentTarget.dataset.checkstate
-    console.log('---', curId, checkState, building)
     //扫的是校门，调用出校门云函数
-    this.callLetMeOut(curId, checkState, building)
+    this.callLetMeOut(bill._id, bill.checkState, building)
   },
 
   callGetLeave: function (funcName) {
@@ -144,7 +143,26 @@ Page({
           this.setData({
             reslist: res.result.data
           })
-        } else {
+        } else if ('2-b' == funcName){
+          let noUse = []
+          let using = []
+          let used = []
+          for (var item of res.result.list) {
+            if (-1 == item.checkState){
+              noUse.unshift(item)
+            }else if (1 == item.checkState){
+              used.unshift(item)
+            }else {
+              using.unshift(item)
+            }
+          }
+          using.push.apply(using,noUse)
+          using.push.apply(using,used)
+          console.log(using,noUse,used)
+          this.setData({
+            reslist: using
+          })
+        } else if ('2-c' == funcName){
           this.setData({
             reslist: res.result.list
           })

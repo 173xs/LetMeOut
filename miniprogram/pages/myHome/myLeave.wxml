@@ -11,9 +11,9 @@
     <view class="yesTime">{{item.leaveDate}} 到 {{item.returnDate}}</view>
   </view>
   <view class="yesBillBox">
-    <image wx:if="{{item.checkState==-1}}" src="/images/leaveGreen.png" data-curid="{{item._id}}" bindtap="showBill"></image>
-    <image wx:if="{{item.checkState==1}}" src="/images/leave.png" data-curid="{{item._id}}" bindtap="showBill"></image>
-    <image wx:if="{{item.checkState==0}}" src="/images/leavePink.png" data-curid="{{item._id}}" bindtap="showBill"></image>
+    <image wx:if="{{item.checkState==-1}}" src="/images/leaveGreen.png" bindtap="showBill" data-curId="{{item._id}}"></image>
+    <image wx:if="{{item.checkState==1}}" src="/images/leave.png" bindtap="showBill" data-curId="{{item._id}}"></image>
+    <image wx:if="{{item.checkState==0}}" src="/images/leavePink.png" bindtap="showBill" data-curId="{{item._id}}"></image>
   </view>
 </view>
 
@@ -71,7 +71,7 @@
       <cover-view class="billListText" wx:if="{{curLeaveBill.checkState==0}}">使用中</cover-view>
       <cover-view class="billListText" wx:if="{{curLeaveBill.checkState==-1}}">未使用</cover-view>
     </cover-view>
-    <cover-view class="billUseBtn"  bindtap="useBill" data-id="{{curLeaveBill._id}}" data-checkState="{{curLeaveBill.checkState}}">使用</cover-view>
+    <cover-view class="billUseBtn"  bindtap="useBill"wx:if="{{curLeaveBill.checkState!=1}}">使用</cover-view>
     <cover-view class="billUseBtn"  bindtap="hideBill">返回</cover-view>
   </cover-view>
 </cover-view>
