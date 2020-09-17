@@ -12,7 +12,8 @@
   </view>
   <view class="yesBillBox">
     <image wx:if="{{item.checkState==-1}}" src="/images/leaveGreen.png" data-curid="{{item._id}}" bindtap="showBill"></image>
-    <image wx:if="{{item.checkState!=-1}}" src="/images/leave.png" data-curid="{{item._id}}" bindtap="showBill"></image>
+    <image wx:if="{{item.checkState==1}}" src="/images/leave.png" data-curid="{{item._id}}" bindtap="showBill"></image>
+    <image wx:if="{{item.checkState==0}}" src="/images/leavePink.png" data-curid="{{item._id}}" bindtap="showBill"></image>
   </view>
 </view>
 

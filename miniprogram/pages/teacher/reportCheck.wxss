@@ -12,7 +12,8 @@ page{background-color:#f8f3f3;}
 .detail{line-height:50rpx;font-size:26rpx;text-indent: 2em;}
 
 .buttonList{width:600rpx;height:60rpx;margin:20rpx auto 0;padding-top:20rpx;border-top:1px solid #f8f3f3;}
-.buttonList button{width:200rpx;height:60rpx;color:white;line-height:60rpx;font-size:28rpx;margin:0 auto;background-color: rgb(88, 187, 88);}
+.okBtn{width:200rpx;height:60rpx;color:white;line-height:60rpx;font-size:28rpx;margin:0 auto;background-color: rgb(88, 187, 88);}
+.okBtned{width:200rpx;height:60rpx;color:rgb(218, 214, 214);line-height:60rpx;font-size:28rpx;margin:0 auto;background-color: rgb(128, 153, 128);}
 
 .emptyBox{width:100%}
 .emptyBox image{width:400rpx;height:250rpx;margin:100rpx auto;display:block}

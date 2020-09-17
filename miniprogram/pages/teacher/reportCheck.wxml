@@ -14,7 +14,8 @@
     <view class="detail">{{item.detail}}</view>
   </view>
   <view class="buttonList">
-    <button class='okBtn' bindtap="okBtn" data-id="{{item._id}}" data-idx="{{index}}" data-sno="{{item.sno}}">已查阅</button>
+    <button wx:if="{{item.check!=1}}" class='okBtn' bindtap="okBtn" data-id="{{item._id}}" data-idx="{{index}}" data-sno="{{item.sno}}">查阅</button>
+    <button wx:if="{{item.check==1}}" class='okBtned' >已查阅</button>
   </view>
 </view>
 
