@@ -91,39 +91,6 @@ async function getLeave2_b(event, context) {
   ]))
 
   return await getLeave(expr)
-  // return await db.collection('leave')
-  // .aggregate()
-  // .lookup(
-  //   {
-  //     from: 'teaInfo',
-  //     let: {
-  //       leave_ano: '$ano',
-  //     },
-  //     pipeline: $.pipeline()
-  //       .match(_.expr($.and([
-  //         $.eq(['$tno', '$$leave_ano']),
-  //       ])))
-  //       .project({
-  //         _id: 0,
-  //         _openid: 0,
-  //         tno: 0,
-  //         tacademy:0,
-  //       })
-  //       .done(),
-  //     as: 'teaInfo',
-  //   }
-  // )
-  // .replaceRoot({
-  //   newRoot: $.mergeObjects([$.arrayElemAt(['$teaInfo', 0]), '$$ROOT'])
-  // })
-  // .project({
-  //   teaInfo: 0
-  // })
-  // .match(_.expr($.and([
-  //   $.eq([event.sno, '$sno']),
-  //   $.eq([1, '$approveState']),
-  // ])))
-  // .end()
 }
 
 //查询某个学生已经驳回的请假申请
@@ -133,36 +100,6 @@ async function getLeave2_c(event, context) {
     $.eq([-1, '$approveState']), //已驳回的请假单
   ]))
   return await getLeave(expr)
-  // return await db.collection('leave')
-  // .aggregate()
-  // .lookup(
-  //   {
-  //     from: 'teaInfo',
-  //     let: {
-  //       leave_ano: '$ano',
-  //     },
-  //     pipeline: $.pipeline()
-  //       .match(_.expr($.and([
-  //         $.eq(['$tno', '$$leave_ano']),
-  //       ])))
-  //       .project({
-  //         _id: 0,
-  //         _openid: 0,
-  //         tno: 0,
-  //         tacademy:0,
-  //       })
-  //       .done(),
-  //     as: 'teaInfo',
-  //   }
-  // )
-  // .replaceRoot({
-  //   newRoot: $.mergeObjects([$.arrayElemAt(['$teaInfo', 0]), '$$ROOT'])
-  // })
-  // .project({
-  //   teaInfo: 0
-  // })
-  // .match()
-  // .end()
 }
 
 //查询某个学生已经审核通过，还未使用的请假单
@@ -175,36 +112,6 @@ async function getLeave2_d(event, context) {
     //$.eq([event.curDate, '$leaveDate'])//时间也要是当天的
   ]))
   return await getLeave(expr)
-  // return await db.collection('leave')
-  // .aggregate()
-  // .lookup(
-  //   {
-  //     from: 'teaInfo',
-  //     let: {
-  //       leave_ano: '$ano',
-  //     },
-  //     pipeline: $.pipeline()
-  //       .match(_.expr($.and([
-  //         $.eq(['$tno', '$$leave_ano']),
-  //       ])))
-  //       .project({
-  //         _id: 0,
-  //         _openid: 0,
-  //         tno: 0,
-  //         tacademy:0,
-  //       })
-  //       .done(),
-  //     as: 'teaInfo',
-  //   }
-  // )
-  // .replaceRoot({
-  //   newRoot: $.mergeObjects([$.arrayElemAt(['$teaInfo', 0]), '$$ROOT'])
-  // })
-  // .project({
-  //   teaInfo: 0
-  // })
-  // .match()
-  // .end()
 }
 
 //通过不同条件来查询某个学生请假单
