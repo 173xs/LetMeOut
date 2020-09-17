@@ -8,7 +8,6 @@ Page({
    */
   data: {
     leaveList: [],
-    approvedList: [],
     limit: 4,
     skip: 0
   },
@@ -29,6 +28,13 @@ Page({
       })
       .then(res => {
         console.log('完成审批')
+        //更新一下前端界面的上的请假单表
+        let newList = this.data.leaveList
+        newList[leave.idx].approveState = approveState
+        newList[leave.idx].approved = 1
+        this.setData({
+          leaveList: newList
+        })
         this.data.skip -= 1
         this.callUpMsg(leave.sno,
           'leave',

@@ -56,6 +56,7 @@ Page({
           'abnormal',
           e.target.dataset.id,
           new Date())
+          //更新前端列表
           let newList = this.data.reportList
           newList[e.currentTarget.dataset.idx].check = 1
           this.setData({
