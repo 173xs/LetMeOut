@@ -132,55 +132,58 @@ Page({
   },
   //体温框的上传
   upTempBtn: function () {
-    console.log(this.data.upTemp)
-    if (this.data.upTemp == 0) {
-      wx.showToast({
-        title: '输入有误',
-        icon: 'none',
-        duration: 1000,
+    var t=this.data.upTemp
+    if (t >= 35 & t <= 45) {
+      console.log(this.data.upTemp)
+      if (this.data.upTemp == 0) {
+        wx.showToast({
+          title: '输入有误',
+          icon: 'none',
+          duration: 1000,
+          mask: true
+        })
+      }
+      var d = new Date()
+      wx.showLoading({
+        title: '体温提交中',
         mask: true
       })
-    }
-    var d = new Date()
-    wx.showLoading({
-      title: '体温提交中',
-      mask: true
-    })
-    wx.cloud.callFunction({
-        name: 'upTemp',
-        data: {
-          sno: app.globalData.regInfo.sno,
-          temperature: this.data.upTemp,
-          date: util.formatDay(d),
-        }
-      })
-      .then(res => {
-        console.log('上传成功')
-        wx.hideLoading({
-          success: (res) => {
-            wx.showToast({
-              title: '上传成功',
-              icon: 'success',
-              duration: 1000,
-              mask: true
-            })
-          },
+      wx.cloud.callFunction({
+          name: 'upTemp',
+          data: {
+            sno: app.globalData.regInfo.sno,
+            temperature: this.data.upTemp,
+            date: util.formatDay(d),
+          }
         })
-      })
-      .catch(err => {
-        console.log('上传失败')
-        wx.hideLoading({
-          success: (res) => {
-            wx.showToast({
-              title: '上传失败',
-              icon: 'none',
-              duration: 1000,
-              mask: true
-            })
-          },
+        .then(res => {
+          console.log('上传成功')
+          wx.hideLoading({
+            success: (res) => {
+              wx.showToast({
+                title: '上传成功',
+                icon: 'success',
+                duration: 1000,
+                mask: true
+              })
+            },
+          })
         })
+        .catch(err => {
+          console.log('上传失败')
+          wx.hideLoading({
+            success: (res) => {
+              wx.showToast({
+                title: '上传失败',
+                icon: 'none',
+                duration: 1000,
+                mask: true
+              })
+            },
+          })
 
-      })
+        })
+      }
   },
 
   /**
