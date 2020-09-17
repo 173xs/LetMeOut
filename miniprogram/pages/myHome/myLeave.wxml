@@ -11,9 +11,9 @@
     <view class="yesTime">{{item.leaveDate}} 到 {{item.returnDate}}</view>
   </view>
   <view class="yesBillBox">
-    <image wx:if="{{item.checkState==-1}}" src="/images/leaveGreen.png" bindtap="showBill" data-curId="{{item._id}}"></image>
-    <image wx:if="{{item.checkState==1}}" src="/images/leave.png" bindtap="showBill" data-curId="{{item._id}}"></image>
-    <image wx:if="{{item.checkState==0}}" src="/images/leavePink.png" bindtap="showBill" data-curId="{{item._id}}"></image>
+    <image wx:if="{{item.checkState==-1}}" src="/images/leaveGreen.png" bindtap="showBill" data-curId="{{item._id}}" data-curIdx="{{index}}"></image>
+    <image wx:if="{{item.checkState==1}}" src="/images/leave.png" bindtap="showBill" data-curId="{{item._id}}" data-curIdx="{{index}}"></image>
+    <image wx:if="{{item.checkState==0}}" src="/images/leavePink.png" bindtap="showBill" data-curId="{{item._id}}" data-curIdx="{{index}}"></image>
   </view>
 </view>
 

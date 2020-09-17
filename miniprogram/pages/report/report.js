@@ -56,8 +56,14 @@ Page({
               console.log('提交成功')
               wx.showToast({
                 title: '提交成功',
-                icon: 'success',
-                mask: true
+                icon:'success',
+                duration:2000,
+                mask:true,
+                success: (res)=>{
+                  wx.navigateBack({
+                    delta: 1,
+                  })
+                }
               })
             },
           })

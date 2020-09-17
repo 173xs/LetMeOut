@@ -88,27 +88,36 @@ textBlur:function(e){
         wx.showToast({
           title: '提交成功',
           icon:'success',
-          duration:800,
-          mask:true
+          duration:2000,
+          mask:true,
+          success: (res)=>{
+            wx.navigateBack({
+              delta: 1,
+            })
+          }
         })
       })
       .catch(err=>{
         wx.showToast({
           title: '提交失败',
           icon:'none',
-          duration:800,
+          duration:2000,
           mask:true
         })
         console.log(err)
       })
     }else{
-      if(len==0){
+      if(reasonLen==0){
         this.setData({
           errmsg:"*啥都不写，感觉辅导员不会批准哦"
         })
-      }else if(len<10){
+      }else if(reasonLen<10){
         this.setData({
           errmsg:"*这么一丢丢，你再多写一点嘛"
+        })
+      }else {
+        this.setData({
+          errmsg:""
         })
       }
     }

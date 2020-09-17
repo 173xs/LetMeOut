@@ -39,13 +39,7 @@ Page({
       .then(res => {
         //console.log(res)
         wx.hideLoading({
-          success: (res) => {
-            wx.showToast({
-              title: '提交成功',
-              icon: 'success',
-              duration: 1500
-            })
-          },
+          success: (res) => {},
         })
       })
       .catch(err => {
@@ -74,17 +68,29 @@ Page({
           console.error(e)
           // Do something when catch error
         }
+        //更新列表
+        let newList = this.data.reslist
+        newList[this.data.curIdx].checkState += 1
+        this.setData({
+          reslist: newList,
+          coverBoxDisplay: "none"
+        })
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 2000
+        })
       })
   },
   //使用请假单
   useBill: function (e) {
     console.log('useBill = ', e)
     let bill = this.data.curLeaveBill
-    if (bill.checkState == -1 && util.formatDay(new Date()) != bill.leaveDate){
+    if (bill.checkState == -1 && util.formatDay(new Date()) != bill.leaveDate) {
       wx.showToast({
         title: '请假单不符合出校条件',
         icon: 'none',
-        mask:true
+        mask: true
       })
       return
     }
@@ -143,26 +149,26 @@ Page({
           this.setData({
             reslist: res.result.data
           })
-        } else if ('2-b' == funcName){
+        } else if ('2-b' == funcName) {
           let noUse = []
           let using = []
           let used = []
           for (var item of res.result.list) {
-            if (-1 == item.checkState){
+            if (-1 == item.checkState) {
               noUse.unshift(item)
-            }else if (1 == item.checkState){
+            } else if (1 == item.checkState) {
               used.unshift(item)
-            }else {
+            } else {
               using.unshift(item)
             }
           }
-          using.push.apply(using,noUse)
-          using.push.apply(using,used)
-          console.log(using,noUse,used)
+          using.push.apply(using, noUse)
+          using.push.apply(using, used)
+          console.log(using, noUse, used)
           this.setData({
             reslist: using
           })
-        } else if ('2-c' == funcName){
+        } else if ('2-c' == funcName) {
           this.setData({
             reslist: res.result.list
           })
@@ -238,7 +244,8 @@ Page({
     //console.log(bill)
     this.setData({
       coverBoxDisplay: "block",
-      curLeaveBill: bill
+      curLeaveBill: bill,
+      curIdx: e.currentTarget.dataset.curidx
     })
   },
   hideBill: function () {
