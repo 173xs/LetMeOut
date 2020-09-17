@@ -1,0 +1,16 @@
+<!--miniprogram/pages/teacher/abnormalList.wxml-->
+<view  class="menuBox">
+    <picker mode="date" value="{{queryDate}}" start="2020-09-01" end="{{nowDate}}" bindchange="bindDateChange"  class="pickerBox">
+      <view  class="leaveTime">{{queryDate}}</view>
+    </picker>
+</view>
+<view class="abnormalList">
+  <text style="font-size:32rpx">E19301219 示例</text>
+  <text style="margin-left:50rpx;color:#808080">李园宿舍楼</text>
+  <text style="float:right;color:#f6b943;font-weight:bold">37.9 ℃</text>
+</view>
+<view class="abnormalList" wx:for="{{reslist}}" wx:key="index">
+  <text style="font-size:32rpx">{{item.sno}}  {{item.sname}}</text>
+  <text style="margin-left:50rpx;color:#808080">{{item.dorm}}宿舍楼</text>
+  <text style="float:right;color:#f6b943;font-weight:bold">{{item.temp}} ℃</text>
+</view>

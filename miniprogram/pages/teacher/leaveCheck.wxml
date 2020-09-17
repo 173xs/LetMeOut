@@ -2,6 +2,8 @@
 
 <view class="noCheckList" wx:for="{{leaveList}}" wx:key="index">
   <view class="userBox">
+  <view style="width:1rpx;height:1rpx" wx:if="{{item.approveState==1}}"><image src="/images/pass.png" class="seal"></image></view>
+  <view style="width:1rpx;height:1rpx" wx:if="{{item.approveState==-1}}"><image src="/images/fail.png" class="seal"></image></view>
     <text class="user">{{item.sno}}{{item.sname}}</text>
     <text class="academy">{{item.sacademy}}</text>
   </view>
@@ -13,8 +15,10 @@
     <view class="noDetail">{{item.leaveReason}}</view>
   </view>
   <view class="buttonList">
-    <button class='backBtn' bindtap="backBtn" data-id="{{item._id}}" data-idx="{{index}}" data-sno="{{item.sno}}">驳回</button>
-    <button class='okBtn' bindtap="okBtn" data-id="{{item._id}}" data-idx="{{index}}"data-sno="{{item.sno}}">通过</button>
+    <button class='backBtn' bindtap="backBtn" data-id="{{item._id}}" data-idx="{{index}}" data-sno="{{item.sno}}" wx:if="{{item.approveState==0}}">驳回</button>
+    <button class='backBtn' wx:if="{{item.approveState==1}}">驳回</button>
+    <button class='okBtn' bindtap="okBtn" data-id="{{item._id}}" data-idx="{{index}}"data-sno="{{item.sno}}" wx:if="{{item.approveState==0}}">通过</button>
+    <button class='okBtn' wx:if="{{item.approveState==-1}}">通过</button>
   </view>
 </view>
 

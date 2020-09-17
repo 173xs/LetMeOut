@@ -20,3 +20,5 @@ page{background-color:#f8f3f3;}
 .emptyBox{width:100%}
 .emptyBox image{width:400rpx;height:250rpx;margin:100rpx auto;display:block}
 .emptyBox text{width:750rpx;line-height:100rpx;text-align:center;font-size:32rpx;color:#808080;display:block}
+
+.seal{position:relative;top:10rpx;left:180rpx;width:300rpx;height:300rpx;}

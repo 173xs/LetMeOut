@@ -17,7 +17,7 @@
   </view>
   <view class="functionList">
     <navigator hover-class="noshadow" url="/pages/myHome/myLeave">
-      <image src="/images/leave2.png"></image>
+      <image src="/images/leave.png"></image>
       <text>我的请假</text>
     </navigator>
     <navigator hover-class="noshadow" url="/pages/travelRecords/travelRecords">

@@ -15,7 +15,8 @@
     "pages/teacher/leaveCheck",
     "pages/teacher/tempShow",
     "pages/teacher/leaveShow",
-    "pages/teacher/reportCheck"
+    "pages/teacher/reportCheck",
+    "pages/teacher/abnormalList"
   ],
   "window": {
     "backgroundTextStyle": "light",
