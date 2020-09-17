@@ -25,6 +25,7 @@ Page({
     wx.cloud.callFunction({
         name: 'getTemp',
         data: {
+          funcName: 1,
           date: queryDate,
           academy: app.globalData.regInfo.tacademy
         }
