@@ -6,7 +6,7 @@
     <view class="informLabel" wx:if="{{item.detail.approveState==-1}}">很遗憾，你提交的请假单管理员没有审核通过，你可以完善请假理由重新申请或者联系管理员。</view>
     <view class="informLabel" wx:if="{{item.detail.approveState==1}}">你提交的请假请求已经审核通过，请前往"我的请假"里面查看请假单，出示请假单即可出校。</view>
     <view class="informUrlBox">
-      <image src="/images/leave2.png" class="informUrlImage" data-curidx="{{index}}"
+      <image src="/images/leave.png" class="informUrlImage" data-curidx="{{index}}"
         bindtap="showBill"></image>
       <view class="informUrlDetail">
         <view class="informUrlTitle">{{item.detail.leaveClass}}</view>
@@ -28,7 +28,7 @@
     <text class="informTitle">异常上报</text>
     <view class="informLabel">你上报的异常审批人已经查阅，我们会妥善进行相关处理，感谢你的上报。</view>
     <view class="informUrlBox">
-      <image src="/images/report1.png" class="informUrlImage"></image>
+      <image src="/images/report.png" class="informUrlImage"></image>
       <view class="informUrlDetail">
         <view class="informUrlTitle">{{item.detail.title}}</view>
         <view class="informUrlContent">
