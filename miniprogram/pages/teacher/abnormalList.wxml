@@ -9,3 +9,7 @@
   <text style="margin-left:50rpx;color:#808080">{{item.sdorm}}宿舍楼</text>
   <text style="float:right;color:#f6b943;font-weight:bold">{{item.temperature}} ℃</text>
 </view>
+<view wx:if="{{reslist.length>0==0}}" class="emptyBox">
+  <image src="/images/empty.png"></image>
+  <text>这里空空如也</text>
+</view>

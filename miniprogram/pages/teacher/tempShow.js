@@ -59,27 +59,13 @@ Page({
           },
         })
       })
+      var that=this
+      var t=setTimeout(function(){
+        that.drawPic()
+      },1500)
   },
-  onLoad: function (options) {
-    var now = util.formatDay(new Date())
-    this.setData({
-      nowDate: now,
-      queryDate: now
-    })
-    this.callGetTemp(this.data.queryDate)
-  },
-  bindDateChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      queryDate: e.detail.value,
-    })
-    //这里获取日期对应的出行记录 eg: queryDate:2020-09-10
-    this.callGetTemp(this.data.queryDate)
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () { //画饼图
+  drawPic:function(){
+ //画饼图
     // 页面渲染完成
     //使用wx.createContext获取绘图上下文context
     var context = wx.createContext();
@@ -120,6 +106,28 @@ Page({
       canvasId: 'mypie',
       actions: context.getActions()
     });
+  },
+  onLoad: function (options) {
+   
+  },
+  bindDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      queryDate: e.detail.value,
+    })
+    //这里获取日期对应的出行记录 eg: queryDate:2020-09-10
+    this.callGetTemp(this.data.queryDate)
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    var now = util.formatDay(new Date())
+    this.setData({
+      nowDate: now,
+      queryDate: now
+    })
+    this.callGetTemp(this.data.queryDate)
   },
 
   /**

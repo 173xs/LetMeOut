@@ -6,3 +6,7 @@ page{height: 100%;background-color:#f8f3f3;}
 
 .abnormalList{width:670rpx;height:80rpx;margin:20rpx auto 0;padding:0 20rpx;border-radius: 20rpx;background-color: white;}
 .abnormalList text{line-height:80rpx;font-size:28rpx;float:left;}
+
+.emptyBox{width:100%}
+.emptyBox image{width:400rpx;height:250rpx;margin:100rpx auto;display:block}
+.emptyBox text{width:750rpx;line-height:100rpx;text-align:center;font-size:32rpx;color:#808080;display:block}
