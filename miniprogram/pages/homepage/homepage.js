@@ -159,11 +159,17 @@ Page({
           }
         })
         .then(res => {
-          console.log('上传成功')
+          console.log('res = ',res)
+          let title = ""
+          if ('collection.add:ok' == res.result.errMsg){
+            title = '上报成功'
+          }else if ('collection.update:ok'){
+            title = '更新成功'
+          }
           wx.hideLoading({
             success: (res) => {
               wx.showToast({
-                title: '上传成功',
+                title: title,
                 icon: 'success',
                 duration: 1000,
                 mask: true
@@ -172,7 +178,7 @@ Page({
           })
         })
         .catch(err => {
-          console.log('上传失败')
+          console.log(err)
           wx.hideLoading({
             success: (res) => {
               wx.showToast({
