@@ -34,13 +34,16 @@ exports.main = async (event, context) => {
     .replaceRoot({
       newRoot: $.mergeObjects([$.arrayElemAt(['$buildInfo', 0]), '$$ROOT'])
     })
-    .project({
-      buildInfo: 0
-    })
     .match(_.expr($.and([
       $.eq([event.sno, '$sno']),
       $.eq([event.date, '$date'])
     ])))
+    .project({
+      buildInfo: 0,
+      _id: 0,
+      sno: 0,
+      bnum: 0,
+    })
     .end()
 
 }

@@ -57,13 +57,14 @@ Page({
 
     // console.log(obj)
     let d = new Date()
-    console.log(util.formatTime(d))
+    let time = util.formatTime(d).split(' ')
+    console.log(time)
     wx.cloud.callFunction({
         name: 'upTravel',
         data: {
           sno: app.globalData.regInfo.sno,
-          date: util.formatDay(d),
-          time: util.formatTime(d),
+          date: time[0],
+          time: time[1],
           bnum: building.num
         }
       })
