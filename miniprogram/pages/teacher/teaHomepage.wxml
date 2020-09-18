@@ -4,7 +4,7 @@
   <view class="bannerBox"><image src="/images/banner.png"></image></view>
   <view class="menuBox">
     <navigator class="iconBox" url="/pages/teacher/leaveCheck" hover-class="noshadow">
-      <cover-image src="/images/leaveCheck.png"></cover-image>
+      <cover-image src="/images/leavecheck.png"></cover-image>
       <text>请假审核</text>
     </navigator>
     <view class="gapBoxColumn"></view>
