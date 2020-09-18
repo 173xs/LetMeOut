@@ -83,7 +83,7 @@ async function getTempCount(event, context) {
     .match(_.expr($.and([
       $.eq([event.date, '$date']),
       $.eq([event.academy, '$sacademy']),
-      $.gte([37.3,'$temperature'])
+      $.gte(['$temperature',37.3])
     ])))
     .project({
       stuInfo: 0,
@@ -134,7 +134,7 @@ async function getAbnormalList(event,context){
   .match(_.expr($.and([
     $.eq([event.date, '$date']),
     $.eq([event.academy, '$sacademy']),
-    $.gte([37.3,'$temperature' ])
+    $.gte(['$temperature',37.3])
   ])))
   .project({
     stuInfo: 0,
