@@ -50,9 +50,21 @@ Page({
       })
       .catch(err => {
         console.error(err)
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '提交失败',
+              icon:'none',
+            })
+          },
+        })
       })
   },
+  //封装调用使用请假单出校或者返校的云函数
   callLetMeOut(curId, checkState, building) {
+    wx.showLoading({
+      title: '请求提交中',
+    })
     wx.cloud.callFunction({
         name: 'letMeOut',
         data: {
@@ -67,6 +79,7 @@ Page({
         } else {
           console.log('返校：更新成功')
         }
+
         //清理掉building
         try {
           wx.removeStorageSync('building')
@@ -74,11 +87,53 @@ Page({
           console.error(e)
           // Do something when catch error
         }
+
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '提交成功',
+              icon: 'success',
+              duration: 2000,
+              mask: true,
+              success: (res) => {
+                setTimeout(() => {
+                  //更新列表
+                  let newList = this.data.reslist
+                  newList[this.data.curIdx].checkState += 1
+                  this.setData({
+                    reslist: newList,
+                    coverBoxDisplay: "none"
+                  })
+                }, 1500);
+              }
+            })
+          },
+        })
+      })
+      .catch(err=>{
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '提交失败',
+              icon: 'none',
+              mask: true
+            })
+          },
+        })
       })
   },
   //使用请假单
   useBill: function (e) {
     console.log('useBill = ', e)
+    let bill = this.data.curLeaveBill
+    if (bill.checkState == -1 && util.formatDay(new Date()) != bill.leaveDate) {
+      wx.showToast({
+        title: '请假单不符合出校条件',
+        icon: 'none',
+        mask: true
+      })
+      return
+    }
     /*先判断是通过扫一扫跳转过来此处，还是直接点击过来
     如果是直接扫一扫过来的就可以从storge获取building
     */
@@ -103,6 +158,7 @@ Page({
           },
           fail: (res) => {
             console.error(res)
+            return
           },
           complete: (res) => {},
         })
@@ -112,18 +168,10 @@ Page({
       // Do something when catch error
     }
 
-    if (1 == e.currentTarget.dataset.checkstate) {
-      console.log('此请假单已经使用')
-      return
-    }
-    //获取请假单id
-    var curId = e.currentTarget.dataset.id
-    // console.log(curId)
-    //获取请假单的使用状态，判断是出校门还是返校
-    var checkState = e.currentTarget.dataset.checkstate
-    console.log('---', curId, checkState, building)
     //扫的是校门，调用出校门云函数
-    this.callLetMeOut(curId, checkState, building)
+    setTimeout(() => {
+      this.callLetMeOut(bill._id, bill.checkState, building)
+    }, 1500);
   },
 
   callGetLeave: function (funcName) {
@@ -141,12 +189,35 @@ Page({
       .then(res => {
         console.log('请假单', res)
         if (funcName == '2-a') {
+          let list = res.result.data
+          list.reverse()
           this.setData({
-            reslist: res.result.data
+            reslist: list
           })
-        } else {
+        } else if ('2-b' == funcName) {
+          let noUse = []
+          let using = []
+          let used = []
+          for (var item of res.result.list) {
+            if (-1 == item.checkState) {
+              noUse.unshift(item)
+            } else if (1 == item.checkState) {
+              used.unshift(item)
+            } else {
+              using.unshift(item)
+            }
+          }
+          using.push.apply(using, noUse)
+          using.push.apply(using, used)
+          console.log(using, noUse, used)
           this.setData({
-            reslist: res.result.list
+            reslist: using
+          })
+        } else if ('2-c' == funcName) {
+          let list = res.result.list
+          list.reverse()
+          this.setData({
+            reslist: list
           })
         }
         wx.hideLoading({
@@ -161,10 +232,14 @@ Page({
         })
       })
       .catch(err => {
-        wx.showToast({
-          title: '加载失败',
-          icon: 'fail',
-          mask: true
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '加载失败',
+              icon: 'none',
+              mask: true
+            })
+          },
         })
       })
   },
@@ -220,7 +295,8 @@ Page({
     //console.log(bill)
     this.setData({
       coverBoxDisplay: "block",
-      curLeaveBill: bill
+      curLeaveBill: bill,
+      curIdx: e.currentTarget.dataset.curidx
     })
   },
   hideBill: function () {

@@ -8,9 +8,10 @@ Page({
    */
   data: {
     reportList: [],
-    limit:4,
+    limit:6,
     skip: 0,
   },
+  //提交发给学生的反馈消息
   callUpMsg(sno,type,id,d){
     wx.cloud.callFunction({
       name:'upMsg',
@@ -23,15 +24,7 @@ Page({
       }
     })
     .then(res=>{
-      wx.hideLoading({
-        success: (res) => {
-          //console.log('消息记录成功')
-          wx.showToast({
-            title: '提交成功',
-            duration: 800
-          })
-        },
-      })
+
     })
 
   },
@@ -51,6 +44,15 @@ Page({
       })
       .then(res => {
         console.log(res)
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '完成审批',
+              icon:'success',
+              duration: 500
+            })
+          },
+        })
         this.data.skip -= 1
         this.callUpMsg(e.target.dataset.sno,
           'abnormal',
@@ -63,11 +65,26 @@ Page({
             reportList: newList
           })
       })
+      .catch(err=>{
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '审批提交失败，请稍候重试',
+              icon: 'none',
+              duration: 1500,
+              mask: true
+            })
+          },
+        })
+      })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '数据加载中',
+    })
     wx.cloud.callFunction({
         name: 'getReport',
         data: {
@@ -78,9 +95,30 @@ Page({
       })
       .then(res => {
         console.log(res.result)
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '加载成功',
+              icon: 'success',
+              duration: 1000,
+            })
+          },
+        })
         this.setData({
           reportList: res.result.list,
           skip: res.result.list.length
+        })
+      })
+      .catch(err => {
+        console.log(err)
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '加载失败，请稍候重试',
+              icon: 'none',
+              duration: 1500,
+            })
+          },
         })
       })
   },
@@ -124,6 +162,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.cloud.callFunction({
         name: 'getReport',
         data: {
@@ -141,6 +182,18 @@ Page({
         })
         this.data.skip += res.result.list.length
         console.log('待查阅列表', this.data.reportList)
+      })
+      .catch(err => {
+        console.log(err)
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '加载失败，请稍候重试',
+              icon: 'none',
+              duration: 1500,
+            })
+          },
+        })
       })
   },
 

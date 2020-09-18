@@ -25,6 +25,7 @@ Page({
     wx.cloud.callFunction({
         name: 'getTemp',
         data: {
+          funcName: 1,
           date: queryDate,
           academy: app.globalData.regInfo.tacademy
         }
@@ -32,12 +33,30 @@ Page({
       .then(res => {
         console.log('res = ', res)
         wx.hideLoading({
-          success: (res) => {},
+          success: (res) => {
+            wx.showToast({
+              title: '加载成功',
+              icon: 'success',
+              duration: 1000,
+            })
+          },
         })
         this.setData({
           totalNum: res.result.total,
           upedNum: res.result.uped,
           hotNum: res.result.hot
+        })
+      })
+      .catch(err => {
+        console.log(err)
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '加载失败，请稍候重试',
+              icon: 'none',
+              duration: 1500,
+            })
+          },
         })
       })
   },

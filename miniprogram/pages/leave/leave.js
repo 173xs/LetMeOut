@@ -6,54 +6,54 @@ Page({
    * 页面的初始数据
    */
   data: {
-    nowDate:'',
-    leaveDate:'',
-    returnDate:'',
-    endDate:'2021-09-01',
-    reasonLength:0,
-    errmsg:""
+    nowDate: '',
+    leaveDate: '',
+    returnDate: '',
+    endDate: '2021-09-01',
+    reasonLength: 0,
+    errmsg: ""
   },
 
   // 离开日期变化时返回日期最小为离开日期
- bindLeaveDateChange: function(e) {
-  console.log('picker发送选择改变，携带值为', e.detail.value)
-  this.setData({
-    leaveDate: e.detail.value,
-    returnDate: e.detail.value
-  })
-},
-bindReturnDateChange: function(e) {
-  console.log('picker发送选择改变，携带值为', e.detail.value)
-  this.setData({
-    returnDate: e.detail.value
-  })
-},
-textCount:function(e){
-  var len=e.detail.value.length
-	if(len<=150){
+  bindLeaveDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      reasonLength:len,
+      leaveDate: e.detail.value,
+      returnDate: e.detail.value
     })
-  }
-},
-textBlur:function(e){
-  var len=e.detail.value.length
-	if(len==0){
+  },
+  bindReturnDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      errmsg:"*啥都不写，感觉辅导员不会批准哦"
+      returnDate: e.detail.value
     })
-  }else if(len<10){
-    this.setData({
-      errmsg:"*这么一丢丢，你再多写一点嘛"
-    })
-  }
-},
+  },
+  textCount: function (e) {
+    var len = e.detail.value.length
+    if (len <= 150) {
+      this.setData({
+        reasonLength: len,
+      })
+    }
+  },
+  textBlur: function (e) {
+    var len = e.detail.value.length
+    if (len == 0) {
+      this.setData({
+        errmsg: "*啥都不写，感觉辅导员不会批准哦"
+      })
+    } else if (len < 10) {
+      this.setData({
+        errmsg: "*这么一丢丢，你再多写一点嘛"
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     // leaveDate和returnDate的初始化
-    var today=util.formatDay(new Date())
+    var today = util.formatDay(new Date())
     this.setData({
       nowDate: today,
       leaveDate: today,
@@ -61,13 +61,13 @@ textBlur:function(e){
     })
     console.log(today)
   },
-  submit: function(e) {
-    var reasonLen=e.detail.value.leaveReason.length
-    if(reasonLen>10){
+  submit: function (e) {
+    var reasonLen = e.detail.value.leaveReason.length
+    if (reasonLen > 10) {
       // console.log('form submit 事件',e.detail.value)
       wx.showLoading({
         title: '申请提交中...',
-        mask:true
+        mask: true
       })
       var data = {
         sno: app.globalData.regInfo.sno,
@@ -77,38 +77,49 @@ textBlur:function(e){
         leaveReason: e.detail.value.leaveReason,
         subDate: this.data.nowDate
       }
-      console.log('data = ',data)
+      console.log('data = ', data)
       wx.cloud.callFunction({
-        name:"upleave",
-        data:data
-      })
-      .then(res=>{
-        // console.log(res)
-        wx.hideLoading()
-        wx.showToast({
-          title: '提交成功',
-          icon:'success',
-          duration:800,
-          mask:true
+          name: "upleave",
+          data: data
         })
-      })
-      .catch(err=>{
-        wx.showToast({
-          title: '提交失败',
-          icon:'none',
-          duration:800,
-          mask:true
+        .then(res => {
+          // console.log(res)
+          wx.hideLoading()
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            duration: 2000,
+            mask: true,
+            success: (res) => {
+              setTimeout(() => {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }, 2000);
+            }
+          })
         })
-        console.log(err)
-      })
-    }else{
-      if(len==0){
+        .catch(err => {
+          wx.showToast({
+            title: '提交失败',
+            icon: 'none',
+            duration: 2000,
+            mask: true
+          })
+          console.log(err)
+        })
+    } else {
+      if (reasonLen == 0) {
         this.setData({
-          errmsg:"*啥都不写，感觉辅导员不会批准哦"
+          errmsg: "*啥都不写，感觉辅导员不会批准哦"
         })
-      }else if(len<10){
+      } else if (reasonLen < 10) {
         this.setData({
-          errmsg:"*这么一丢丢，你再多写一点嘛"
+          errmsg: "*这么一丢丢，你再多写一点嘛"
+        })
+      } else {
+        this.setData({
+          errmsg: ""
         })
       }
     }
