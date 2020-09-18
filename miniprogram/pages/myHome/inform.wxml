@@ -21,7 +21,10 @@
     </view>
     <view class="otherBox">
       <text class="informTime">审批时间：{{item.time}}</text>
-      <image class="deleteIcon" src="/images/delete.png"></image>
+      <image class="deleteIcon" src="/images/delete.png"
+      bindtap="deleteMsg"
+      data-id="{{item._id}}"
+      data-idx="{{index}}"></image>
     </view>
   </view>
   <view class="informBox" wx:if="{{item.type=='abnormal'}}">
@@ -41,7 +44,9 @@
     </view>
     <view class="otherBox">
       <text class="informTime">审批时间：{{item.time}}</text>
-      <image class="deleteIcon" src="/images/delete.png"></image>
+      <image class="deleteIcon" src="/images/delete.png" bindtap="deleteMsg"
+      data-id="{{item._id}}"
+      data-idx="{{index}}"></image>
     </view>
   </view>
 </view>

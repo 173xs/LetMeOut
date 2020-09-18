@@ -1,5 +1,6 @@
 // pages/inform/inform.js
 var app = getApp()
+
 Page({
 
   /**
@@ -31,6 +32,47 @@ Page({
       coverBoxDisplay: "none"
     })
   },
+  //删除消息
+  deleteMsg: function (e) {
+    wx.showLoading({
+      title: '请求提交中',
+    })
+    wx.cloud.callFunction({
+        name: 'deleteMsg',
+        data: {
+          id: e.currentTarget.dataset.id
+        }
+      })
+      .then(res => {
+        // console.log(res)
+        if ("document.remove:ok" == res.result.errMsg){
+          wx.hideLoading({
+            success: (res) => {
+              wx.showToast({
+                title: '删除成功',
+              })
+              let newList = this.data.reslist
+              newList.splice(e.currentTarget.dataset.idx, 1)
+              this.setData({
+                reslist: newList
+              })          
+            },
+          })
+        }
+      })
+      .catch(err => {
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '删除失败',
+              icon: 'none'
+            })
+          },
+        })
+        console.error(err)
+      })
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -43,22 +85,6 @@ Page({
       })
       .then(res => {
         console.log('消息列表', res.result)
-        // let list = []
-        // for (var item of res.result) {
-        //   if ('leave' == item.type) {
-        //     item.title = item.detail.leaveClass +
-        //       ':' +
-        //       item.detail.leaveDate +
-        //       '~' +
-        //       item.detail.returnDate
-        //   } else {
-        //     item.title
-        //   }
-        //   list.push(item)
-        // }
-        // this.setData({
-        //   reslist: list
-        // })
         this.setData({
           reslist: res.result
         })
