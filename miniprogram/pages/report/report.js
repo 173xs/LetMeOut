@@ -8,33 +8,42 @@ Page({
    */
   data: {
     reasonLength: 0,
-    errmsg1:"",
-    errmsg2:""
+    errmsg1: "",
+    errmsg2: ""
   },
-  inputBlur:function(e){
-    var len=e.detail.value.length
-    if(len==0){
+  inputBlur: function (e) {
+    var len = e.detail.value.length
+    if (len == 0) {
       this.setData({
-        errmsg1:"*来都来了，啥都不写吗"
+        errmsg1: "*来都来了，啥都不写吗"
+      })
+    } else {
+      this.setData({
+        errmsg1: ''
       })
     }
   },
-  textBlur:function(e){
-    var len=e.detail.value.length
-    if(len==0){
+  textBlur: function (e) {
+    var len = e.detail.value.length
+    console.log('textblur', e, len)
+    if (len == 0) {
       this.setData({
-        errmsg2:"*来都来了，啥都不写吗"
+        errmsg2: "*来都来了，啥都不写吗"
       })
-    }else if(len<10){
+    } else if (len < 10) {
       this.setData({
-        errmsg2:"*这么一丢丢，你再多写一点嘛"
+        errmsg2: "*这么一丢丢，你再多写一点嘛"
+      })
+    } else {
+      this.setData({
+        errmsg2: ''
       })
     }
   },
   submit(e) {
-    var titleLen=e.detail.value.title.length
-    var qosLen=e.detail.value.detail.length
-    if(titleLen>0 & qosLen>10){
+    var titleLen = e.detail.value.title.length
+    var qosLen = e.detail.value.detail.length
+    if (titleLen > 0 & qosLen > 10) {
       console.log(e.detail.value)
       wx.showLoading({
         title: '提交中',
@@ -56,18 +65,20 @@ Page({
               console.log('提交成功')
               wx.showToast({
                 title: '提交成功',
-                icon:'success',
-                duration:2000,
-                mask:true,
-                success: (res)=>{
-                  wx.navigateBack({
-                    delta: 1,
-                  })
+                icon: 'success',
+                duration: 2000,
+                mask: true,
+                success: (res) => {
+                  setTimeout(() => {
+                    wx.navigateBack({
+                      delta: 1,
+                    })
+                  }, 2000);
                 }
               })
             },
           })
-  
+
         })
         .catch(err => {
           // console.error(err)
@@ -80,15 +91,23 @@ Page({
               })
             },
           })
-  
+
         })
-    }else{
+    }
+    if (0 == titleLen) {
       this.setData({
-        errmsg1:"*来都来了，啥都不写吗",
-        errmsg2:"*来都来了，啥都不写吗"
+        errmsg1: "*来都来了，啥都不写吗"
       })
     }
-    
+    if (0 == qosLen) {
+      this.setData({
+        errmsg2: "*来都来了，啥都不写吗"
+      })
+    } else if (10 > qosLen) {
+      this.setData({
+        errmsg2: "*这么一丢丢，你再多写一点嘛"
+      })
+    }
   },
   textCount: function (e) {
     var len = e.detail.value.length

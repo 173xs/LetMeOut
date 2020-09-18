@@ -101,9 +101,11 @@ Page({
           跳转请假单界面，选取请假单出示并使用
           */
           wx.setStorageSync('building', building)
-          wx.navigateTo({
-            url: '../../pages/myHome/myLeave'
-          })
+          setTimeout(() => {
+            wx.navigateTo({
+              url: '../../pages/myHome/myLeave'
+            })
+          }, 1500);
         }
       },
       fail: (res) => {},

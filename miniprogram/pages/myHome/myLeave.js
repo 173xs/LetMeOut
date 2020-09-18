@@ -39,14 +39,32 @@ Page({
       .then(res => {
         //console.log(res)
         wx.hideLoading({
-          success: (res) => {},
+          success: (res) => {
+            wx.showToast({
+              title: '提交成功',
+              icon: 'success',
+              duration: 1500
+            })
+          },
         })
       })
       .catch(err => {
         console.error(err)
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '提交失败',
+              icon:'none',
+            })
+          },
+        })
       })
   },
+  //封装调用使用请假单出校或者返校的云函数
   callLetMeOut(curId, checkState, building) {
+    wx.showLoading({
+      title: '请求提交中',
+    })
     wx.cloud.callFunction({
         name: 'letMeOut',
         data: {
@@ -61,6 +79,7 @@ Page({
         } else {
           console.log('返校：更新成功')
         }
+
         //清理掉building
         try {
           wx.removeStorageSync('building')
@@ -68,17 +87,38 @@ Page({
           console.error(e)
           // Do something when catch error
         }
-        //更新列表
-        let newList = this.data.reslist
-        newList[this.data.curIdx].checkState += 1
-        this.setData({
-          reslist: newList,
-          coverBoxDisplay: "none"
+
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '提交成功',
+              icon: 'success',
+              duration: 2000,
+              mask: true,
+              success: (res) => {
+                setTimeout(() => {
+                  //更新列表
+                  let newList = this.data.reslist
+                  newList[this.data.curIdx].checkState += 1
+                  this.setData({
+                    reslist: newList,
+                    coverBoxDisplay: "none"
+                  })
+                }, 1500);
+              }
+            })
+          },
         })
-        wx.showToast({
-          title: '提交成功',
-          icon: 'success',
-          duration: 2000
+      })
+      .catch(err=>{
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '提交失败',
+              icon: 'none',
+              mask: true
+            })
+          },
         })
       })
   },
@@ -118,6 +158,7 @@ Page({
           },
           fail: (res) => {
             console.error(res)
+            return
           },
           complete: (res) => {},
         })
@@ -128,7 +169,9 @@ Page({
     }
 
     //扫的是校门，调用出校门云函数
-    this.callLetMeOut(bill._id, bill.checkState, building)
+    setTimeout(() => {
+      this.callLetMeOut(bill._id, bill.checkState, building)
+    }, 1500);
   },
 
   callGetLeave: function (funcName) {
@@ -146,8 +189,10 @@ Page({
       .then(res => {
         console.log('请假单', res)
         if (funcName == '2-a') {
+          let list = res.result.data
+          list.reverse()
           this.setData({
-            reslist: res.result.data
+            reslist: list
           })
         } else if ('2-b' == funcName) {
           let noUse = []
@@ -169,8 +214,10 @@ Page({
             reslist: using
           })
         } else if ('2-c' == funcName) {
+          let list = res.result.list
+          list.reverse()
           this.setData({
-            reslist: res.result.list
+            reslist: list
           })
         }
         wx.hideLoading({
@@ -185,10 +232,14 @@ Page({
         })
       })
       .catch(err => {
-        wx.showToast({
-          title: '加载失败',
-          icon: 'fail',
-          mask: true
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '加载失败',
+              icon: 'none',
+              mask: true
+            })
+          },
         })
       })
   },
