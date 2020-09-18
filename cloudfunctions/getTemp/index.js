@@ -142,5 +142,7 @@ async function getAbnormalList(event,context){
     _openid: 0,
     date: 0,
   })
+  .limit(event.limit)
+  .skip(event.skip)
   .end()
 }

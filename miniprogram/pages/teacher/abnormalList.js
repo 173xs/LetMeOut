@@ -9,7 +9,9 @@ Page({
   data: {
     nowDate: "",
     queryDate: "",
-    reslist: []
+    reslist: [],
+    limit: 20,
+    skip: 0
   },
   bindDateChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -19,7 +21,7 @@ Page({
     this.callGetTemp(this.data.queryDate)
   },
   //调用getTemp云函数
-  callGetTemp(queryDate) {
+  callGetTemp(queryDate, limit, skip) {
     wx.showLoading({
       title: '加载中',
       mask: true
@@ -29,7 +31,9 @@ Page({
         data: {
           funcName: 2,
           date: queryDate,
-          academy: app.globalData.regInfo.tacademy
+          academy: app.globalData.regInfo.tacademy,
+          limit: limit,
+          skip: skip
         }
       })
       .then(res => {
@@ -43,9 +47,12 @@ Page({
             })
           },
         })
+        let oldList = this.data.reslist
+        let newList = oldList.concat(res.result.list)
         this.setData({
-          reslist: res.result.list
+          reslist: newList
         })
+        this.data.skip += res.result.list.length
       })
       .catch(err => {
         console.log(err)
@@ -69,7 +76,8 @@ Page({
       nowDate: now,
       queryDate: now
     })
-    this.callGetTemp(this.data.queryDate)
+    let limit = this.data.limit + this.data.skip
+    this.callGetTemp(this.data.queryDate, limit, this.data.skip)
   },
 
   /**
@@ -111,7 +119,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    let limit = this.data.limit + this.data.skip
+    this.callGetTemp(this.data.queryDate, limit, this.data.skip)
   },
 
   /**
