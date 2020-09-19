@@ -1,0 +1,37 @@
+{"_id":"65825b355f5adbf0011d04df71fbd357","type":"gate","bname":"南门","bnum":"g1"}
+{"_id":"7498b5fe5f5adc1201558dfb40f8d7d8","type":"gate","bname":"北门","bnum":"g2"}
+{"_id":"65825b355f5ae7ca011dc8513de63d5a","type":"dinning hall","bname":"桂园餐厅","bnum":"dh1"}
+{"_id":"ac5f38825f5ae7ef0159cde252f3c2ff","type":"dinning hall","bname":"桔园餐厅","bnum":"dh2"}
+{"_id":"6518b7395f5ae80a014da15742aa4991","type":"dinning hall","bname":"榴园餐厅","bnum":"dh4"}
+{"_id":"7498b5fe5f5ae83f015690d41382ec78","type":"dinning hall","bname":"梅园餐厅","bnum":"dh3"}
+{"_id":"b5416b755f5ae86c018c879530d0b916","type":"dinning hall","bname":"研究生餐厅","bnum":"dh5"}
+{"_id":"60173c665f5ae88f012e543350216e01","type":"gate","bname":"东门","bnum":"g3"}
+{"_id":"b5416b755f5ae8a9018c8a1b5226433b","type":"gate","bname":"西门","bnum":"g4"}
+{"_id":"65825b355f5ec664013b767438948401","bname":"实验楼","bnum":"b1","type":"building"}
+{"_id":"65825b355f5ec698013b786851516e02","bname":"理工楼D","bnum":"b2-D","type":"building"}
+{"_id":"60173c665f5ec6cc014db5d410c2747f","bname":"行知楼","bnum":"b3","type":"building"}
+{"_id":"f1168d5b5f620d0d001c544b606f46a2","bname":"蕙园8栋","bnum":"d13-8","type":"dorm"}
+{"_id":"5f3dc7b45f620d29001878881226d834","bnum":"d13-9","type":"dorm","bname":"蕙园9栋"}
+{"_id":"c54dac465f620d640017acd9708301af","bname":"蕙园10栋","bnum":"d13-10","type":"dorm"}
+{"_id":"f1168d5b5f620d88001c5bc4266e4924","bname":"杏园","bnum":"d1","type":"dorm"}
+{"_id":"c54dac465f620da90017b06b0ad5cf7f","bname":"枣园","bnum":"d2","type":"dorm"}
+{"_id":"994c5b685f620dcc0018e3252fb3b584","bname":"榴园","bnum":"d3","type":"dorm"}
+{"_id":"350d8cf95f620dec001317fe2ad9edc5","bname":"桔园","bnum":"d4","type":"dorm"}
+{"_id":"5f3dc7b45f620e10001884464aac1345","bname":"桃园","bnum":"d5","type":"dorm"}
+{"_id":"c54dac465f620e350017b72210df5ecd","bname":"松园","bnum":"d7","type":"dorm"}
+{"_id":"9170e7955f620e590014a4c92d1616e5","bname":"竹园","bnum":"d9","type":"dorm"}
+{"_id":"6057d84c5f620e7e0014f75d38465147","type":"dorm","bname":"梅园","bnum":"d8"}
+{"_id":"5f3dc7b45f620e9c00188df40f98e49e","bname":"桂园","bnum":"d11","type":"dorm"}
+{"_id":"c54dac465f620ec00017c04b48dac37d","bname":"枫园","bnum":"d12","type":"dorm"}
+{"_id":"f1168d5b5f620ee6001c71b8469b7139","bname":"槐园","bnum":"d10","type":"dorm"}
+{"_id":"c54dac465f620f000017c378472a7f1e","type":"building","bnum":"b2-A","bname":"理工楼A"}
+{"_id":"f1168d5b5f620f80001c7a82731f64c5","type":"building","bname":"艺术楼","bnum":"b4"}
+{"_id":"994c5b685f620fb40018ffe56a828305","bname":"人文楼A","bnum":"b5-A","type":"building"}
+{"_id":"55aebe8c5f620fdb00143c28446bb6bd","bname":"社科楼A","bnum":"b6-A","type":"building"}
+{"_id":"55aebe8c5f62100400143dab48631089","bname":"适之楼","bnum":"b7","type":"building"}
+{"_id":"6057d84c5f62102600150b021ee1fec4","type":"building","bname":"校医院","bnum":"b8"}
+{"_id":"350d8cf95f621043001332224ac0183f","type":"building","bname":"博学南","bnum":"b9"}
+{"_id":"9170e7955f6210620014bc331fff7882","bname":"博学北","bnum":"b10","type":"building"}
+{"_id":"6057d84c5f62107f00150f043ad386c8","bname":"笃行南","bnum":"b11","type":"building"}
+{"_id":"350d8cf95f6210990013354e42758df2","bname":"笃行北","bnum":"b12","type":"building"}
+{"_id":"994c5b685f6210cb00190dbd74ab1e10","bname":"文典阁","bnum":"b13","type":"building"}

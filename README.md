@@ -34,22 +34,42 @@
 
 - 出行记录：通过程序首页扫一扫功能扫描建筑的二维码，会自动保存出行记录
 
+![出行记录](./docs/images/travelRecords.jpg)
+
 - 请假：可以提交请假申请，获得批准后扫描校门的二维码进出，系统记录进出时间
+
+![请假申请](./docs/images/upLeave.jpg)
 
 - 异常上报：可以上传自己或他人的他人的体温异常，或者其他一些违反校园疫情管理规定的相关行为
 
+![异常上报](./docs/images/report.jpg)
+
 - 体温上报：学生需每日进行体温测量，并上传测量的体温数值
+
+![体温上报](./docs/images/upTemp.jpg)
 
 ### 教师端
 
-- 请假审核：教师根据学生上传的请假信息进行审核
+- 请假审核：教师根据学生上传的请假信息进行审核并查看概览
+
+![请假审核](./docs/images/approveLeave.jpg)
+
+![请假概览](./docs/images/leave.jpg)
 
 - 体温概览：可以查看所在学院每天的体温上报情况以及异常体温人员名单
 
+![体温概览](./docs/images/temp.jpg)
+
+![发热人员](./docs/images/hotPeople.jpg)
+
 - 异常处理：查看上报的异常
+
+![异常处理](./docs/images/reviewReport.jpg)
 
 
 ## 代码链接
+
+`https://github.com/173xs/LetMeOut`
 
 ## 团队/作者简介
 
