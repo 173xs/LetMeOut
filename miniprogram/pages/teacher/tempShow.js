@@ -71,7 +71,11 @@ Page({
     var context = wx.createContext();
     // 画饼图
     //    数据源
-    var rate = 1 - (this.data.hotNum / this.data.upedNum).toFixed(2)
+    if(this.data.upedNum==0){
+      var rate=1
+    }else{
+      var rate = 1 - (this.data.hotNum / this.data.upedNum).toFixed(2)
+    }
     var colors = ["#68ed50", "#f6b943"];
     //    定义圆心坐标
     var point = {
